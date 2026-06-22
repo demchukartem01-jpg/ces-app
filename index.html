@@ -389,18 +389,16 @@
     const container = document.getElementById(containerId);
     container.innerHTML = '';
     catNames.forEach(name => {
-      const cat = CATEGORIES[name];
-      if (!cat) return;
-      const total = cat.sections.reduce((s, sec) => s + sec.questions.length, 0);
+      const icon = CATEGORY_ICONS[name] || '📄';
       const card = document.createElement('div');
       card.className = 'card';
-      const src = fromScreen || (containerId === 'deck-list' ? 'screen-deck' : 'screen-engine-group');
+      const src = fromScreen || containerId;
       card.onclick = () => openCategory(name, src);
       card.innerHTML = `
-        <div class="card-icon">${cat.icon}</div>
+        <div class="card-icon">${icon}</div>
         <div class="card-body">
           <div class="card-title">${name}</div>
-          <div class="card-sub">${total} вопросов · ${cat.sections.length} частей</div>
+          <div class="card-sub">Нажмите для загрузки</div>
         </div>
         <div class="card-arrow">→</div>`;
       container.appendChild(card);
@@ -408,9 +406,17 @@
   }
 
   async function openCategory(name, fromScreen) {
-    // Загружаем данные категории если ещё не загружены
+    // Показываем экран загрузки
     if (!LOADED_CATS[name]) {
+      showScreen('screen-sub');
+      document.getElementById('sub-title').textContent = 'Загрузка...';
+      document.getElementById('sub-eyebrow').textContent = name;
+      document.getElementById('sub-subtitle').textContent = '';
+      document.getElementById('sub-sections').innerHTML = '<div style="text-align:center;padding:40px;color:var(--foam-dim)">⏳ Загрузка вопросов...</div>';
+      document.getElementById('sub-back-btn').onclick = () => showScreen(fromScreen);
+
       await loadCategory(name);
+
       // Перестраиваем CATEGORIES после загрузки
       TEST_SECTIONS.forEach(s => {
         const c = getCat(s.title);
