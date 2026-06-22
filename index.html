@@ -7,147 +7,94 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
   :root {
-    --deep-navy: #0a1929;
-    --mid-navy: #14283d;
-    --brass: #c8973f;
-    --brass-bright: #e0b15c;
-    --foam: #e8eef2;
-    --foam-dim: #a9bcc9;
-    --danger: #c4543a;
-    --success: #4a8f6e;
+    --deep-navy: #0a1929; --mid-navy: #14283d; --brass: #c8973f;
+    --brass-bright: #e0b15c; --foam: #e8eef2; --foam-dim: #a9bcc9;
+    --danger: #c4543a; --success: #4a8f6e;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: radial-gradient(ellipse at top, var(--mid-navy), var(--deep-navy) 65%);
-    color: var(--foam);
-    font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
-    min-height: 100vh;
-    padding-bottom: 60px;
-  }
-
-  /* ---- HEADER ---- */
-  .header { padding: 28px 20px 22px; border-bottom: 1px solid rgba(200,151,63,0.25); }
+  body { background: radial-gradient(ellipse at top, var(--mid-navy), var(--deep-navy) 65%); color: var(--foam); font-family: -apple-system,'Segoe UI',Roboto,sans-serif; min-height: 100vh; padding-bottom: 60px; }
+  .header { padding: 24px 20px 18px; border-bottom: 1px solid rgba(200,151,63,0.25); }
   .eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass); font-weight: 600; display: flex; align-items: center; gap: 8px; }
   .eyebrow::before { content:''; width:16px; height:1px; background:var(--brass); }
-  .header h1 { font-size: 28px; font-weight: 700; margin-top: 8px; }
-  .header p { color: var(--foam-dim); font-size: 14px; margin-top: 6px; }
-
-  /* ---- CARDS ---- */
-  .card-list { padding: 20px 16px; display: flex; flex-direction: column; gap: 12px; }
-  .card {
-    background: linear-gradient(135deg, var(--mid-navy), rgba(20,40,61,0.6));
-    border: 1px solid rgba(200,151,63,0.18);
-    border-radius: 14px; padding: 18px; display: flex; align-items: center; gap: 16px; cursor: pointer;
-    transition: border-color 0.15s, transform 0.1s;
-  }
+  .header h1 { font-size: 26px; font-weight: 700; margin-top: 8px; }
+  .header p { color: var(--foam-dim); font-size: 13px; margin-top: 5px; }
+  .card-list { padding: 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+  .card { background: linear-gradient(135deg, var(--mid-navy), rgba(20,40,61,0.6)); border: 1px solid rgba(200,151,63,0.18); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: border-color 0.15s, transform 0.1s; }
   .card:active { transform: scale(0.98); border-color: rgba(200,151,63,0.5); }
-  .card-icon {
-    font-size: 22px; width: 44px; height: 44px; border-radius: 12px;
-    background: rgba(200,151,63,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
+  .card-icon { font-size: 20px; width: 42px; height: 42px; border-radius: 11px; background: rgba(200,151,63,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .card-body { flex: 1; }
-  .card-title { font-size: 16px; font-weight: 600; }
-  .card-sub { font-size: 12.5px; color: var(--foam-dim); margin-top: 3px; }
+  .card-title { font-size: 15px; font-weight: 600; }
+  .card-sub { font-size: 12px; color: var(--foam-dim); margin-top: 3px; }
   .card-arrow { color: var(--brass); font-size: 18px; flex-shrink: 0; }
-
-  /* ---- FINAL EXAM CARD ---- */
-  .final-card {
-    margin: 4px 16px 0;
-    background: linear-gradient(135deg, #1a3a5c, #0f2540);
-    border: 1px solid var(--brass);
-    border-radius: 14px; padding: 18px; display: flex; align-items: center; gap: 16px; cursor: pointer;
-    transition: border-color 0.15s, transform 0.1s;
-  }
+  .final-card { margin: 4px 16px 0; background: linear-gradient(135deg, #1a3a5c, #0f2540); border: 1px solid var(--brass); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: transform 0.1s; }
   .final-card:active { transform: scale(0.98); }
   .final-card .card-title { color: var(--brass-bright); }
-
-  /* ---- BACK BTN ---- */
-  .back-btn { background: none; border: none; color: var(--foam-dim); font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; }
-
-  /* ---- QUIZ ---- */
-  .quiz-view { display: none; padding: 16px 16px; }
+  .back-btn { background: none; border: none; color: var(--foam-dim); font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; margin-bottom: 12px; }
+  .quiz-view { display: none; padding: 16px; }
   .quiz-view.active { display: block; }
-
-  .quiz-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .quiz-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
   .timer { font-size: 20px; font-weight: 700; color: var(--brass-bright); letter-spacing: 0.05em; }
   .timer.warning { color: #e05c3a; }
-
-  .progress-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; margin-bottom: 20px; }
+  .progress-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; margin-bottom: 18px; }
   .progress-fill { height: 100%; background: linear-gradient(90deg, var(--brass), var(--brass-bright)); border-radius: 2px; transition: width 0.3s; }
-  .question-counter { font-size: 12px; color: var(--brass); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; font-weight: 600; }
-  .question-text { font-size: 18px; line-height: 1.45; margin-bottom: 14px; }
-  .question-img { width: 100%; max-height: 200px; object-fit: contain; border-radius: 10px; margin-bottom: 14px; background: rgba(255,255,255,0.04); }
-
-  .options { display: flex; flex-direction: column; gap: 10px; }
-  .option {
-    background: var(--mid-navy); border: 1px solid rgba(200,151,63,0.18);
-    border-radius: 12px; padding: 13px 16px; font-size: 15px; color: var(--foam);
-    cursor: pointer; transition: all 0.12s; display: flex; align-items: center; gap: 12px;
-  }
+  .question-counter { font-size: 11px; color: var(--brass); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+  .question-text { font-size: 17px; line-height: 1.45; margin-bottom: 12px; }
+  .question-img { width: 100%; max-height: 200px; object-fit: contain; border-radius: 10px; margin-bottom: 12px; background: rgba(255,255,255,0.04); }
+  .options { display: flex; flex-direction: column; gap: 9px; }
+  .option { background: var(--mid-navy); border: 1px solid rgba(200,151,63,0.18); border-radius: 12px; padding: 12px 14px; font-size: 14px; color: var(--foam); cursor: pointer; transition: all 0.12s; display: flex; align-items: center; gap: 11px; }
   .option:active { transform: scale(0.98); }
-  .option-letter { width:26px; height:26px; border-radius:50%; border:1px solid rgba(200,151,63,0.4); display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--brass); flex-shrink:0; font-weight:600; }
+  .option-letter { width:24px; height:24px; border-radius:50%; border:1px solid rgba(200,151,63,0.4); display:flex; align-items:center; justify-content:center; font-size:11px; color:var(--brass); flex-shrink:0; font-weight:600; }
   .option.correct { border-color: var(--success); background: rgba(74,143,110,0.15); }
   .option.correct .option-letter { background: var(--success); border-color: var(--success); color: white; }
   .option.wrong { border-color: var(--danger); background: rgba(196,84,58,0.15); }
   .option.wrong .option-letter { background: var(--danger); border-color: var(--danger); color: white; }
-
-  /* ---- RESULT ---- */
   .result-view { display: none; padding: 40px 24px; text-align: center; }
   .result-view.active { display: block; }
   .result-score { font-size: 56px; font-weight: 700; color: var(--brass-bright); line-height: 1; }
   .result-label { color: var(--foam-dim); font-size: 14px; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
-  .result-time { margin-top: 12px; font-size: 15px; color: var(--foam-dim); }
-  .result-message { margin-top: 20px; font-size: 15px; color: var(--foam); line-height: 1.5; }
-  .restart-btn { margin-top: 28px; background: var(--brass); color: var(--deep-navy); border: none; border-radius: 12px; padding: 14px 28px; font-size: 15px; font-weight: 700; cursor: pointer; display: block; width: 100%; }
-
+  .result-time { margin-top: 12px; font-size: 14px; color: var(--foam-dim); }
+  .result-message { margin-top: 18px; font-size: 15px; color: var(--foam); line-height: 1.5; }
+  .restart-btn { margin-top: 24px; background: var(--brass); color: var(--deep-navy); border: none; border-radius: 12px; padding: 14px 28px; font-size: 15px; font-weight: 700; cursor: pointer; display: block; width: 100%; }
   .hidden { display: none !important; }
+  .section-divider { padding: 12px 16px 4px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--foam-dim); font-weight: 600; }
 </style>
 </head>
 <body>
 
-<!-- ЭКРАН 1: Главное меню -->
+<!-- ГЛАВНОЕ МЕНЮ -->
 <div id="screen-main">
   <div class="header">
     <div class="eyebrow">CES · Подготовка моряков</div>
     <h1>Морские тесты</h1>
     <p>Выбери раздел для подготовки</p>
   </div>
-  <div class="card-list">
-    <div class="card" onclick="showScreen('screen-gmdss')">
-      <div class="card-icon">📡</div>
-      <div class="card-body">
-        <div class="card-title">GMDSS</div>
-        <div class="card-sub">382 вопроса · 4 раздела</div>
-      </div>
-      <div class="card-arrow">→</div>
-    </div>
-  </div>
+  <div class="card-list" id="main-menu"></div>
 </div>
 
-<!-- ЭКРАН 2: Разделы GMDSS -->
-<div id="screen-gmdss" class="hidden">
+<!-- ПОДРАЗДЕЛЫ (для каждой категории) -->
+<div id="screen-sub" class="hidden">
   <div class="header">
-    <button class="back-btn" onclick="showScreen('screen-main')" style="margin-bottom:12px">← Назад</button>
-    <div class="eyebrow">GMDSS</div>
-    <h1>Выберите раздел</h1>
-    <p>Или пройдите финальный экзамен</p>
+    <button class="back-btn" onclick="showScreen('screen-main')">← Назад</button>
+    <div class="eyebrow" id="sub-eyebrow"></div>
+    <h1 id="sub-title"></h1>
+    <p id="sub-subtitle"></p>
   </div>
-  <div class="card-list" id="gmdss-sections"></div>
-  <div class="final-card" onclick="startFinal()">
+  <div class="card-list" id="sub-sections"></div>
+  <div class="final-card" id="sub-final" onclick="startCategoryFinal()">
     <div class="card-icon" style="background:rgba(200,151,63,0.2)">🎯</div>
     <div class="card-body">
       <div class="card-title">Финальный экзамен</div>
-      <div class="card-sub">50 случайных вопросов · 60 минут</div>
+      <div class="card-sub" id="sub-final-sub">50 случайных вопросов · 60 минут</div>
     </div>
     <div class="card-arrow" style="color:var(--brass-bright)">→</div>
   </div>
 </div>
 
-<!-- ЭКРАН 3: Квиз -->
+<!-- КВИЗ -->
 <div id="screen-quiz" class="hidden">
-  <div class="quiz-view active" id="quizView">
+  <div class="quiz-view active">
     <div class="quiz-header">
-      <button class="back-btn" onclick="confirmExit()">← Выйти</button>
+      <button class="back-btn" onclick="confirmExit()" style="margin-bottom:0">← Выйти</button>
       <div class="timer hidden" id="timerDisplay">60:00</div>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -158,14 +105,14 @@
   </div>
 </div>
 
-<!-- ЭКРАН 4: Результат -->
+<!-- РЕЗУЛЬТАТ -->
 <div id="screen-result" class="hidden">
   <div class="result-view active">
     <div class="result-score" id="resultScore"></div>
     <div class="result-label">Правильных ответов</div>
     <div class="result-time" id="resultTime"></div>
     <div class="result-message" id="resultMessage"></div>
-    <button class="restart-btn" onclick="showScreen('screen-gmdss')">Вернуться к разделам</button>
+    <button class="restart-btn" onclick="showScreen('screen-sub')">Вернуться к разделам</button>
   </div>
 </div>
 
@@ -174,6 +121,18 @@
   const tg = window.Telegram?.WebApp;
   if (tg) { tg.ready(); tg.expand(); }
 
+  // Группируем разделы по категориям
+  const CATEGORIES = {
+    'GMDSS': { icon: '📡', sections: [] },
+    'Bulk Carrier Management': { icon: '🚢', sections: [] },
+  };
+
+  TEST_SECTIONS.forEach(s => {
+    if (s.title.startsWith('GMDSS')) CATEGORIES['GMDSS'].sections.push(s);
+    else if (s.title.startsWith('Bulk Carrier')) CATEGORIES['Bulk Carrier Management'].sections.push(s);
+  });
+
+  let currentCategory = null;
   let currentQuestions = [];
   let currentIndex = 0;
   let correctCount = 0;
@@ -183,34 +142,65 @@
   let timeLeft = 0;
   let startTime = null;
 
-  // ---- Navigation ----
   function showScreen(id) {
-    ['screen-main','screen-gmdss','screen-quiz','screen-result'].forEach(s => {
-      document.getElementById(s).classList.add('hidden');
-    });
+    ['screen-main','screen-sub','screen-quiz','screen-result'].forEach(s =>
+      document.getElementById(s).classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
   }
 
-  // ---- Build section list ----
-  function renderGMDSSSections() {
-    const container = document.getElementById('gmdss-sections');
+  function renderMainMenu() {
+    const container = document.getElementById('main-menu');
     container.innerHTML = '';
-    TEST_SECTIONS.forEach((section, i) => {
+    Object.entries(CATEGORIES).forEach(([name, cat]) => {
+      if (!cat.sections.length) return;
+      const total = cat.sections.reduce((s, sec) => s + sec.questions.length, 0);
       const card = document.createElement('div');
       card.className = 'card';
-      card.onclick = () => startSection(section.questions, false);
+      card.onclick = () => openCategory(name);
       card.innerHTML = `
-        <div class="card-icon" style="font-size:14px;font-weight:700;color:var(--brass)">${String(i+1).padStart(2,'0')}</div>
+        <div class="card-icon">${cat.icon}</div>
         <div class="card-body">
-          <div class="card-title">${section.title}</div>
-          <div class="card-sub">${section.questions.length} вопросов</div>
+          <div class="card-title">${name}</div>
+          <div class="card-sub">${total} вопросов · ${cat.sections.length} разделов</div>
         </div>
         <div class="card-arrow">→</div>`;
       container.appendChild(card);
     });
   }
 
-  // ---- Start section ----
+  function openCategory(name) {
+    currentCategory = name;
+    const cat = CATEGORIES[name];
+    const total = cat.sections.reduce((s, sec) => s + sec.questions.length, 0);
+    document.getElementById('sub-eyebrow').textContent = name;
+    document.getElementById('sub-title').textContent = 'Выберите раздел';
+    document.getElementById('sub-subtitle').textContent = `${total} вопросов · ${cat.sections.length} частей`;
+    document.getElementById('sub-final-sub').textContent = `50 случайных из ${total} · 60 минут`;
+
+    const container = document.getElementById('sub-sections');
+    container.innerHTML = '';
+    cat.sections.forEach((sec, i) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.onclick = () => startSection(sec.questions, false);
+      card.innerHTML = `
+        <div class="card-icon" style="font-size:13px;font-weight:700;color:var(--brass)">${String(i+1).padStart(2,'0')}</div>
+        <div class="card-body">
+          <div class="card-title">${sec.title}</div>
+          <div class="card-sub">${sec.questions.length} вопросов</div>
+        </div>
+        <div class="card-arrow">→</div>`;
+      container.appendChild(card);
+    });
+    showScreen('screen-sub');
+  }
+
+  function startCategoryFinal() {
+    const all = CATEGORIES[currentCategory].sections.flatMap(s => s.questions);
+    const shuffled = [...all].sort(() => Math.random() - 0.5).slice(0, 50);
+    startSection(shuffled, true);
+  }
+
   function startSection(questions, final) {
     currentQuestions = questions;
     currentIndex = 0;
@@ -230,60 +220,40 @@
     renderQuestion();
   }
 
-  function startFinal() {
-    const all = TEST_SECTIONS.flatMap(s => s.questions);
-    const shuffled = [...all].sort(() => Math.random() - 0.5).slice(0, 50);
-    startSection(shuffled, true);
-  }
-
-  // ---- Timer ----
   function startTimer() {
     clearInterval(timerInterval);
     updateTimerDisplay();
     timerInterval = setInterval(() => {
       timeLeft--;
       updateTimerDisplay();
-      if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        showResult(true);
-      }
+      if (timeLeft <= 0) { clearInterval(timerInterval); showResult(true); }
     }, 1000);
   }
 
   function updateTimerDisplay() {
-    const m = Math.floor(timeLeft / 60);
-    const s = timeLeft % 60;
+    const m = Math.floor(timeLeft/60), s = timeLeft%60;
     const el = document.getElementById('timerDisplay');
     el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
     el.classList.toggle('warning', timeLeft <= 300);
   }
 
-  // ---- Render question ----
   function renderQuestion() {
     answered = false;
     const q = currentQuestions[currentIndex];
     const total = currentQuestions.length;
-
-    document.getElementById('progressFill').style.width = (currentIndex / total * 100) + '%';
+    document.getElementById('progressFill').style.width = (currentIndex/total*100)+'%';
     document.getElementById('questionCounter').textContent = `Вопрос ${currentIndex+1} из ${total}`;
     document.getElementById('questionText').textContent = q.question;
-
     const img = document.getElementById('questionImg');
-    if (q.image) {
-      img.src = q.image;
-      img.style.display = 'block';
-      img.onerror = () => { img.style.display = 'none'; };
-    } else {
-      img.style.display = 'none';
-    }
-
+    if (q.image) { img.src = q.image; img.style.display='block'; img.onerror=()=>{img.style.display='none';}; }
+    else { img.style.display='none'; }
     const list = document.getElementById('optionsList');
     list.innerHTML = '';
-    const letters = ['А','Б','В','Г','Д'];
-    q.options.forEach((opt, i) => {
+    ['А','Б','В','Г','Д'].forEach((letter, i) => {
+      if (!q.options[i]) return;
       const el = document.createElement('div');
       el.className = 'option';
-      el.innerHTML = `<div class="option-letter">${letters[i]}</div><div>${opt}</div>`;
+      el.innerHTML = `<div class="option-letter">${letter}</div><div>${q.options[i]}</div>`;
       el.onclick = () => selectAnswer(i, el);
       list.appendChild(el);
     });
@@ -294,58 +264,38 @@
     answered = true;
     const q = currentQuestions[currentIndex];
     const allOptions = document.querySelectorAll('.option');
-    if (index === q.correctIndex) {
-      el.classList.add('correct');
-      correctCount++;
-      tg?.HapticFeedback?.notificationOccurred('success');
-    } else {
-      el.classList.add('wrong');
-      allOptions[q.correctIndex].classList.add('correct');
-      tg?.HapticFeedback?.notificationOccurred('error');
-    }
+    if (index === q.correctIndex) { el.classList.add('correct'); correctCount++; tg?.HapticFeedback?.notificationOccurred('success'); }
+    else { el.classList.add('wrong'); allOptions[q.correctIndex].classList.add('correct'); tg?.HapticFeedback?.notificationOccurred('error'); }
     setTimeout(() => {
-      if (currentIndex + 1 < currentQuestions.length) {
-        currentIndex++;
-        renderQuestion();
-      } else {
-        showResult(false);
-      }
+      if (currentIndex+1 < currentQuestions.length) { currentIndex++; renderQuestion(); }
+      else showResult(false);
     }, 900);
   }
 
-  // ---- Result ----
   function showResult(timeUp) {
     clearInterval(timerInterval);
     showScreen('screen-result');
     const total = currentQuestions.length;
     document.getElementById('resultScore').textContent = `${correctCount}/${total}`;
-
     if (isFinal) {
-      const elapsed = Math.floor((Date.now() - startTime) / 1000);
-      const em = Math.floor(elapsed / 60), es = elapsed % 60;
-      document.getElementById('resultTime').textContent = timeUp
-        ? '⏱ Время вышло!'
-        : `⏱ Затрачено: ${String(em).padStart(2,'0')}:${String(es).padStart(2,'0')}`;
-    } else {
-      document.getElementById('resultTime').textContent = '';
-    }
-
-    const pct = correctCount / total;
+      const elapsed = Math.floor((Date.now()-startTime)/1000);
+      const em = Math.floor(elapsed/60), es = elapsed%60;
+      document.getElementById('resultTime').textContent = timeUp ? '⏱ Время вышло!' : `⏱ Затрачено: ${String(em).padStart(2,'0')}:${String(es).padStart(2,'0')}`;
+    } else { document.getElementById('resultTime').textContent = ''; }
+    const pct = correctCount/total;
     document.getElementById('resultMessage').textContent =
-      pct === 1 ? 'Отлично! Все ответы верны. Готов к экзамену! 🏆' :
-      pct >= 0.7 ? 'Хороший результат! Ещё немного практики. 👍' :
+      pct===1 ? 'Отлично! Все ответы верны. Готов к экзамену! 🏆' :
+      pct>=0.7 ? 'Хороший результат! Ещё немного практики. 👍' :
       'Стоит повторить материал и попробовать снова. 📚';
   }
 
   function confirmExit() {
-    if (isFinal && timeLeft > 0) {
-      if (!confirm('Выйти из экзамена? Результат не сохранится.')) return;
-    }
+    if (isFinal && timeLeft > 0) { if (!confirm('Выйти из экзамена?')) return; }
     clearInterval(timerInterval);
-    showScreen('screen-gmdss');
+    showScreen('screen-sub');
   }
 
-  renderGMDSSSections();
+  renderMainMenu();
 </script>
 </body>
 </html>
