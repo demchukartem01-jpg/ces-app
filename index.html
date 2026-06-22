@@ -115,7 +115,7 @@
       </div>
       <div class="card-arrow">→</div>
     </div>
-    <div class="card" onclick="showScreen('screen-stats')" style="margin-top:4px">
+    <div class="card" onclick="showScreen('screen-stats'); loadStats();" style="margin-top:4px">
       <div class="card-icon">📊</div>
       <div class="card-body">
         <div class="card-title">Моя статистика</div>
@@ -756,12 +756,7 @@
     container.innerHTML = html;
   }
 
-  // Перехватываем showScreen для загрузки статистики
-  const _origShowScreen = showScreen;
-  function showScreen(id) {
-    _origShowScreen(id);
-    if (id === 'screen-stats') loadStats();
-  }
+
 
 </script>
 </body>
