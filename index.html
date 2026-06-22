@@ -122,14 +122,75 @@
   if (tg) { tg.ready(); tg.expand(); }
 
   // Группируем разделы по категориям
-  const CATEGORIES = {
-    'GMDSS': { icon: '📡', sections: [] },
-    'Bulk Carrier Management': { icon: '🚢', sections: [] },
+  // Иконки для категорий
+  const CATEGORY_ICONS = {
+    'GMDSS': '📡',
+    'Bulk Carrier Management': '🚢',
+    'Container Ship Management': '🏗️',
+    'Chemical Tanker Management': '⚗️',
+    'General Cargo Management': '📦',
+    'LPG Tanker Management': '🔥',
+    'Oil Tanker Management': '🛢️',
+    'RoRo Management': '🚗',
+    'Bulk Carrier Operational': '⚓',
+    'Container Ship Operational': '🔩',
+    'Chemical Tanker Operational': '🧪',
+    'General Cargo Operational': '📋',
+    'LPG Tanker Operational': '💨',
+    'Oil Tanker Operational': '⛽',
+    'RoRo Operational': '🚛',
+    'Bulk Carrier Support': '🔧',
+    'Container Ship Support': '🛠️',
+    'Chemical Tanker Support': '🧰',
+    'General Cargo Support': '📌',
+    'LPG Tanker Support': '🔑',
+    'Oil Tanker Support': '🪛',
+    'RoRo Support': '🔐',
+    'ETO': '⚡',
+    'Slow Speed Management': '🐢',
+    'Medium Speed Management': '⚙️',
+    'Steam Management': '💧',
+    'Slow Speed Operational': '🔄',
+    'Medium Speed Operational': '🔁',
   };
 
+  // Финальные тесты для каждой категории
+  const FINAL_COUNTS = {
+    'GMDSS': 50,
+    'Bulk Carrier Management': 71,
+  };
+
+  // Автоматически строим категории из данных
+  const CATEGORIES = {};
+
+  function getCategoryName(title) {
+    // Определяем категорию по префиксу названия раздела
+    const prefixes = [
+      'GMDSS',
+      'Bulk Carrier Management', 'Container Ship Management', 'Chemical Tanker Management',
+      'General Cargo Management', 'LPG Tanker Management', 'Oil Tanker Management', 'RoRo Management',
+      'Bulk Carrier Operational', 'Container Ship Operational', 'Chemical Tanker Operational',
+      'General Cargo Operational', 'LPG Tanker Operational', 'Oil Tanker Operational', 'RoRo Operational',
+      'Bulk Carrier Support', 'Container Ship Support', 'Chemical Tanker Support',
+      'General Cargo Support', 'LPG Tanker Support', 'Oil Tanker Support', 'RoRo Support',
+      'ETO', 'Slow Speed Management', 'Medium Speed Management', 'Steam Management',
+      'Slow Speed Operational', 'Medium Speed Operational',
+    ];
+    for (const p of prefixes) {
+      if (title.startsWith(p.split(' ')[0]) && title.includes(p.split(' ').slice(1).join(' ') || title)) {
+        // Точное совпадение префикса
+        if (title.startsWith(p)) return p;
+      }
+    }
+    return title;
+  }
+
   TEST_SECTIONS.forEach(s => {
-    if (s.title.startsWith('GMDSS')) CATEGORIES['GMDSS'].sections.push(s);
-    else if (s.title.startsWith('Bulk Carrier')) CATEGORIES['Bulk Carrier Management'].sections.push(s);
+    const cat = getCategoryName(s.title);
+    if (!CATEGORIES[cat]) {
+      CATEGORIES[cat] = { icon: CATEGORY_ICONS[cat] || '📄', sections: [] };
+    }
+    CATEGORIES[cat].sections.push(s);
   });
 
   let currentCategory = null;
@@ -148,24 +209,58 @@
     document.getElementById(id).classList.remove('hidden');
   }
 
+  const DECK_CATS = [
+    'GMDSS',
+    'Bulk Carrier Management','Container Ship Management','Chemical Tanker Management',
+    'General Cargo Management','LPG Tanker Management','Oil Tanker Management','RoRo Management',
+    'Bulk Carrier Operational','Container Ship Operational','Chemical Tanker Operational',
+    'General Cargo Operational','LPG Tanker Operational','Oil Tanker Operational','RoRo Operational',
+    'Bulk Carrier Support','Container Ship Support','Chemical Tanker Support',
+    'General Cargo Support','LPG Tanker Support','Oil Tanker Support','RoRo Support',
+  ];
+  const ENGINE_CATS = [
+    'ETO','Slow Speed Management','Medium Speed Management','Steam Management',
+    'Slow Speed Operational','Medium Speed Operational',
+  ];
+
   function renderMainMenu() {
     const container = document.getElementById('main-menu');
     container.innerHTML = '';
-    Object.entries(CATEGORIES).forEach(([name, cat]) => {
-      if (!cat.sections.length) return;
-      const total = cat.sections.reduce((s, sec) => s + sec.questions.length, 0);
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.onclick = () => openCategory(name);
-      card.innerHTML = `
-        <div class="card-icon">${cat.icon}</div>
-        <div class="card-body">
-          <div class="card-title">${name}</div>
-          <div class="card-sub">${total} вопросов · ${cat.sections.length} разделов</div>
-        </div>
-        <div class="card-arrow">→</div>`;
-      container.appendChild(card);
-    });
+
+    const deckCats = Object.entries(CATEGORIES).filter(([n]) => DECK_CATS.includes(n));
+    const engineCats = Object.entries(CATEGORIES).filter(([n]) => ENGINE_CATS.includes(n));
+
+    if (deckCats.length) {
+      const d = document.createElement('div');
+      d.className = 'section-divider';
+      d.textContent = '⚓ Deck Department';
+      container.appendChild(d);
+      deckCats.forEach(([name, cat]) => addCategoryCard(container, name, cat));
+    }
+
+    if (engineCats.length) {
+      const d = document.createElement('div');
+      d.className = 'section-divider';
+      d.textContent = '⚙️ Engine Department';
+      container.appendChild(d);
+      engineCats.forEach(([name, cat]) => addCategoryCard(container, name, cat));
+    }
+  }
+
+  function addCategoryCard(container, name, cat) {
+    if (!cat.sections.length) return;
+    const total = cat.sections.reduce((s, sec) => s + sec.questions.length, 0);
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = () => openCategory(name);
+    card.innerHTML = `
+      <div class="card-icon">${cat.icon}</div>
+      <div class="card-body">
+        <div class="card-title">${name}</div>
+        <div class="card-sub">${total} вопросов · ${cat.sections.length} разделов</div>
+      </div>
+      <div class="card-arrow">→</div>`;
+    container.appendChild(card);
   }
 
   function openCategory(name) {
@@ -196,7 +291,6 @@
     showScreen('screen-sub');
   }
 
-  const FINAL_COUNTS = { 'GMDSS': 50, 'Bulk Carrier Management': 71 };
   function startCategoryFinal() {
     const all = CATEGORIES[currentCategory].sections.flatMap(s => s.questions);
     const count = FINAL_COUNTS[currentCategory] || 50;
