@@ -87,39 +87,68 @@
 
   .hidden { display: none !important; }
   .section-divider { padding: 10px 16px 4px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--foam-dim); font-weight: 600; }
+
+  /* Language switcher */
+  .lang-switcher {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px 0;
+    justify-content: flex-end;
+  }
+  .lang-btn {
+    background: rgba(200,151,63,0.1);
+    border: 1px solid rgba(200,151,63,0.3);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--foam-dim);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .lang-btn.active {
+    background: rgba(200,151,63,0.25);
+    border-color: var(--brass);
+    color: var(--brass-bright);
+    font-weight: 600;
+  }
 </style>
 </head>
 <body>
 
 <!-- ЭКРАН 1: Главный — выбор департамента -->
 <div id="screen-main">
-  <div class="header">
-    <div class="eyebrow">CES · Подготовка моряков</div>
-    <h1>Морские тесты</h1>
-    <p>Выбери свой департамент</p>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn" onclick="setLang('uk')">UK</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
   </div>
-  <div class="card-list">
+  <div class="header">
+    <div class="eyebrow" id="txt-eyebrow">CES · Подготовка моряков</div>
+    <h1 id="txt-title">Морские тесты</h1>
+    <p id="txt-subtitle">Выбери свой департамент</p>
+  </div>
+  <div class="card-list" id="main-cards">
     <div class="dept-card dept-deck" onclick="showScreen('screen-deck')">
       <div class="dept-icon">⚓</div>
       <div class="card-body">
-        <div class="dept-title">Deck Department</div>
-        <div class="dept-sub">GMDSS, Tankers, Bulk Carrier и др.</div>
+        <div class="dept-title" id="txt-deck">Deck Department</div>
+        <div class="dept-sub" id="txt-deck-sub">GMDSS, Tankers, Bulk Carrier и др.</div>
       </div>
       <div class="card-arrow">→</div>
     </div>
     <div class="dept-card dept-engine" onclick="showScreen('screen-engine')">
       <div class="dept-icon">⚙️</div>
       <div class="card-body">
-        <div class="dept-title">Engine Department</div>
-        <div class="dept-sub">ETO, Slow/Medium Speed, Steam</div>
+        <div class="dept-title" id="txt-engine">Engine Department</div>
+        <div class="dept-sub" id="txt-engine-sub">ETO, Slow/Medium Speed, Steam</div>
       </div>
       <div class="card-arrow">→</div>
     </div>
     <div class="card" onclick="showScreen('screen-stats'); loadStats();" style="margin-top:4px">
       <div class="card-icon">📊</div>
       <div class="card-body">
-        <div class="card-title">Моя статистика</div>
-        <div class="card-sub">Результаты, прогресс, время</div>
+        <div class="card-title" id="txt-stats">Моя статистика</div>
+        <div class="card-sub" id="txt-stats-sub">Результаты, прогресс, время</div>
       </div>
       <div class="card-arrow">→</div>
     </div>
@@ -131,15 +160,15 @@
   <div class="header">
     <button class="back-btn" onclick="showScreen('screen-main')">← Назад</button>
     <div class="eyebrow">Deck Department</div>
-    <h1>Выберите уровень</h1>
-    <p>Management, Operational или Support</p>
+    <h1 id="txt-deck-level">Выберите уровень</h1>
+    <p id="txt-deck-level-sub">Management, Operational или Support</p>
   </div>
   <div class="card-list">
     <div class="dept-card dept-deck" onclick="showDeckGroup('gmdss')">
       <div class="dept-icon">📡</div>
       <div class="card-body">
-        <div class="dept-title">GMDSS</div>
-        <div class="dept-sub">Все должности</div>
+        <div class="dept-title" id="txt-d-gmdss">GMDSS</div>
+        <div class="dept-sub" id="txt-d-gmdss-sub">Все должности</div>
       </div>
       <div class="card-arrow">→</div>
     </div>
@@ -260,7 +289,7 @@
       <div class="result-label">Правильных ответов</div>
       <div class="result-time" id="resultTime"></div>
       <div class="result-message" id="resultMessage"></div>
-      <button class="result-btn" onclick="goBackFromResult()">← Вернуться к разделам</button>
+      <button class="result-btn" id="txt-back-btn" onclick="goBackFromResult()">← Вернуться к разделам</button>
     </div>
     <div class="review-title">Разбор ошибок</div>
     <div id="reviewList"></div>
@@ -373,6 +402,203 @@
 
   function goBackFromResult() {
     showScreen('screen-sub');
+  }
+
+
+  // ---- Translations ----
+  const LANGS = {
+    ru: {
+      eyebrow: 'CES · Подготовка моряков',
+      title: 'Морские тесты',
+      subtitle: 'Выбери свой департамент',
+      deck: 'Deck Department',
+      deckSub: 'GMDSS, Tankers, Bulk Carrier и др.',
+      engine: 'Engine Department',
+      engineSub: 'ETO, Slow/Medium Speed, Steam',
+      stats: 'Моя статистика',
+      statsSub: 'Результаты, прогресс, время',
+      gmdss: 'GMDSS',
+      gmdssSub: 'Все должности',
+      management: 'Management Level',
+      managementSub: 'Master & Ch.Officer',
+      operational: 'Operational Level',
+      operationalSub: '2nd & 3rd Officer',
+      support: 'Support Level',
+      supportSub: 'Deck Rating',
+      engineManagement: 'Management Level',
+      engineManagementSub: 'Ch.Engineer & 2nd Engineer',
+      engineOperational: 'Operational Level',
+      engineOperationalSub: '3rd Engineer & 4th Engineer',
+      selectSection: 'Выберите раздел',
+      selectLevel: 'Выберите уровень',
+      selectTest: 'Выберите тест',
+      finalExam: 'Финальный экзамен',
+      finalSub: 'случайных · 60 минут',
+      question: 'Вопрос',
+      of: 'из',
+      exit: '← Выйти',
+      back: '← Назад',
+      correct: 'правильных ответов',
+      timeUp: 'Время вышло!',
+      spent: 'Затрачено:',
+      excellent: 'Отлично! Все ответы верны! 🏆',
+      good: 'Хороший результат! Ещё немного практики. 👍',
+      retry: 'Стоит повторить материал. 📚',
+      backToSections: 'Вернуться к разделам',
+      myStats: 'Моя статистика',
+      loading: '⏳ Загрузка...',
+      errorLoad: '❌ Ошибка загрузки. Проверь интернет.',
+      reviewTitle: 'Разбор ошибок',
+      allCorrect: '🎯 Все ответы верные!',
+      testsCount: 'Тестов пройдено',
+      avgScore: 'Средний балл',
+      studyTime: 'Время обучения',
+      finals: 'Финальных экзаменов',
+      progress: 'Прогресс по разделам',
+      recentTests: 'Последние тесты',
+      noTests: 'Ты ещё не проходил тесты.\nНачни прямо сейчас! 🚢',
+      statsOnly: 'Статистика доступна только в Telegram',
+      statsError: 'Ошибка загрузки статистики',
+      parts: 'частей',
+      questions: 'вопросов',
+    },
+    uk: {
+      eyebrow: 'CES · Підготовка моряків',
+      title: 'Морські тести',
+      subtitle: 'Обери свій департамент',
+      deck: 'Deck Department',
+      deckSub: 'GMDSS, Tankers, Bulk Carrier та ін.',
+      engine: 'Engine Department',
+      engineSub: 'ETO, Slow/Medium Speed, Steam',
+      stats: 'Моя статистика',
+      statsSub: 'Результати, прогрес, час',
+      gmdss: 'GMDSS',
+      gmdssSub: 'Всі посади',
+      management: 'Management Level',
+      managementSub: 'Master & Ch.Officer',
+      operational: 'Operational Level',
+      operationalSub: '2nd & 3rd Officer',
+      support: 'Support Level',
+      supportSub: 'Deck Rating',
+      engineManagement: 'Management Level',
+      engineManagementSub: 'Ch.Engineer & 2nd Engineer',
+      engineOperational: 'Operational Level',
+      engineOperationalSub: '3rd Engineer & 4th Engineer',
+      selectSection: 'Оберіть розділ',
+      selectLevel: 'Оберіть рівень',
+      selectTest: 'Оберіть тест',
+      finalExam: 'Фінальний екзамен',
+      finalSub: 'випадкових · 60 хвилин',
+      question: 'Питання',
+      of: 'з',
+      exit: '← Вийти',
+      back: '← Назад',
+      correct: 'правильних відповідей',
+      timeUp: 'Час вийшов!',
+      spent: 'Витрачено:',
+      excellent: 'Чудово! Всі відповіді вірні! 🏆',
+      good: 'Гарний результат! Ще трохи практики. 👍',
+      retry: 'Варто повторити матеріал. 📚',
+      backToSections: 'Повернутися до розділів',
+      myStats: 'Моя статистика',
+      loading: '⏳ Завантаження...',
+      errorLoad: '❌ Помилка завантаження. Перевір інтернет.',
+      reviewTitle: 'Розбір помилок',
+      allCorrect: '🎯 Всі відповіді правильні!',
+      testsCount: 'Тестів пройдено',
+      avgScore: 'Середній бал',
+      studyTime: 'Час навчання',
+      finals: 'Фінальних екзаменів',
+      progress: 'Прогрес по розділах',
+      recentTests: 'Останні тести',
+      noTests: 'Ти ще не проходив тести.\nПочни прямо зараз! 🚢',
+      statsOnly: 'Статистика доступна тільки в Telegram',
+      statsError: 'Помилка завантаження статистики',
+      parts: 'частин',
+      questions: 'питань',
+    },
+    en: {
+      eyebrow: 'CES · Seafarer Training',
+      title: 'Maritime Tests',
+      subtitle: 'Choose your department',
+      deck: 'Deck Department',
+      deckSub: 'GMDSS, Tankers, Bulk Carrier etc.',
+      engine: 'Engine Department',
+      engineSub: 'ETO, Slow/Medium Speed, Steam',
+      stats: 'My Statistics',
+      statsSub: 'Results, progress, time',
+      gmdss: 'GMDSS',
+      gmdssSub: 'All positions',
+      management: 'Management Level',
+      managementSub: 'Master & Ch.Officer',
+      operational: 'Operational Level',
+      operationalSub: '2nd & 3rd Officer',
+      support: 'Support Level',
+      supportSub: 'Deck Rating',
+      engineManagement: 'Management Level',
+      engineManagementSub: 'Ch.Engineer & 2nd Engineer',
+      engineOperational: 'Operational Level',
+      engineOperationalSub: '3rd Engineer & 4th Engineer',
+      selectSection: 'Select section',
+      selectLevel: 'Select level',
+      selectTest: 'Select test',
+      finalExam: 'Final Exam',
+      finalSub: 'random · 60 minutes',
+      question: 'Question',
+      of: 'of',
+      exit: '← Exit',
+      back: '← Back',
+      correct: 'correct answers',
+      timeUp: 'Time is up!',
+      spent: 'Time spent:',
+      excellent: 'Excellent! All answers correct! 🏆',
+      good: 'Good result! A bit more practice. 👍',
+      retry: 'Review the material and try again. 📚',
+      backToSections: 'Back to sections',
+      myStats: 'My Statistics',
+      loading: '⏳ Loading...',
+      errorLoad: '❌ Load error. Check internet.',
+      reviewTitle: 'Review mistakes',
+      allCorrect: '🎯 All answers correct!',
+      testsCount: 'Tests completed',
+      avgScore: 'Average score',
+      studyTime: 'Study time',
+      finals: 'Final exams',
+      progress: 'Progress by section',
+      recentTests: 'Recent tests',
+      noTests: 'You have not taken any tests yet.\nStart now! 🚢',
+      statsOnly: 'Statistics available in Telegram only',
+      statsError: 'Failed to load statistics',
+      parts: 'parts',
+      questions: 'questions',
+    }
+  };
+
+  let currentLang = localStorage.getItem('ces_lang') || 'ru';
+  let T = LANGS[currentLang];
+
+  function setLang(lang) {
+    currentLang = lang;
+    T = LANGS[lang];
+    try { localStorage.setItem('ces_lang', lang); } catch(e) {}
+    // Обновляем кнопки
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+    applyLang();
+  }
+
+  function applyLang() {
+    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    set('txt-eyebrow', T.eyebrow);
+    set('txt-title', T.title);
+    set('txt-subtitle', T.subtitle);
+    set('txt-deck', T.deck);
+    set('txt-deck-sub', T.deckSub);
+    set('txt-engine', T.engine);
+    set('txt-engine-sub', T.engineSub);
+    set('txt-stats', T.stats);
+    set('txt-stats-sub', T.statsSub);
   }
 
   // ---- Build dept lists ----
@@ -502,7 +728,7 @@
     const q = currentQuestions[currentIndex];
     const total = currentQuestions.length;
     document.getElementById('progressFill').style.width = (currentIndex/total*100)+'%';
-    document.getElementById('questionCounter').textContent = `Вопрос ${currentIndex+1} из ${total}`;
+    document.getElementById('questionCounter').textContent = T.question + ' ' + (currentIndex+1) + ' ' + T.of + ' ' + total;
     document.getElementById('questionText').textContent = q.question;
     const img = document.getElementById('questionImg');
     if (q.image) { img.src = q.image; img.style.display='block'; img.onerror=()=>{img.style.display='none';}; }
@@ -564,9 +790,7 @@
     } else document.getElementById('resultTime').textContent = '';
     const pct = correctCount/total;
     document.getElementById('resultMessage').textContent =
-      pct===1 ? 'Отлично! Все ответы верны! 🏆' :
-      pct>=0.7 ? 'Хороший результат! Ещё немного практики. 👍' :
-      'Стоит повторить материал. 📚';
+      pct===1 ? T.excellent : pct>=0.7 ? T.good : T.retry;
 
     // Разбор ошибок
     const reviewList = document.getElementById('reviewList');
@@ -617,10 +841,10 @@
   // ---- Deck groups ----
   function showDeckGroup(group) {
     const map = {
-      'gmdss':       { cats: DECK_GMDSS,            title: 'GMDSS',            eyebrow: 'Все должности' },
-      'management':  { cats: DECK_MANAGEMENT_CATS,   title: 'Management Level', eyebrow: 'Master & Ch.Officer' },
-      'operational': { cats: DECK_OPERATIONAL_CATS,  title: 'Operational Level',eyebrow: '2nd & 3rd Officer' },
-      'support':     { cats: DECK_SUPPORT_CATS,       title: 'Support Level',    eyebrow: 'Deck Rating' },
+      'gmdss':       { cats: DECK_GMDSS,            title: T.gmdss,       eyebrow: T.gmdssSub },
+      'management':  { cats: DECK_MANAGEMENT_CATS,   title: T.management,  eyebrow: T.managementSub },
+      'operational': { cats: DECK_OPERATIONAL_CATS,  title: T.operational, eyebrow: T.operationalSub },
+      'support':     { cats: DECK_SUPPORT_CATS,       title: T.support,     eyebrow: T.supportSub },
     };
     const { cats, title, eyebrow } = map[group];
     document.getElementById('deck-group-title').textContent = title;
@@ -632,8 +856,8 @@
   // ---- Engine groups ----
   function showEngineGroup(group) {
     const cats = group === 'management' ? ENGINE_MANAGEMENT_CATS : ENGINE_OPERATIONAL_CATS;
-    const title = group === 'management' ? 'Management Level' : 'Operational Level';
-    const eyebrow = group === 'management' ? 'Ch.Engineer & 2nd Engineer' : '3rd & 4th Engineer';
+    const title = group === 'management' ? T.engineManagement : T.engineOperational;
+    const eyebrow = group === 'management' ? T.engineManagementSub : T.engineOperationalSub;
     document.getElementById('engine-group-title').textContent = title;
     document.getElementById('engine-group-eyebrow').textContent = eyebrow;
     buildDeptList('engine-group-list', cats, 'screen-engine-group');
@@ -642,6 +866,7 @@
 
   // ---- Init ----
   // deck-list больше не используется — через showDeckGroup
+  setLang(currentLang);
 
 
   // ---- Statistics ----
