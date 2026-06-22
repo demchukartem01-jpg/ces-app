@@ -135,3 +135,30 @@ app.get('/api/admin', (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`CES Server running on port ${PORT}`));
+
+// Запускаем Telegram бота
+try {
+  const TelegramBot = require('node-telegram-bot-api');
+  const bot = new TelegramBot(BOT_TOKEN, { polling: true });
+  const APP_URL = process.env.APP_URL || 'https://ces-app.onrender.com';
+
+  bot.onText(/\/start/, (msg) => {
+    bot.sendMessage(msg.chat.id, 'Добро пожаловать в CES тренажёр! 🚢\n\nНажми кнопку ниже чтобы начать:', {
+      reply_markup: {
+        inline_keyboard: [[{ text: '📋 Открыть тесты', web_app: { url: APP_URL } }]]
+      }
+    });
+  });
+
+  bot.onText(/\/stats/, (msg) => {
+    bot.sendMessage(msg.chat.id, 'Твоя статистика:', {
+      reply_markup: {
+        inline_keyboard: [[{ text: '📊 Моя статистика', web_app: { url: APP_URL + '?screen=stats' } }]]
+      }
+    });
+  });
+
+  console.log('Бот запущен...');
+} catch(e) {
+  console.log('Bot error:', e.message);
+}
