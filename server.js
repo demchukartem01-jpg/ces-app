@@ -165,12 +165,12 @@ try {
     });
   });
 
-  // Команда /admin — статистика для владельца
+  // Команда /admin - статистика для владельца
   const ADMIN_ID = 361088297;
   bot.onText(/\/admin/, async (msg) => {
     const chatId = msg.chat.id;
     if (msg.chat.id !== ADMIN_ID) {
-      bot.sendMessage(chatId, '⛔ Нет доступа');
+      bot.sendMessage(chatId, 'Нет доступа');
       return;
     }
     try {
@@ -178,37 +178,40 @@ try {
       const totalUsers = Object.keys(data.users).length;
       const totalResults = data.results.length;
       const yesterday = Date.now() - 86400000;
-      const todayUsers = new Set(data.results.filter(r => r.created_at > yesterday).map(r => r.tid)).size;
-      const weekUsers = new Set(data.results.filter(r => r.created_at > Date.now() - 7*86400000).map(r => r.tid)).size;
+      const todayUsers = new Set(data.results.filter(function(r){ return r.created_at > yesterday; }).map(function(r){ return r.tid; })).size;
+      const weekUsers = new Set(data.results.filter(function(r){ return r.created_at > Date.now() - 7*86400000; }).map(function(r){ return r.tid; })).size;
 
-      // Топ категорий
       const catMap = {};
-      data.results.forEach(r => {
+      data.results.forEach(function(r) {
         if (!catMap[r.category]) catMap[r.category] = 0;
         catMap[r.category]++;
       });
       const topCats = Object.entries(catMap)
-        .sort((a,b) => b[1]-a[1]).slice(0,5)
-        .map(function(e){return '  ' + e[0] + ': ' + e[1];}).join('\n');
-');
+        .sort(function(a,b){ return b[1]-a[1]; }).slice(0,5)
+        .map(function(e){ return '  ' + e[0] + ': ' + e[1]; }).join('\n');
 
-      // Последние пользователи
       const recentUsers = Object.values(data.users)
-        .sort((a,b) => (b.last_seen||0) - (a.last_seen||0)).slice(0,5)
-        .map(function(u){return '  ' + (u.first_name||'Unknown') + ' (@' + (u.username||'-') + ')';}).join('\n');
-');
+        .sort(function(a,b){ return (b.last_seen||0) - (a.last_seen||0); }).slice(0,5)
+        .map(function(u){ return '  ' + (u.first_name||'?') + ' (@' + (u.username||'-') + ')'; }).join('\n');
 
-      const text = '📊 *Статистика CES бота*\n\n' +
-        '👥 Всего пользователей: *' + totalUsers + '*\n' +
-        '📝 Всего тестов пройдено: *' + totalResults + '*\n' +
-        '🔥 Активных сегодня: *' + todayUsers + '*\n' +
-        '📅 Активных за неделю: *' + weekUsers + '*\n\n' +
-        '🏆 *Топ разделов:*\n' + (topCats || '  Нет данных') + '\n\n' +
-        '🕐 *Последние пользователи:*\n' + (recentUsers || '  Нет данных');
+      const lines = [
+        'Статистика CES бота',
+        '',
+        'Всего пользователей: ' + totalUsers,
+        'Всего тестов пройдено: ' + totalResults,
+        'Активных сегодня: ' + todayUsers,
+        'Активных за неделю: ' + weekUsers,
+        '',
+        'Топ разделов:',
+        topCats || '  Нет данных',
+        '',
+        'Последние пользователи:',
+        recentUsers || '  Нет данных'
+      ];
 
-      bot.sendMessage(chatId, text, { parse_mode: 'Markdown' });
+      bot.sendMessage(chatId, lines.join('\n'));
     } catch(e) {
-      bot.sendMessage(chatId, '❌ Ошибка: ' + e.message);
+      bot.sendMessage(chatId, 'Ошибка: ' + e.message);
     }
   });
 
