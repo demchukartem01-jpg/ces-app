@@ -165,6 +165,64 @@ try {
     });
   });
 
+  // Команда /admin — статистика для владельца
+  const ADMIN_ID = 361088297;
+  bot.onText(/\/admin/, async (msg) => {
+    const chatId = msg.chat.id;
+    if (msg.chat.id !== ADMIN_ID) {
+      bot.sendMessage(chatId, '⛔ Нет доступа');
+      return;
+    }
+    try {
+      const data = loadData();
+      const totalUsers = Object.keys(data.users).length;
+      const totalResults = data.results.length;
+      const yesterday = Date.now() - 86400000;
+      const todayUsers = new Set(data.results.filter(r => r.created_at > yesterday).map(r => r.tid)).size;
+      const weekUsers = new Set(data.results.filter(r => r.created_at > Date.now() - 7*86400000).map(r => r.tid)).size;
+
+      // Топ категорий
+      const catMap = {};
+      data.results.forEach(r => {
+        if (!catMap[r.category]) catMap[r.category] = 0;
+        catMap[r.category]++;
+      });
+      const topCats = Object.entries(catMap)
+        .sort((a,b) => b[1]-a[1]).slice(0,5)
+        .map(([cat, count]) => `  📚 ${cat}: ${count}`).join('
+');
+
+      // Последние пользователи
+      const recentUsers = Object.values(data.users)
+        .sort((a,b) => (b.last_seen||0) - (a.last_seen||0)).slice(0,5)
+        .map(u => `  👤 ${u.first_name || 'Unknown'} (@${u.username || '-'})`).join('
+');
+
+      const text = `📊 *Статистика CES бота*
+
+` +
+        `👥 Всего пользователей: *${totalUsers}*
+` +
+        `📝 Всего тестов пройдено: *${totalResults}*
+` +
+        `🔥 Активных сегодня: *${todayUsers}*
+` +
+        `📅 Активных за неделю: *${weekUsers}*
+
+` +
+        `🏆 *Топ разделов:*
+${topCats || '  Нет данных'}
+
+` +
+        `🕐 *Последние пользователи:*
+${recentUsers || '  Нет данных'}`;
+
+      bot.sendMessage(chatId, text, { parse_mode: 'Markdown' });
+    } catch(e) {
+      bot.sendMessage(chatId, '❌ Ошибка: ' + e.message);
+    }
+  });
+
   console.log('Бот запущен...');
 } catch(e) {
   console.log('Bot error:', e.message);
