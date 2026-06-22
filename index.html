@@ -213,9 +213,9 @@
 <div id="screen-engine" class="hidden">
   <div class="header">
     <button class="back-btn" onclick="showScreen('screen-main')">← Назад</button>
-    <div class="eyebrow">Engine Department</div>
-    <h1>Выберите уровень</h1>
-    <p>Management или Operational</p>
+    <div class="eyebrow" id="txt-eng-eyebrow">Engine Department</div>
+    <h1 id="txt-eng-h1">Выберите уровень</h1>
+    <p id="txt-eng-p">Management или Operational</p>
   </div>
   <div class="card-list">
     <div class="dept-card dept-engine" onclick="showEngineGroup('management')">
@@ -259,7 +259,7 @@
   <div class="final-card" onclick="startCategoryFinal()">
     <div class="card-icon" style="background:rgba(200,151,63,0.2)">🎯</div>
     <div class="card-body">
-      <div class="card-title">Финальный экзамен</div>
+      <div class="card-title" id="txt-final-title">Финальный экзамен</div>
       <div class="card-sub" id="sub-final-sub">50 случайных · 60 минут</div>
     </div>
     <div class="card-arrow" style="color:var(--brass-bright)">→</div>
@@ -270,7 +270,7 @@
 <div id="screen-quiz" class="hidden">
   <div class="quiz-wrap active">
     <div class="quiz-header">
-      <button class="back-btn" onclick="confirmExit()" style="margin-bottom:0">← Выйти</button>
+      <button class="back-btn" id="txt-exit-btn" onclick="confirmExit()" style="margin-bottom:0">← Выйти</button>
       <div class="timer hidden" id="timerDisplay">60:00</div>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -291,7 +291,7 @@
       <div class="result-message" id="resultMessage"></div>
       <button class="result-btn" id="txt-back-btn" onclick="goBackFromResult()">← Вернуться к разделам</button>
     </div>
-    <div class="review-title">Разбор ошибок</div>
+    <div class="review-title" id="txt-review-title">Разбор ошибок</div>
     <div id="reviewList"></div>
   </div>
 </div>
@@ -300,8 +300,8 @@
 <div id="screen-stats" class="hidden">
   <div class="header">
     <button class="back-btn" onclick="showScreen('screen-main')">← Назад</button>
-    <div class="eyebrow">Личный кабинет</div>
-    <h1>Моя статистика</h1>
+    <div class="eyebrow" id="txt-stats-eyebrow">Личный кабинет</div>
+    <h1 id="txt-stats-h1">Моя статистика</h1>
   </div>
   <div id="stats-content" style="padding:16px">
     <div style="text-align:center;padding:40px;color:var(--foam-dim)">Загрузка...</div>
@@ -590,6 +590,7 @@
 
   function applyLang() {
     const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    // Главный экран
     set('txt-eyebrow', T.eyebrow);
     set('txt-title', T.title);
     set('txt-subtitle', T.subtitle);
@@ -599,6 +600,30 @@
     set('txt-engine-sub', T.engineSub);
     set('txt-stats', T.stats);
     set('txt-stats-sub', T.statsSub);
+    // Deck экран
+    set('txt-deck-h1', T.selectLevel);
+    set('txt-d-gmdss', T.gmdss);
+    set('txt-d-gmdss-sub', T.gmdssSub);
+    set('txt-d-mgmt', T.management);
+    set('txt-d-mgmt-sub', T.managementSub);
+    // Engine экран
+    set('txt-eng-h1', T.selectLevel);
+    set('txt-eng-mgmt', T.engineManagement);
+    set('txt-eng-mgmt-sub', T.engineManagementSub);
+    set('txt-eng-op', T.engineOperational);
+    set('txt-eng-op-sub', T.engineOperationalSub);
+    // Финальный
+    set('txt-final-title', T.finalExam);
+    // Квиз
+    set('txt-exit-btn', T.exit);
+    // Статистика
+    set('txt-stats-eyebrow', T.myStats);
+    set('txt-stats-h1', T.myStats);
+    // Результат
+    set('txt-back-btn', T.backToSections);
+    set('txt-review-title', T.reviewTitle);
+    // Разделы
+    set('sub-title', document.getElementById('sub-title')?.textContent === 'Загрузка...' ? T.loading : T.selectSection);
   }
 
   // ---- Build dept lists ----
@@ -615,7 +640,7 @@
         <div class="card-icon">${icon}</div>
         <div class="card-body">
           <div class="card-title">${name}</div>
-          <div class="card-sub">Нажмите для загрузки</div>
+          <div class="card-sub" id="txt-tap-load">Нажмите для загрузки</div>
         </div>
         <div class="card-arrow">→</div>`;
       container.appendChild(card);
@@ -629,7 +654,7 @@
     // Показываем экран с индикатором загрузки
     showScreen('screen-sub');
     document.getElementById('sub-eyebrow').textContent = name;
-    document.getElementById('sub-title').textContent = 'Выберите раздел';
+    document.getElementById('sub-title').textContent = T.selectSection;
     document.getElementById('sub-subtitle').textContent = '';
     document.getElementById('sub-back-btn').onclick = () => showScreen(fromScreen);
     document.getElementById('sub-sections').innerHTML = '<div style="text-align:center;padding:40px;color:var(--foam-dim)">⏳ Загрузка...</div>';
@@ -638,7 +663,7 @@
     if (!LOADED_CATS[name]) {
       const ok = await loadCategory(name);
       if (!ok) {
-        document.getElementById('sub-sections').innerHTML = '<div style="text-align:center;padding:40px;color:var(--danger)">❌ Ошибка загрузки. Проверь интернет.</div>';
+        document.getElementById('sub-sections').innerHTML = '<div style="text-align:center;padding:40px;color:var(--danger)">' + T.errorLoad + '</div>';
         return;
       }
       // Добавляем в CATEGORIES
@@ -651,7 +676,7 @@
     const fc = FINAL_COUNTS[name] || 50;
 
     document.getElementById('sub-eyebrow').textContent = name;
-    document.getElementById('sub-title').textContent = 'Выберите раздел';
+    document.getElementById('sub-title').textContent = T.selectSection;
     document.getElementById('sub-subtitle').textContent = `${total} вопросов · ${cat.sections.length} частей`;
     document.getElementById('sub-final-sub').textContent = `${fc} случайных · 60 минут`;
     document.getElementById('sub-back-btn').onclick = () => showScreen(fromScreen);
