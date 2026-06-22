@@ -133,9 +133,36 @@
   <div class="header">
     <button class="back-btn" onclick="showScreen('screen-main')">← Назад</button>
     <div class="eyebrow">Engine Department</div>
-    <h1>Выберите тест</h1>
+    <h1>Выберите уровень</h1>
   </div>
-  <div class="card-list" id="engine-list"></div>
+  <div class="card-list">
+    <div class="dept-card dept-engine" onclick="showEngineGroup('management')">
+      <div class="dept-icon">👨‍✈️</div>
+      <div class="card-body">
+        <div class="dept-title">Management Level</div>
+        <div class="dept-sub">Ch.Engineer & 2nd Engineer</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+    <div class="dept-card dept-engine" onclick="showEngineGroup('operational')">
+      <div class="dept-icon">🔧</div>
+      <div class="card-body">
+        <div class="dept-title">Operational Level</div>
+        <div class="dept-sub">3rd Engineer & 4th Engineer</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+  </div>
+</div>
+
+<!-- ЭКРАН 3b: Engine подгруппа -->
+<div id="screen-engine-group" class="hidden">
+  <div class="header">
+    <button class="back-btn" onclick="showScreen('screen-engine')">← Назад</button>
+    <div class="eyebrow" id="engine-group-eyebrow">Engine Department</div>
+    <h1 id="engine-group-title">Выберите тест</h1>
+  </div>
+  <div class="card-list" id="engine-group-list"></div>
 </div>
 
 <!-- ЭКРАН 4: Подразделы категории -->
@@ -204,7 +231,9 @@
     'GMDSS': 50, 'Bulk Carrier Management': 71,
   };
   const DECK_CATS = ['GMDSS','Bulk Carrier Management','Container Ship Management','Chemical Tanker Management','General Cargo Management','LPG Tanker Management','Oil Tanker Management','RoRo Management'];
-  const ENGINE_CATS = ['ETO','Slow Speed Management','Medium Speed Management','Steam Management','Slow Speed Operational','Medium Speed Operational'];
+  const ENGINE_MANAGEMENT_CATS = ['ETO','Slow Speed Management','Medium Speed Management','Steam Management'];
+  const ENGINE_OPERATIONAL_CATS = ['Slow Speed Operational','Medium Speed Operational'];
+  const ENGINE_CATS = [...ENGINE_MANAGEMENT_CATS, ...ENGINE_OPERATIONAL_CATS];
 
   const SECTION_MAP = [
     ['GMDSS','GMDSS'],['Bulk Carrier','Bulk Carrier Management'],
@@ -256,7 +285,7 @@
   }
 
   // ---- Build dept lists ----
-  function buildDeptList(containerId, catNames) {
+  function buildDeptList(containerId, catNames, fromScreen) {
     const container = document.getElementById(containerId);
     container.innerHTML = '';
     catNames.forEach(name => {
@@ -265,7 +294,8 @@
       const total = cat.sections.reduce((s, sec) => s + sec.questions.length, 0);
       const card = document.createElement('div');
       card.className = 'card';
-      card.onclick = () => openCategory(name, containerId === 'deck-list' ? 'screen-deck' : 'screen-engine');
+      const src = fromScreen || (containerId === 'deck-list' ? 'screen-deck' : 'screen-engine-group');
+      card.onclick = () => openCategory(name, src);
       card.innerHTML = `
         <div class="card-icon">${cat.icon}</div>
         <div class="card-body">
@@ -460,9 +490,19 @@
     showScreen('screen-sub');
   }
 
+  // ---- Engine groups ----
+  function showEngineGroup(group) {
+    const cats = group === 'management' ? ENGINE_MANAGEMENT_CATS : ENGINE_OPERATIONAL_CATS;
+    const title = group === 'management' ? 'Management Level' : 'Operational Level';
+    const eyebrow = group === 'management' ? 'Ch.Engineer & 2nd Engineer' : '3rd & 4th Engineer';
+    document.getElementById('engine-group-title').textContent = title;
+    document.getElementById('engine-group-eyebrow').textContent = eyebrow;
+    buildDeptList('engine-group-list', cats, 'screen-engine-group');
+    showScreen('screen-engine-group');
+  }
+
   // ---- Init ----
-  buildDeptList('deck-list', DECK_CATS);
-  buildDeptList('engine-list', ENGINE_CATS);
+  buildDeptList('deck-list', DECK_CATS, 'screen-deck');
 </script>
 </body>
 </html>
