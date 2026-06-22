@@ -279,7 +279,7 @@
   </div>
 </div>
 
-<script src="data.js?v=2"></script>
+<script src="data.js"></script>
 <script>
   const tg = window.Telegram?.WebApp;
   if (tg) { tg.ready(); tg.expand(); }
@@ -405,27 +405,7 @@
     });
   }
 
-  async function openCategory(name, fromScreen) {
-    // Показываем экран загрузки
-    if (!LOADED_CATS[name]) {
-      showScreen('screen-sub');
-      document.getElementById('sub-title').textContent = 'Загрузка...';
-      document.getElementById('sub-eyebrow').textContent = name;
-      document.getElementById('sub-subtitle').textContent = '';
-      document.getElementById('sub-sections').innerHTML = '<div style="text-align:center;padding:40px;color:var(--foam-dim)">⏳ Загрузка вопросов...</div>';
-      document.getElementById('sub-back-btn').onclick = () => showScreen(fromScreen);
-
-      await loadCategory(name);
-
-      // Перестраиваем CATEGORIES после загрузки
-      TEST_SECTIONS.forEach(s => {
-        const c = getCat(s.title);
-        if (!CATEGORIES[c]) CATEGORIES[c] = { icon: CATEGORY_ICONS[c] || '📄', sections: [] };
-        if (!CATEGORIES[c].sections.find(x => x.title === s.title)) {
-          CATEGORIES[c].sections.push(s);
-        }
-      });
-    }
+  function openCategory(name, fromScreen) {
     currentCategory = name;
     prevDeptScreen = fromScreen;
     const cat = CATEGORIES[name];
