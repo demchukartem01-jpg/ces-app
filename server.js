@@ -189,33 +189,22 @@ try {
       });
       const topCats = Object.entries(catMap)
         .sort((a,b) => b[1]-a[1]).slice(0,5)
-        .map(([cat, count]) => `  📚 ${cat}: ${count}`).join('
+        .map(function(e){return '  ' + e[0] + ': ' + e[1];}).join('\n');
 ');
 
       // Последние пользователи
       const recentUsers = Object.values(data.users)
         .sort((a,b) => (b.last_seen||0) - (a.last_seen||0)).slice(0,5)
-        .map(u => `  👤 ${u.first_name || 'Unknown'} (@${u.username || '-'})`).join('
+        .map(function(u){return '  ' + (u.first_name||'Unknown') + ' (@' + (u.username||'-') + ')';}).join('\n');
 ');
 
-      const text = `📊 *Статистика CES бота*
-
-` +
-        `👥 Всего пользователей: *${totalUsers}*
-` +
-        `📝 Всего тестов пройдено: *${totalResults}*
-` +
-        `🔥 Активных сегодня: *${todayUsers}*
-` +
-        `📅 Активных за неделю: *${weekUsers}*
-
-` +
-        `🏆 *Топ разделов:*
-${topCats || '  Нет данных'}
-
-` +
-        `🕐 *Последние пользователи:*
-${recentUsers || '  Нет данных'}`;
+      const text = '📊 *Статистика CES бота*\n\n' +
+        '👥 Всего пользователей: *' + totalUsers + '*\n' +
+        '📝 Всего тестов пройдено: *' + totalResults + '*\n' +
+        '🔥 Активных сегодня: *' + todayUsers + '*\n' +
+        '📅 Активных за неделю: *' + weekUsers + '*\n\n' +
+        '🏆 *Топ разделов:*\n' + (topCats || '  Нет данных') + '\n\n' +
+        '🕐 *Последние пользователи:*\n' + (recentUsers || '  Нет данных');
 
       bot.sendMessage(chatId, text, { parse_mode: 'Markdown' });
     } catch(e) {
