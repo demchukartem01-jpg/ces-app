@@ -4,6 +4,7 @@ const LOADED_CATS = {};
 const API_URL = 'https://ces-bot.onrender.com';
 
 const CATEGORY_META = {
+  // Deck Management
   "GMDSS": { icon: "📡", deck: true, level: "gmdss" },
   "Bulk Carrier Management": { icon: "🚢", deck: true, level: "management" },
   "Container Ship Management": { icon: "🏗️", deck: true, level: "management" },
@@ -12,6 +13,15 @@ const CATEGORY_META = {
   "LPG Tanker Management": { icon: "🔥", deck: true, level: "management" },
   "Oil Tanker Management": { icon: "🛢️", deck: true, level: "management" },
   "RoRo Management": { icon: "🚗", deck: true, level: "management" },
+  // Deck Operational
+  "Bulk Carrier Operational": { icon: "🚢", deck: true, level: "operational" },
+  "Container Ship Operational": { icon: "🏗️", deck: true, level: "operational" },
+  "Chemical Tanker Operational": { icon: "⚗️", deck: true, level: "operational" },
+  "General Cargo Operational": { icon: "📦", deck: true, level: "operational" },
+  "LPG Tanker Operational": { icon: "🔥", deck: true, level: "operational" },
+  "Oil Tanker Operational": { icon: "🛢️", deck: true, level: "operational" },
+  "RoRo Operational": { icon: "🚗", deck: true, level: "operational" },
+  // Engine
   "ETO": { icon: "⚡", deck: false, level: "management" },
   "Slow Speed Management": { icon: "🐢", deck: false, level: "management" },
   "Medium Speed Management": { icon: "⚙️", deck: false, level: "management" },
