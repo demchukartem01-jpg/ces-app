@@ -175,7 +175,8 @@
     document.getElementById('sub-eyebrow').textContent = name;
     document.getElementById('sub-title').textContent = 'Выберите раздел';
     document.getElementById('sub-subtitle').textContent = `${total} вопросов · ${cat.sections.length} частей`;
-    document.getElementById('sub-final-sub').textContent = `50 случайных из ${total} · 60 минут`;
+    const fc = FINAL_COUNTS[name] || 50;
+    document.getElementById('sub-final-sub').textContent = `${fc} случайных из ${total} · 60 минут`;
 
     const container = document.getElementById('sub-sections');
     container.innerHTML = '';
@@ -195,9 +196,11 @@
     showScreen('screen-sub');
   }
 
+  const FINAL_COUNTS = { 'GMDSS': 50, 'Bulk Carrier Management': 71 };
   function startCategoryFinal() {
     const all = CATEGORIES[currentCategory].sections.flatMap(s => s.questions);
-    const shuffled = [...all].sort(() => Math.random() - 0.5).slice(0, 50);
+    const count = FINAL_COUNTS[currentCategory] || 50;
+    const shuffled = [...all].sort(() => Math.random() - 0.5).slice(0, count);
     startSection(shuffled, true);
   }
 
