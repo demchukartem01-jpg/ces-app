@@ -198,20 +198,25 @@
     'Chemical Tanker Management':'⚗️','General Cargo Management':'📦',
     'LPG Tanker Management':'🔥','Oil Tanker Management':'🛢️','RoRo Management':'🚗',
     'ETO':'⚡','Slow Speed Management':'🐢','Medium Speed Management':'⚙️','Steam Management':'💧',
+    'Slow Speed Operational':'🔄','Medium Speed Operational':'🔁',
   };
   const FINAL_COUNTS = {
     'GMDSS': 50, 'Bulk Carrier Management': 71,
   };
   const DECK_CATS = ['GMDSS','Bulk Carrier Management','Container Ship Management','Chemical Tanker Management','General Cargo Management','LPG Tanker Management','Oil Tanker Management','RoRo Management'];
-  const ENGINE_CATS = ['ETO','Slow Speed Management','Medium Speed Management','Steam Management'];
+  const ENGINE_CATS = ['ETO','Slow Speed Management','Medium Speed Management','Steam Management','Slow Speed Operational','Medium Speed Operational'];
 
   const SECTION_MAP = [
     ['GMDSS','GMDSS'],['Bulk Carrier','Bulk Carrier Management'],
     ['Container Ship','Container Ship Management'],['Chemical Tanker','Chemical Tanker Management'],
     ['General Cargo','General Cargo Management'],['LPG Tanker','LPG Tanker Management'],
     ['Oil Tanker','Oil Tanker Management'],['RoRo','RoRo Management'],
-    ['ETO','ETO'],['Slow Speed','Slow Speed Management'],
-    ['Medium Speed','Medium Speed Management'],['Steam','Steam Management'],
+    ['ETO','ETO'],
+    ['Slow Speed Op','Slow Speed Operational'],
+    ['Medium Speed Op','Medium Speed Operational'],
+    ['Slow Speed','Slow Speed Management'],
+    ['Medium Speed','Medium Speed Management'],
+    ['Steam','Steam Management'],
   ];
 
   function getCat(title) {
