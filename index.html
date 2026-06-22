@@ -13,12 +13,14 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: radial-gradient(ellipse at top, var(--mid-navy), var(--deep-navy) 65%); color: var(--foam); font-family: -apple-system,'Segoe UI',Roboto,sans-serif; min-height: 100vh; padding-bottom: 60px; }
-  .header { padding: 24px 20px 18px; border-bottom: 1px solid rgba(200,151,63,0.25); }
+
+  .header { padding: 22px 20px 16px; border-bottom: 1px solid rgba(200,151,63,0.25); }
   .eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass); font-weight: 600; display: flex; align-items: center; gap: 8px; }
   .eyebrow::before { content:''; width:16px; height:1px; background:var(--brass); }
-  .header h1 { font-size: 26px; font-weight: 700; margin-top: 8px; }
-  .header p { color: var(--foam-dim); font-size: 13px; margin-top: 5px; }
-  .card-list { padding: 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+  .header h1 { font-size: 24px; font-weight: 700; margin-top: 8px; }
+  .header p { color: var(--foam-dim); font-size: 13px; margin-top: 4px; }
+
+  .card-list { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
   .card { background: linear-gradient(135deg, var(--mid-navy), rgba(20,40,61,0.6)); border: 1px solid rgba(200,151,63,0.18); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: border-color 0.15s, transform 0.1s; }
   .card:active { transform: scale(0.98); border-color: rgba(200,151,63,0.5); }
   .card-icon { font-size: 20px; width: 42px; height: 42px; border-radius: 11px; background: rgba(200,151,63,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -26,20 +28,32 @@
   .card-title { font-size: 15px; font-weight: 600; }
   .card-sub { font-size: 12px; color: var(--foam-dim); margin-top: 3px; }
   .card-arrow { color: var(--brass); font-size: 18px; flex-shrink: 0; }
+
+  .dept-card { border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: transform 0.1s; }
+  .dept-card:active { transform: scale(0.98); }
+  .dept-deck { background: linear-gradient(135deg, #0d2137, #1a3a5c); border: 1px solid rgba(100,180,255,0.3); }
+  .dept-engine { background: linear-gradient(135deg, #1a1200, #3a2800); border: 1px solid rgba(255,180,50,0.3); }
+  .dept-icon { font-size: 36px; flex-shrink: 0; }
+  .dept-title { font-size: 18px; font-weight: 700; }
+  .dept-sub { font-size: 13px; color: var(--foam-dim); margin-top: 4px; }
+
   .final-card { margin: 4px 16px 0; background: linear-gradient(135deg, #1a3a5c, #0f2540); border: 1px solid var(--brass); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: transform 0.1s; }
   .final-card:active { transform: scale(0.98); }
   .final-card .card-title { color: var(--brass-bright); }
+
   .back-btn { background: none; border: none; color: var(--foam-dim); font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; margin-bottom: 12px; }
-  .quiz-view { display: none; padding: 16px; }
-  .quiz-view.active { display: block; }
+
+  /* Quiz */
+  .quiz-wrap { display: none; padding: 16px; }
+  .quiz-wrap.active { display: block; }
   .quiz-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
   .timer { font-size: 20px; font-weight: 700; color: var(--brass-bright); letter-spacing: 0.05em; }
   .timer.warning { color: #e05c3a; }
   .progress-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; margin-bottom: 18px; }
   .progress-fill { height: 100%; background: linear-gradient(90deg, var(--brass), var(--brass-bright)); border-radius: 2px; transition: width 0.3s; }
-  .question-counter { font-size: 11px; color: var(--brass); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
-  .question-text { font-size: 17px; line-height: 1.45; margin-bottom: 12px; }
-  .question-img { width: 100%; max-height: 200px; object-fit: contain; border-radius: 10px; margin-bottom: 12px; background: rgba(255,255,255,0.04); }
+  .q-counter { font-size: 11px; color: var(--brass); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+  .q-text { font-size: 17px; line-height: 1.45; margin-bottom: 12px; }
+  .q-img { width: 100%; max-height: 200px; object-fit: contain; border-radius: 10px; margin-bottom: 12px; background: rgba(255,255,255,0.04); }
   .options { display: flex; flex-direction: column; gap: 9px; }
   .option { background: var(--mid-navy); border: 1px solid rgba(200,151,63,0.18); border-radius: 12px; padding: 12px 14px; font-size: 14px; color: var(--foam); cursor: pointer; transition: all 0.12s; display: flex; align-items: center; gap: 11px; }
   .option:active { transform: scale(0.98); }
@@ -48,71 +62,128 @@
   .option.correct .option-letter { background: var(--success); border-color: var(--success); color: white; }
   .option.wrong { border-color: var(--danger); background: rgba(196,84,58,0.15); }
   .option.wrong .option-letter { background: var(--danger); border-color: var(--danger); color: white; }
-  .result-view { display: none; padding: 40px 24px; text-align: center; }
-  .result-view.active { display: block; }
-  .result-score { font-size: 56px; font-weight: 700; color: var(--brass-bright); line-height: 1; }
-  .result-label { color: var(--foam-dim); font-size: 14px; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
-  .result-time { margin-top: 12px; font-size: 14px; color: var(--foam-dim); }
-  .result-message { margin-top: 18px; font-size: 15px; color: var(--foam); line-height: 1.5; }
-  .restart-btn { margin-top: 24px; background: var(--brass); color: var(--deep-navy); border: none; border-radius: 12px; padding: 14px 28px; font-size: 15px; font-weight: 700; cursor: pointer; display: block; width: 100%; }
+
+  /* Result */
+  .result-wrap { display: none; padding: 24px 16px; }
+  .result-wrap.active { display: block; }
+  .result-top { text-align: center; padding: 20px 0 24px; border-bottom: 1px solid rgba(200,151,63,0.2); margin-bottom: 20px; }
+  .result-score { font-size: 52px; font-weight: 700; color: var(--brass-bright); line-height: 1; }
+  .result-label { color: var(--foam-dim); font-size: 13px; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .result-time { margin-top: 10px; font-size: 13px; color: var(--foam-dim); }
+  .result-message { margin-top: 14px; font-size: 15px; color: var(--foam); line-height: 1.5; }
+  .result-btn { margin-top: 20px; background: var(--brass); color: var(--deep-navy); border: none; border-radius: 12px; padding: 13px 24px; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%; }
+
+  /* Review */
+  .review-title { font-size: 14px; font-weight: 700; color: var(--brass); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
+  .review-item { background: var(--mid-navy); border-radius: 12px; padding: 14px; margin-bottom: 12px; border-left: 3px solid var(--success); }
+  .review-item.wrong { border-left-color: var(--danger); }
+  .review-q { font-size: 14px; line-height: 1.4; margin-bottom: 10px; }
+  .review-img { width: 100%; max-height: 160px; object-fit: contain; border-radius: 8px; margin-bottom: 10px; background: rgba(255,255,255,0.04); }
+  .review-answer { font-size: 13px; padding: 7px 10px; border-radius: 8px; margin-bottom: 5px; display: flex; align-items: flex-start; gap: 8px; }
+  .review-answer.correct-ans { background: rgba(74,143,110,0.2); color: #7fd4a8; }
+  .review-answer.wrong-ans { background: rgba(196,84,58,0.2); color: #e89080; }
+  .review-answer.user-wrong { background: rgba(196,84,58,0.15); color: #e89080; }
+  .review-mark { flex-shrink: 0; font-size: 14px; }
+
   .hidden { display: none !important; }
-  .section-divider { padding: 12px 16px 4px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--foam-dim); font-weight: 600; }
+  .section-divider { padding: 10px 16px 4px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--foam-dim); font-weight: 600; }
 </style>
 </head>
 <body>
 
-<!-- ГЛАВНОЕ МЕНЮ -->
+<!-- ЭКРАН 1: Главный — выбор департамента -->
 <div id="screen-main">
   <div class="header">
     <div class="eyebrow">CES · Подготовка моряков</div>
     <h1>Морские тесты</h1>
-    <p>Выбери раздел для подготовки</p>
+    <p>Выбери свой департамент</p>
   </div>
-  <div class="card-list" id="main-menu"></div>
+  <div class="card-list">
+    <div class="dept-card dept-deck" onclick="showScreen('screen-deck')">
+      <div class="dept-icon">⚓</div>
+      <div class="card-body">
+        <div class="dept-title">Deck Department</div>
+        <div class="dept-sub">GMDSS, Tankers, Bulk Carrier и др.</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+    <div class="dept-card dept-engine" onclick="showScreen('screen-engine')">
+      <div class="dept-icon">⚙️</div>
+      <div class="card-body">
+        <div class="dept-title">Engine Department</div>
+        <div class="dept-sub">ETO, Slow/Medium Speed, Steam</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+  </div>
 </div>
 
-<!-- ПОДРАЗДЕЛЫ (для каждой категории) -->
-<div id="screen-sub" class="hidden">
+<!-- ЭКРАН 2: Deck Department -->
+<div id="screen-deck" class="hidden">
   <div class="header">
     <button class="back-btn" onclick="showScreen('screen-main')">← Назад</button>
+    <div class="eyebrow">Deck Department</div>
+    <h1>Выберите тест</h1>
+  </div>
+  <div class="card-list" id="deck-list"></div>
+</div>
+
+<!-- ЭКРАН 3: Engine Department -->
+<div id="screen-engine" class="hidden">
+  <div class="header">
+    <button class="back-btn" onclick="showScreen('screen-main')">← Назад</button>
+    <div class="eyebrow">Engine Department</div>
+    <h1>Выберите тест</h1>
+  </div>
+  <div class="card-list" id="engine-list"></div>
+</div>
+
+<!-- ЭКРАН 4: Подразделы категории -->
+<div id="screen-sub" class="hidden">
+  <div class="header">
+    <button class="back-btn" id="sub-back-btn">← Назад</button>
     <div class="eyebrow" id="sub-eyebrow"></div>
     <h1 id="sub-title"></h1>
     <p id="sub-subtitle"></p>
   </div>
   <div class="card-list" id="sub-sections"></div>
-  <div class="final-card" id="sub-final" onclick="startCategoryFinal()">
+  <div class="final-card" onclick="startCategoryFinal()">
     <div class="card-icon" style="background:rgba(200,151,63,0.2)">🎯</div>
     <div class="card-body">
       <div class="card-title">Финальный экзамен</div>
-      <div class="card-sub" id="sub-final-sub">50 случайных вопросов · 60 минут</div>
+      <div class="card-sub" id="sub-final-sub">50 случайных · 60 минут</div>
     </div>
     <div class="card-arrow" style="color:var(--brass-bright)">→</div>
   </div>
 </div>
 
-<!-- КВИЗ -->
+<!-- ЭКРАН 5: Квиз -->
 <div id="screen-quiz" class="hidden">
-  <div class="quiz-view active">
+  <div class="quiz-wrap active">
     <div class="quiz-header">
       <button class="back-btn" onclick="confirmExit()" style="margin-bottom:0">← Выйти</button>
       <div class="timer hidden" id="timerDisplay">60:00</div>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="question-counter" id="questionCounter"></div>
-    <div class="question-text" id="questionText"></div>
-    <img class="question-img" id="questionImg" style="display:none" alt="">
+    <div class="q-counter" id="questionCounter"></div>
+    <div class="q-text" id="questionText"></div>
+    <img class="q-img" id="questionImg" style="display:none" alt="">
     <div class="options" id="optionsList"></div>
   </div>
 </div>
 
-<!-- РЕЗУЛЬТАТ -->
+<!-- ЭКРАН 6: Результат + разбор -->
 <div id="screen-result" class="hidden">
-  <div class="result-view active">
-    <div class="result-score" id="resultScore"></div>
-    <div class="result-label">Правильных ответов</div>
-    <div class="result-time" id="resultTime"></div>
-    <div class="result-message" id="resultMessage"></div>
-    <button class="restart-btn" onclick="showScreen('screen-sub')">Вернуться к разделам</button>
+  <div class="result-wrap active">
+    <div class="result-top">
+      <div class="result-score" id="resultScore"></div>
+      <div class="result-label">Правильных ответов</div>
+      <div class="result-time" id="resultTime"></div>
+      <div class="result-message" id="resultMessage"></div>
+      <button class="result-btn" onclick="goBackFromResult()">← Вернуться к разделам</button>
+    </div>
+    <div class="review-title">Разбор ошибок</div>
+    <div id="reviewList"></div>
   </div>
 </div>
 
@@ -121,91 +192,45 @@
   const tg = window.Telegram?.WebApp;
   if (tg) { tg.ready(); tg.expand(); }
 
-  // Группируем разделы по категориям
-  // Иконки для категорий
+  // ---- Категории ----
   const CATEGORY_ICONS = {
-    'GMDSS': '📡',
-    'Bulk Carrier Management': '🚢',
-    'Container Ship Management': '🏗️',
-    'Chemical Tanker Management': '⚗️',
-    'General Cargo Management': '📦',
-    'LPG Tanker Management': '🔥',
-    'Oil Tanker Management': '🛢️',
-    'RoRo Management': '🚗',
-    'Bulk Carrier Operational': '⚓',
-    'Container Ship Operational': '🔩',
-    'Chemical Tanker Operational': '🧪',
-    'General Cargo Operational': '📋',
-    'LPG Tanker Operational': '💨',
-    'Oil Tanker Operational': '⛽',
-    'RoRo Operational': '🚛',
-    'Bulk Carrier Support': '🔧',
-    'Container Ship Support': '🛠️',
-    'Chemical Tanker Support': '🧰',
-    'General Cargo Support': '📌',
-    'LPG Tanker Support': '🔑',
-    'Oil Tanker Support': '🪛',
-    'RoRo Support': '🔐',
-    'ETO': '⚡',
-    'Slow Speed Management': '🐢',
-    'Medium Speed Management': '⚙️',
-    'Steam Management': '💧',
-    'Slow Speed Operational': '🔄',
-    'Medium Speed Operational': '🔁',
+    'GMDSS':'📡','Bulk Carrier Management':'🚢','Container Ship Management':'🏗️',
+    'Chemical Tanker Management':'⚗️','General Cargo Management':'📦',
+    'LPG Tanker Management':'🔥','Oil Tanker Management':'🛢️','RoRo Management':'🚗',
+    'ETO':'⚡','Slow Speed Management':'🐢','Medium Speed Management':'⚙️','Steam Management':'💧',
   };
-
-  // Финальные тесты для каждой категории
   const FINAL_COUNTS = {
-    'GMDSS': 50,
-    'Bulk Carrier Management': 71,
+    'GMDSS': 50, 'Bulk Carrier Management': 71,
   };
+  const DECK_CATS = ['GMDSS','Bulk Carrier Management','Container Ship Management','Chemical Tanker Management','General Cargo Management','LPG Tanker Management','Oil Tanker Management','RoRo Management'];
+  const ENGINE_CATS = ['ETO','Slow Speed Management','Medium Speed Management','Steam Management'];
 
-  // Автоматически строим категории из данных
-  const CATEGORIES = {};
-
-  // Маппинг: префикс раздела -> название категории
-  const SECTION_TO_CATEGORY = [
-    ['GMDSS', 'GMDSS'],
-    ['Bulk Carrier', 'Bulk Carrier Management'],
-    ['Container Ship', 'Container Ship Management'],
-    ['Chemical Tanker', 'Chemical Tanker Management'],
-    ['General Cargo', 'General Cargo Management'],
-    ['LPG Tanker', 'LPG Tanker Management'],
-    ['Oil Tanker', 'Oil Tanker Management'],
-    ['RoRo', 'RoRo Management'],
-    ['ETO', 'ETO'],
-    ['Slow Speed', 'Slow Speed Management'],
-    ['Medium Speed', 'Medium Speed Management'],
-    ['Steam', 'Steam Management'],
+  const SECTION_MAP = [
+    ['GMDSS','GMDSS'],['Bulk Carrier','Bulk Carrier Management'],
+    ['Container Ship','Container Ship Management'],['Chemical Tanker','Chemical Tanker Management'],
+    ['General Cargo','General Cargo Management'],['LPG Tanker','LPG Tanker Management'],
+    ['Oil Tanker','Oil Tanker Management'],['RoRo','RoRo Management'],
+    ['ETO','ETO'],['Slow Speed','Slow Speed Management'],
+    ['Medium Speed','Medium Speed Management'],['Steam','Steam Management'],
   ];
 
-  // Deck и Engine категории
-  const DECK_CATS = [
-    'GMDSS',
-    'Bulk Carrier Management', 'Container Ship Management', 'Chemical Tanker Management',
-    'General Cargo Management', 'LPG Tanker Management', 'Oil Tanker Management', 'RoRo Management',
-  ];
-  const ENGINE_CATS = [
-    'ETO', 'Slow Speed Management', 'Medium Speed Management', 'Steam Management',
-  ];
-
-  function getCategoryName(title) {
-    for (const [prefix, catName] of SECTION_TO_CATEGORY) {
-      if (title.startsWith(prefix)) return catName;
-    }
+  function getCat(title) {
+    for (const [p, c] of SECTION_MAP) if (title.startsWith(p)) return c;
     return title;
   }
 
+  const CATEGORIES = {};
   TEST_SECTIONS.forEach(s => {
-    const cat = getCategoryName(s.title);
-    if (!CATEGORIES[cat]) {
-      CATEGORIES[cat] = { icon: CATEGORY_ICONS[cat] || '📄', sections: [] };
-    }
-    CATEGORIES[cat].sections.push(s);
+    const c = getCat(s.title);
+    if (!CATEGORIES[c]) CATEGORIES[c] = { icon: CATEGORY_ICONS[c] || '📄', sections: [] };
+    CATEGORIES[c].sections.push(s);
   });
 
+  // ---- State ----
   let currentCategory = null;
+  let prevDeptScreen = 'screen-deck';
   let currentQuestions = [];
+  let userAnswers = [];
   let currentIndex = 0;
   let correctCount = 0;
   let answered = false;
@@ -214,73 +239,51 @@
   let timeLeft = 0;
   let startTime = null;
 
+  // ---- Navigation ----
   function showScreen(id) {
-    ['screen-main','screen-sub','screen-quiz','screen-result'].forEach(s =>
-      document.getElementById(s).classList.add('hidden'));
+    document.querySelectorAll('[id^="screen-"]').forEach(el => el.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
+    window.scrollTo(0, 0);
   }
 
+  function goBackFromResult() {
+    showScreen('screen-sub');
+  }
 
-
-  function renderMainMenu() {
-    const container = document.getElementById('main-menu');
+  // ---- Build dept lists ----
+  function buildDeptList(containerId, catNames) {
+    const container = document.getElementById(containerId);
     container.innerHTML = '';
-
-    const deckCats = Object.entries(CATEGORIES).filter(([n]) => DECK_CATS.includes(n));
-    const engineCats = Object.entries(CATEGORIES).filter(([n]) => ENGINE_CATS.includes(n));
-
-    if (deckCats.length) {
-      const d = document.createElement('div');
-      d.className = 'section-divider';
-      d.innerHTML = '&#9875; Deck Department';
-      container.appendChild(d);
-      deckCats.forEach(([name, cat]) => addCategoryCard(container, name, cat));
-    }
-
-    if (engineCats.length) {
-      const d = document.createElement('div');
-      d.className = 'section-divider';
-      d.innerHTML = '&#9881;&#65039; Engine Department';
-      container.appendChild(d);
-      engineCats.forEach(([name, cat]) => addCategoryCard(container, name, cat));
-    }
-
-    // Неизвестные категории
-    const otherCats = Object.entries(CATEGORIES).filter(([n]) => !DECK_CATS.includes(n) && !ENGINE_CATS.includes(n));
-    if (otherCats.length) {
-      const d = document.createElement('div');
-      d.className = 'section-divider';
-      d.textContent = 'Other';
-      container.appendChild(d);
-      otherCats.forEach(([name, cat]) => addCategoryCard(container, name, cat));
-    }
+    catNames.forEach(name => {
+      const cat = CATEGORIES[name];
+      if (!cat) return;
+      const total = cat.sections.reduce((s, sec) => s + sec.questions.length, 0);
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.onclick = () => openCategory(name, containerId === 'deck-list' ? 'screen-deck' : 'screen-engine');
+      card.innerHTML = `
+        <div class="card-icon">${cat.icon}</div>
+        <div class="card-body">
+          <div class="card-title">${name}</div>
+          <div class="card-sub">${total} вопросов · ${cat.sections.length} частей</div>
+        </div>
+        <div class="card-arrow">→</div>`;
+      container.appendChild(card);
+    });
   }
 
-  function addCategoryCard(container, name, cat) {
-    if (!cat.sections.length) return;
-    const total = cat.sections.reduce((s, sec) => s + sec.questions.length, 0);
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.onclick = () => openCategory(name);
-    card.innerHTML = `
-      <div class="card-icon">${cat.icon}</div>
-      <div class="card-body">
-        <div class="card-title">${name}</div>
-        <div class="card-sub">${total} вопросов · ${cat.sections.length} разделов</div>
-      </div>
-      <div class="card-arrow">→</div>`;
-    container.appendChild(card);
-  }
-
-  function openCategory(name) {
+  function openCategory(name, fromScreen) {
     currentCategory = name;
+    prevDeptScreen = fromScreen;
     const cat = CATEGORIES[name];
     const total = cat.sections.reduce((s, sec) => s + sec.questions.length, 0);
+    const fc = FINAL_COUNTS[name] || 50;
+
     document.getElementById('sub-eyebrow').textContent = name;
     document.getElementById('sub-title').textContent = 'Выберите раздел';
     document.getElementById('sub-subtitle').textContent = `${total} вопросов · ${cat.sections.length} частей`;
-    const fc = FINAL_COUNTS[name] || 50;
-    document.getElementById('sub-final-sub').textContent = `${fc} случайных из ${total} · 60 минут`;
+    document.getElementById('sub-final-sub').textContent = `${fc} случайных · 60 минут`;
+    document.getElementById('sub-back-btn').onclick = () => showScreen(fromScreen);
 
     const container = document.getElementById('sub-sections');
     container.innerHTML = '';
@@ -302,13 +305,15 @@
 
   function startCategoryFinal() {
     const all = CATEGORIES[currentCategory].sections.flatMap(s => s.questions);
-    const count = FINAL_COUNTS[currentCategory] || 50;
-    const shuffled = [...all].sort(() => Math.random() - 0.5).slice(0, count);
+    const fc = FINAL_COUNTS[currentCategory] || 50;
+    const shuffled = [...all].sort(() => Math.random() - 0.5).slice(0, fc);
     startSection(shuffled, true);
   }
 
+  // ---- Quiz ----
   function startSection(questions, final) {
     currentQuestions = questions;
+    userAnswers = new Array(questions.length).fill(null);
     currentIndex = 0;
     correctCount = 0;
     answered = false;
@@ -352,7 +357,7 @@
     document.getElementById('questionText').textContent = q.question;
     const img = document.getElementById('questionImg');
     if (q.image) { img.src = q.image; img.style.display='block'; img.onerror=()=>{img.style.display='none';}; }
-    else { img.style.display='none'; }
+    else img.style.display='none';
     const list = document.getElementById('optionsList');
     list.innerHTML = '';
     ['А','Б','В','Г','Д'].forEach((letter, i) => {
@@ -369,15 +374,23 @@
     if (answered) return;
     answered = true;
     const q = currentQuestions[currentIndex];
+    userAnswers[currentIndex] = index;
     const allOptions = document.querySelectorAll('.option');
-    if (index === q.correctIndex) { el.classList.add('correct'); correctCount++; tg?.HapticFeedback?.notificationOccurred('success'); }
-    else { el.classList.add('wrong'); allOptions[q.correctIndex].classList.add('correct'); tg?.HapticFeedback?.notificationOccurred('error'); }
+    if (index === q.correctIndex) {
+      el.classList.add('correct'); correctCount++;
+      tg?.HapticFeedback?.notificationOccurred('success');
+    } else {
+      el.classList.add('wrong');
+      allOptions[q.correctIndex].classList.add('correct');
+      tg?.HapticFeedback?.notificationOccurred('error');
+    }
     setTimeout(() => {
       if (currentIndex+1 < currentQuestions.length) { currentIndex++; renderQuestion(); }
       else showResult(false);
     }, 900);
   }
 
+  // ---- Result + Review ----
   function showResult(timeUp) {
     clearInterval(timerInterval);
     showScreen('screen-result');
@@ -386,22 +399,65 @@
     if (isFinal) {
       const elapsed = Math.floor((Date.now()-startTime)/1000);
       const em = Math.floor(elapsed/60), es = elapsed%60;
-      document.getElementById('resultTime').textContent = timeUp ? '⏱ Время вышло!' : `⏱ Затрачено: ${String(em).padStart(2,'0')}:${String(es).padStart(2,'0')}`;
-    } else { document.getElementById('resultTime').textContent = ''; }
+      document.getElementById('resultTime').textContent = timeUp
+        ? '⏱ Время вышло!'
+        : `⏱ Затрачено: ${String(em).padStart(2,'0')}:${String(es).padStart(2,'0')}`;
+    } else document.getElementById('resultTime').textContent = '';
     const pct = correctCount/total;
     document.getElementById('resultMessage').textContent =
-      pct===1 ? 'Отлично! Все ответы верны. Готов к экзамену! 🏆' :
+      pct===1 ? 'Отлично! Все ответы верны! 🏆' :
       pct>=0.7 ? 'Хороший результат! Ещё немного практики. 👍' :
-      'Стоит повторить материал и попробовать снова. 📚';
+      'Стоит повторить материал. 📚';
+
+    // Разбор ошибок
+    const reviewList = document.getElementById('reviewList');
+    reviewList.innerHTML = '';
+    const wrongQuestions = currentQuestions.filter((q, i) => userAnswers[i] !== q.correctIndex);
+    
+    if (wrongQuestions.length === 0) {
+      reviewList.innerHTML = '<div style="text-align:center;color:var(--foam-dim);padding:20px">🎯 Все ответы верные!</div>';
+      return;
+    }
+
+    currentQuestions.forEach((q, i) => {
+      if (userAnswers[i] === q.correctIndex) return; // пропускаем правильные
+      const item = document.createElement('div');
+      item.className = 'review-item wrong';
+      
+      let imgHtml = '';
+      if (q.image) imgHtml = `<img class="review-img" src="${q.image}" onerror="this.style.display='none'" alt="">`;
+      
+      const letters = ['А','Б','В','Г','Д'];
+      let answersHtml = '';
+      q.options.forEach((opt, oi) => {
+        const isCorrect = oi === q.correctIndex;
+        const isUserWrong = oi === userAnswers[i] && !isCorrect;
+        if (isCorrect) {
+          answersHtml += `<div class="review-answer correct-ans"><span class="review-mark">✓</span><span>${letters[oi]}. ${opt}</span></div>`;
+        } else if (isUserWrong) {
+          answersHtml += `<div class="review-answer wrong-ans"><span class="review-mark">✗</span><span>${letters[oi]}. ${opt}</span></div>`;
+        }
+      });
+
+      item.innerHTML = `
+        <div class="review-q"><strong>Вопрос ${i+1}.</strong> ${q.question}</div>
+        ${imgHtml}
+        ${answersHtml}`;
+      reviewList.appendChild(item);
+    });
   }
 
   function confirmExit() {
-    if (isFinal && timeLeft > 0) { if (!confirm('Выйти из экзамена?')) return; }
+    if (isFinal && timeLeft > 0 && currentIndex > 0) {
+      if (!confirm('Выйти из экзамена?')) return;
+    }
     clearInterval(timerInterval);
     showScreen('screen-sub');
   }
 
-  renderMainMenu();
+  // ---- Init ----
+  buildDeptList('deck-list', DECK_CATS);
+  buildDeptList('engine-list', ENGINE_CATS);
 </script>
 </body>
 </html>
