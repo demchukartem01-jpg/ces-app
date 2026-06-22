@@ -4235,7 +4235,7 @@ const TEST_SECTIONS = [
           "That there is another vessel in the vicinity that has just altered course to port",
           "That there is another vessel nearby, that is underway, but stopped and making no way through the water"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image489.jpg"
       },
       {
@@ -4246,7 +4246,7 @@ const TEST_SECTIONS = [
           "Capacity Plan",
           "Vessel stability book"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image834.jpg"
       },
       {
@@ -4257,7 +4257,7 @@ const TEST_SECTIONS = [
           "G2B",
           "J2B"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image10.jpg"
       },
       {
@@ -4268,7 +4268,7 @@ const TEST_SECTIONS = [
           "That people know where to find designated equipment",
           "That people are well trained"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image54.jpg"
       },
       {
@@ -4279,7 +4279,7 @@ const TEST_SECTIONS = [
           "The trim of the vessel is not important",
           "The vessel must be maintained at an even keel"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image829.jpg"
       },
       {
@@ -4290,7 +4290,7 @@ const TEST_SECTIONS = [
           "The use of MF DSC",
           "The use of HF DSC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -4301,7 +4301,7 @@ const TEST_SECTIONS = [
           "Pressed to listen",
           "Pressed in during speaking only to work duplex"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image6.jpg"
       },
       {
@@ -4323,7 +4323,7 @@ const TEST_SECTIONS = [
           "Having the vessel guided by a VTS operation",
           "Only using traditional navigational techniques"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image535.jpg"
       },
       {
@@ -4334,7 +4334,7 @@ const TEST_SECTIONS = [
           "Making use of Risk Assessment as a means to improving safety",
           "Consult the chief officer before commencing work"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image52.jpg"
       },
       {
@@ -4367,7 +4367,7 @@ const TEST_SECTIONS = [
           "It will prevent accidents from happening",
           "It leads to better work performance and positive atmosphere among the crew"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image1.jpg"
       },
       {
@@ -4378,7 +4378,7 @@ const TEST_SECTIONS = [
           "The manufacturer.",
           "The Classification Society."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image545.jpg"
       },
       {
@@ -4389,7 +4389,7 @@ const TEST_SECTIONS = [
           "Pressure forces caused by green water on deck",
           "Slamming in way of flat bottom forward of light draught"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image247.jpg"
       },
       {
@@ -4411,7 +4411,7 @@ const TEST_SECTIONS = [
           "Load the cargo as the moisture content is within acceptable limits",
           "Refuse to load the cargo as the moisture content is outside acceptable limits"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image835.jpg"
       },
       {
@@ -4422,7 +4422,7 @@ const TEST_SECTIONS = [
           "To calculate light displacement of the vessel",
           "To ascertain the actual weight of cargo loaded"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image659.jpg"
       },
       {
@@ -4433,7 +4433,7 @@ const TEST_SECTIONS = [
           "Call the company, explain the situation and ask for instructions",
           "Tell the watchkeeper to proceed on passage"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image295.jpg"
       },
       {
@@ -4444,7 +4444,7 @@ const TEST_SECTIONS = [
           "Sound general alarm, muster ships crew and transmit a Mayday call and message.",
           "The alarms could be faulty and should be ignored"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image831.jpg"
       },
       {
@@ -4466,7 +4466,7 @@ const TEST_SECTIONS = [
           "RCC common channel",
           "LES message channel"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -4477,7 +4477,7 @@ const TEST_SECTIONS = [
           "A Notification of Deficiency.",
           "A revised Class Notation."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image543.jpg"
       },
       {
@@ -4488,7 +4488,7 @@ const TEST_SECTIONS = [
           "Safety call",
           "Urgent call"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image8.jpg"
       },
       {
@@ -4499,7 +4499,7 @@ const TEST_SECTIONS = [
           "Channel 16 only",
           "Channels 6, 13 & 16"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image8.jpg"
       },
       {
@@ -4510,7 +4510,7 @@ const TEST_SECTIONS = [
           "True motion does not provide the collision risk of targets as only true vectors are available",
           "The true vector can never give an indication of collision risk with another ship"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image487.jpg"
       },
       {
@@ -4521,7 +4521,7 @@ const TEST_SECTIONS = [
           "The trim of the vessel will not be satisfactory.",
           "The summer deadweight will not be achieved."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image828.jpg"
       },
       {
@@ -4532,7 +4532,7 @@ const TEST_SECTIONS = [
           "An organized conspiracy usually smuggles a small amount of drugs.",
           "Individual entrepreneurs usually smuggle large quantities of drugs."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image138.jpg"
       },
       {
@@ -4543,7 +4543,7 @@ const TEST_SECTIONS = [
           "Reporting to stations and preparing for the duties described in the muster list",
           "All the items mentioned"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image249.jpg"
       },
       {
@@ -4554,7 +4554,7 @@ const TEST_SECTIONS = [
           "The use of MF and/or VHF R/T",
           "The use of MF DSC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image19.jpg"
       },
       {
@@ -4565,7 +4565,7 @@ const TEST_SECTIONS = [
           "Crew should follow an emergency procedure",
           "The bridge team should devise a plan of action"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image577.jpg"
       },
       {
@@ -4576,7 +4576,7 @@ const TEST_SECTIONS = [
           "Ship owner has Document of Compliance issued, and vessel is assessed and holds all statutory certificates",
           "RSS issue SMC with Register"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image52.jpg"
       },
       {
@@ -4587,7 +4587,7 @@ const TEST_SECTIONS = [
           "In waters with the danger of icing, loading of deck cargo must be approved by competent authority.",
           "The ship is loaded in such a manner that adequate stability is achieved in all loading condition."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image180.jpg"
       },
       {
@@ -4598,7 +4598,7 @@ const TEST_SECTIONS = [
           "Alphabetical order.",
           "Selective laboratory tests commissioned by the Committee."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image513.jpg"
       },
       {
@@ -4609,7 +4609,7 @@ const TEST_SECTIONS = [
           "Name of vessel; IMO number; Port of registry; Port of destination of your vessel",
           "There should be no communication with the other vessel"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image295.jpg"
       },
       {
@@ -4620,7 +4620,7 @@ const TEST_SECTIONS = [
           "Damage to hatch covers",
           "Excessive stresses on tank top"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image834.jpg"
       },
       {
@@ -4642,7 +4642,7 @@ const TEST_SECTIONS = [
           "Yes - because it is the easiest sailing to compute and then follow",
           "Yes - because an ECDIS in track control will do the computation and steer the route"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image247.jpg"
       },
       {
@@ -4664,7 +4664,7 @@ const TEST_SECTIONS = [
           "No, on the bow the tug uses power to run with the vessel, which reduces the available power on the towline",
           "Yes, the force would normally be expected to be the same at any speed of the ship"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image546.jpg"
       },
       {
@@ -4675,7 +4675,7 @@ const TEST_SECTIONS = [
           "Stop engines and inform the engine room",
           "Send the bridge look-out down to investigate"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image590.jpg"
       },
       {
@@ -4686,7 +4686,7 @@ const TEST_SECTIONS = [
           "Noisy hatch cover operations",
           "A fall in the hydraulic header tank level"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image835.jpg"
       },
       {
@@ -4697,7 +4697,7 @@ const TEST_SECTIONS = [
           "It must always be conducted immediately before loading",
           "A maximum for seven (7) days, when there has been no change in the moisture content due to rain or snow"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image835.jpg"
       },
       {
@@ -4708,7 +4708,7 @@ const TEST_SECTIONS = [
           "A call for account of the receiver",
           "An urgent call"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       },
       {
@@ -4719,7 +4719,7 @@ const TEST_SECTIONS = [
           "In G3E mode – on simplex basis",
           "In G3E mode – on duplex basis"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image6.jpg"
       },
       {
@@ -4730,7 +4730,7 @@ const TEST_SECTIONS = [
           "Safety",
           "Urgency"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image10.jpg"
       },
       {
@@ -4741,7 +4741,7 @@ const TEST_SECTIONS = [
           "Interlocked across the entire cargo hold with the longitudinal axes athwartships",
           "Interlocked up to the hopper tank plating with the longitudinal axes athwartships"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image815.jpg"
       },
       {
@@ -4752,7 +4752,7 @@ const TEST_SECTIONS = [
           "Discretion.",
           "Contractual penalty discount."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image36.jpg"
       },
       {
@@ -4763,7 +4763,7 @@ const TEST_SECTIONS = [
           "When a target's AIS signal has a large error on it",
           "When two adjacent AIS targets come together"
         ],
-        "correctIndex": 0
+        "correctIndex": 1
       },
       {
         "question": "What must be ensured, prior to receiving a bulk cargo of iron ore on a Bulk Carrier?",
@@ -4773,7 +4773,7 @@ const TEST_SECTIONS = [
           "Cargo hold tank tops must be pressure-tested",
           "Cargo hold ventilation systems must be satisfactorily tested"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image836.jpg"
       },
       {
@@ -4806,7 +4806,7 @@ const TEST_SECTIONS = [
           "A Letter of Credit.",
           "An addendum to the Bill of Lading."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image574.jpg"
       },
       {
@@ -4817,7 +4817,7 @@ const TEST_SECTIONS = [
           "PAN PAN",
           "No specific word will precede a routine message"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image8.jpg"
       },
       {
@@ -4828,7 +4828,7 @@ const TEST_SECTIONS = [
           "Radio telex commands",
           "2 digit code telex services"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -4850,7 +4850,7 @@ const TEST_SECTIONS = [
           "For all vessels except those engaged in coastal trade.",
           "For tankers and other vessels carrying persistent oil as cargo."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image42.jpg"
       },
       {
@@ -4861,7 +4861,7 @@ const TEST_SECTIONS = [
           "Anything might happen as it depends upon the type of specialised rudder fitted",
           "It is reduced because of the reduced water acting on the rudder"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image520.jpg"
       },
       {
@@ -4883,7 +4883,7 @@ const TEST_SECTIONS = [
           "1500 cubic metres ( m3)",
           "3000 tonnes"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image835.jpg"
       },
       {
@@ -4894,7 +4894,7 @@ const TEST_SECTIONS = [
           "A substance which is subject to the provisions of Annex III of MARPOL.",
           "A substance which, because of its tendency to degrade in seafood, or because of its hazard potential to the aquatic environment is subject to the provisions of Annex I of MARPOL, as amended, and carried by sea accordingly."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image542.jpg"
       },
       {
@@ -4916,7 +4916,7 @@ const TEST_SECTIONS = [
           "Light reflective paint coatings and fixed lighting systems",
           "Sacrificial anodes and water resistant expoxy paint coatings"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image835.jpg"
       },
       {
@@ -4927,7 +4927,7 @@ const TEST_SECTIONS = [
           "Turned at intervals of not more than 30 months and renewed every 5 years",
           "Renewed every three years"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image79.jpg"
       },
       {
@@ -4949,7 +4949,7 @@ const TEST_SECTIONS = [
           "Test transmissions specially broadcast for this purpose once a week",
           "A compulsory built-in alarm for defects"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image20.jpg"
       },
       {
@@ -4982,7 +4982,7 @@ const TEST_SECTIONS = [
           "All cargo hold bilges are sounded daily and the amount of water logged; the bilges can then be pumped out.",
           "The bilges should have been sealed prior to loading"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image832.jpg"
       },
       {
@@ -4993,7 +4993,7 @@ const TEST_SECTIONS = [
           "The vessel may have its classification affected",
           "The vessel is still seaworthy but repairs must be carried out at next port"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image830.jpg"
       },
       {
@@ -5004,7 +5004,7 @@ const TEST_SECTIONS = [
           "Simplex",
           "On low power"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image6.jpg"
       },
       {
@@ -5026,7 +5026,7 @@ const TEST_SECTIONS = [
           "Strict and authoritative while giving orders",
           "Polite and diplomatic while talking to crew members"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image239.jpg"
       },
       {
@@ -5037,7 +5037,7 @@ const TEST_SECTIONS = [
           "60 Ah",
           "48 Ah"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -5070,7 +5070,7 @@ const TEST_SECTIONS = [
           "3 Cm radar",
           "Special radar"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image5.jpg"
       },
       {
@@ -5092,7 +5092,7 @@ const TEST_SECTIONS = [
           "Fortnightly, with signature of Chief Engineer and witness",
           "Every three months. Details of test with signatures of Master and witness"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image52.jpg"
       },
       {
@@ -5103,7 +5103,7 @@ const TEST_SECTIONS = [
           "The use of SART transponders",
           "The use of HF DSC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image10.jpg"
       },
       {
@@ -5114,7 +5114,7 @@ const TEST_SECTIONS = [
           "Has to contain a work-frequency",
           "Will automatically send the correct working frequency"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -5125,7 +5125,7 @@ const TEST_SECTIONS = [
           "At 20 years and every five years thereafter.",
           "Every 2 1/2 years."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image541.jpg"
       },
       {
@@ -5147,7 +5147,7 @@ const TEST_SECTIONS = [
           "Assess the compartments flooded to determine the remaining stability",
           "Start discharging water using all available means. Monitor water ingress and any increase of draft or list to determine if the situation has stabilised"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image34.jpg"
       },
       {
@@ -5158,7 +5158,7 @@ const TEST_SECTIONS = [
           "The Code of Safe Practice for Solid Bulk Cargoes",
           "SOLAS 74/88 regulations"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image816.jpg"
       },
       {
@@ -5169,7 +5169,7 @@ const TEST_SECTIONS = [
           "H3E",
           "J3E"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image6.jpg"
       },
       {
@@ -5213,7 +5213,7 @@ const TEST_SECTIONS = [
           "The available manpower and their experience in this type of work.",
           "The potential severity of harm and the likelihood that harm will occur."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image299.jpg"
       },
       {
@@ -5224,7 +5224,7 @@ const TEST_SECTIONS = [
           "Any more than 2.8m",
           "Any height above 2.0m"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image826.jpg"
       },
       {
@@ -5235,7 +5235,7 @@ const TEST_SECTIONS = [
           "The aftermost cargo hold",
           "The midships cargo hold"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image826.jpg"
       },
       {
@@ -5246,7 +5246,7 @@ const TEST_SECTIONS = [
           "A link between the shipboard training officer and the company training officer ashore",
           "Proper rest to the crew after each training programme"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image254.jpg"
       },
       {
@@ -5257,7 +5257,7 @@ const TEST_SECTIONS = [
           "A diamond shape, where it can best be seen shall be displayed on the tug and the tow. Three shapes shall also be displayed in a vertical line, the upper and lower being balls and the middle one a diamond",
           "Three shapes shall be displayed on the tug, where they can best be seen, in a vertical line, the upper and lower being balls and the middle one a cylinder. The signal flag \"T\" shall also be flown on the tug. A diamond shall be displayed aft on the tow"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image588.jpg"
       },
       {
@@ -5268,7 +5268,7 @@ const TEST_SECTIONS = [
           "The International Aeronautical and Maritime Search and Rescue (IAMSAR) Manual",
           "The Merchant Ship Search and Rescue (MERSAR) Manual"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image527.jpg"
       },
       {
@@ -5290,7 +5290,7 @@ const TEST_SECTIONS = [
           "Give relevant instructions and warnings",
           "Give information on survival craft capacity"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image50.jpg"
       },
       {
@@ -5301,7 +5301,7 @@ const TEST_SECTIONS = [
           "The type of tug and its desired position on the vessel",
           "The location of the vessel and the type of fairleads that it has"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image555.jpg"
       },
       {
@@ -5323,7 +5323,7 @@ const TEST_SECTIONS = [
           "2 years",
           "5 years"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image52.jpg"
       }
     ]
@@ -5350,7 +5350,7 @@ const TEST_SECTIONS = [
           "15 ppm",
           "25 ppm"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image42.jpg"
       },
       {
@@ -5361,7 +5361,7 @@ const TEST_SECTIONS = [
           "A correction that should be applied to the charted depth value shown on the chart",
           "Position of transducer below the water surface and the height of tide"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image487.jpg"
       },
       {
@@ -5372,7 +5372,7 @@ const TEST_SECTIONS = [
           "All prescribed life-saving appliances shall have marking in red colour",
           "All prescribed life-saving appliances shall be made of non-combustible or fire retardant material"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image21.jpg"
       },
       {
@@ -5394,7 +5394,7 @@ const TEST_SECTIONS = [
           "Continue discharge since Annex IV of MARPOL is internationally not yet in force.",
           "Reduce discharge rate in order to have less discolouration of surrounding water."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image42.jpg"
       },
       {
@@ -5405,7 +5405,7 @@ const TEST_SECTIONS = [
           "QI is an authorised individual, situated in the US, and contracted by the owner or operator of the vessel",
           "An individual certified by USCG to handle oil spills"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image40.jpg"
       },
       {
@@ -5427,7 +5427,7 @@ const TEST_SECTIONS = [
           "25-50% of the baggage is required to be checked at Security Level 1.",
           "5-15% of the baggage is required to be checked at Security Level 1."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image165.jpg"
       },
       {
@@ -5438,7 +5438,7 @@ const TEST_SECTIONS = [
           "Cargo watch-keeping officers",
           "The entire ship's crew"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image842.jpg"
       },
       {
@@ -5449,7 +5449,7 @@ const TEST_SECTIONS = [
           "All of the suggested answers",
           "Request the engine room to check the steering system"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image356.jpg"
       },
       {
@@ -5460,7 +5460,7 @@ const TEST_SECTIONS = [
           "November, Alfa, Victor, Tango, Echo, X-ray",
           "November, Apple, Victoria, Tango, Echo, X-mas"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       },
       {
@@ -5471,7 +5471,7 @@ const TEST_SECTIONS = [
           "All of the mentioned",
           "Hazardous substances"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image57.jpg"
       },
       {
@@ -5482,7 +5482,7 @@ const TEST_SECTIONS = [
           "White",
           "Red"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image44.jpg"
       },
       {
@@ -5504,7 +5504,7 @@ const TEST_SECTIONS = [
           "The International Search and Rescue Coordination System",
           "The Worldwide Maritime Mutual Assistance Programme (WMMAP)"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image502.jpg"
       },
       {
@@ -5515,7 +5515,7 @@ const TEST_SECTIONS = [
           "That the instrument can measure flammable atmospheres",
           "That the instrument complies with international regulations"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image835.jpg"
       },
       {
@@ -5526,7 +5526,7 @@ const TEST_SECTIONS = [
           "There is a positive pressure field created ahead of the vessel and a negative one astern",
           "There is an increase in the water velocity and a decrease of water pressure around certain parts of the vessel's hull"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image540.jpg"
       },
       {
@@ -5537,7 +5537,7 @@ const TEST_SECTIONS = [
           "Improve the scheduling and traffic movement in the area.",
           "Provide local information to all vessels navigating in the area"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image505.jpg"
       },
       {
@@ -5548,7 +5548,7 @@ const TEST_SECTIONS = [
           "Quantity and rate of loading the cargo",
           "Maximum permissible forces and moments on the ship"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image826.jpg"
       },
       {
@@ -5559,7 +5559,7 @@ const TEST_SECTIONS = [
           "12 hours",
           "24 hours"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image15.jpg"
       },
       {
@@ -5570,7 +5570,7 @@ const TEST_SECTIONS = [
           "\" All Stations - This is \"\"SAINT-ROMAIN\"\"\"\"",
           "\" SECURITE - All Stations - This is \"\"SAINT-ROMAIN\"\"\""
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image13.jpg"
       },
       {
@@ -5592,7 +5592,7 @@ const TEST_SECTIONS = [
           "This is a vessel engaged on port security duties. The two balls in a vertical line indicate that the port is closed; the two diamonds in a vertical line indicate that the port is engaged in mine-clearance operations; the ball / diamond / ball in a vertical line indicate that the vessel is restricted in her ability to manoeuvre",
           "This is a vessel engaged in dredging or underwater operations. The two balls in a vertical line indicate the side on which an obstruction exists; the two diamonds in a vertical line indicate the side on which it is safe to pass; the ball / diamond / /ball in a vertical line indiacte that the vessel is restricted in her ability to manoeuvre"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image564.jpg"
       },
       {
@@ -5625,7 +5625,7 @@ const TEST_SECTIONS = [
           "In classification society rules",
           "In owner's instruction"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image80.jpg"
       },
       {
@@ -5636,7 +5636,7 @@ const TEST_SECTIONS = [
           "12th day, 1310 hours local time",
           "12th month, 13th day, 1000 hours UTC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image1.jpg"
       },
       {
@@ -5647,7 +5647,7 @@ const TEST_SECTIONS = [
           "PTT",
           "High/Low power"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image6.jpg"
       },
       {
@@ -5680,7 +5680,7 @@ const TEST_SECTIONS = [
           "The equivalent to the total weight of the lifeboat when loaded with its full complement of persons and equipment.",
           "0.8 times the total weight of the lifeboat when loaded with its full complement of persons, equipment and stores."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image573.jpg"
       },
       {
@@ -5691,7 +5691,7 @@ const TEST_SECTIONS = [
           "On VHF Ch 16",
           "On 121.5 MHz"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image501.jpg"
       },
       {
@@ -5702,7 +5702,7 @@ const TEST_SECTIONS = [
           "There is minimum pressure head on the tank top and pumps are not required",
           "Ballasting can be done without any supervision"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image833.jpg"
       },
       {
@@ -5713,7 +5713,7 @@ const TEST_SECTIONS = [
           "Vessel stability book",
           "Shell expansion"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image843.jpg"
       },
       {
@@ -5724,7 +5724,7 @@ const TEST_SECTIONS = [
           "The correct chemical name of a potentially hazardous material, as identified from the Chemical Cargo List.",
           "The name assigned by the manufacturer to a material, substance or article for the purposes of shipment."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image523.jpg"
       },
       {
@@ -5735,7 +5735,7 @@ const TEST_SECTIONS = [
           "6 hours",
           "8 hours"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image3.jpg"
       },
       {
@@ -5746,7 +5746,7 @@ const TEST_SECTIONS = [
           "The cargo securing manual",
           "The timber deck cargo code published by IMO"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image840.jpg"
       },
       {
@@ -5768,7 +5768,7 @@ const TEST_SECTIONS = [
           "At the after end of each cargo hold",
           "In cargo hold bilges"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image826.jpg"
       },
       {
@@ -5779,7 +5779,7 @@ const TEST_SECTIONS = [
           "Two years",
           "Four years"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image41.jpg"
       },
       {
@@ -5823,7 +5823,7 @@ const TEST_SECTIONS = [
           "An EGC-message destined for ships with the same group call number",
           "A MSI-message destined for ships in specific geographical area"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -5845,7 +5845,7 @@ const TEST_SECTIONS = [
           "Nothing, proceed on passage unless they are in distress",
           "Contact one or both vessels involved in the incident and offer assistance"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image93.jpg"
       },
       {
@@ -5856,7 +5856,7 @@ const TEST_SECTIONS = [
           "The cargo may liquefy",
           "The grain cargo may produce methane gas"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image845.jpg"
       },
       {
@@ -5867,7 +5867,7 @@ const TEST_SECTIONS = [
           "You must wait 1 minute minimum before repeating your call",
           "You must wait 5 minutes before repeating the call"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image1.jpg"
       },
       {
@@ -5878,7 +5878,7 @@ const TEST_SECTIONS = [
           "07",
           "16"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image8.jpg"
       },
       {
@@ -5900,7 +5900,7 @@ const TEST_SECTIONS = [
           "Once a month",
           "Once a year"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image15.jpg"
       },
       {
@@ -5911,7 +5911,7 @@ const TEST_SECTIONS = [
           "The main supply line to be blanked off prior to the work.",
           "Arrange a watchman in the CO2 central."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image169.jpg"
       },
       {
@@ -5922,7 +5922,7 @@ const TEST_SECTIONS = [
           "Turning circle will stay the same as they are a function of the rudder angle only",
           "Turning circles will be of a greater diameter for the same rudder angle"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image520.jpg"
       },
       {
@@ -5955,7 +5955,7 @@ const TEST_SECTIONS = [
           "the use of MF and/or VHF R/T",
           "the use of MF and/or HF R/T"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image8.jpg"
       },
       {
@@ -5966,7 +5966,7 @@ const TEST_SECTIONS = [
           "Individual call",
           "Distress call"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image13.jpg"
       },
       {
@@ -5977,7 +5977,7 @@ const TEST_SECTIONS = [
           "The only possible hazard is associated with ingress of water into the hold and a loss of stability",
           "There are no special hazards associated with this cargo"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image840.jpg"
       },
       {
@@ -5988,7 +5988,7 @@ const TEST_SECTIONS = [
           "It is visible for a shorter time than a fuel oil spill",
           "It will sink more rapidly than crude oil"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image42.jpg"
       },
       {
@@ -6010,7 +6010,7 @@ const TEST_SECTIONS = [
           "Sound the General Alarm",
           "Stop engine(s)"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image514.jpg"
       },
       {
@@ -6021,7 +6021,7 @@ const TEST_SECTIONS = [
           "\"Secure area, passwords, a firewall and a secure network.\"",
           "\"Protective markings, reference checks, and passwords.\""
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image63.jpg"
       },
       {
@@ -6043,7 +6043,7 @@ const TEST_SECTIONS = [
           "The vessel could be detained by its flag Administration",
           "The classification society concerned could suspend the vessel's International Oil Pollution Prevention (IOPP) Certificate"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image837.jpg"
       },
       {
@@ -6054,7 +6054,7 @@ const TEST_SECTIONS = [
           "COTP-zones may have additional rules and regulations",
           "After implementation of OPA-90 there are no area specific rules andregulations"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image40.jpg"
       },
       {
@@ -6076,7 +6076,7 @@ const TEST_SECTIONS = [
           "Ability to make weak stations audible",
           "Ability to distinguish weak stations from adjacent stronger stations"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -6098,7 +6098,7 @@ const TEST_SECTIONS = [
           "Rubber packing hatch cleat washers and glue for two panel sections",
           "Specimen fittings shown in the hatch cover manufacturer's manual"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image847.jpg"
       },
       {
@@ -6109,7 +6109,7 @@ const TEST_SECTIONS = [
           "Yes - as the pilot will not bring their own passage plan",
           "Yes - this is very much part of the Master/Pilot information exchange"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image508.jpg"
       },
       {
@@ -6120,7 +6120,7 @@ const TEST_SECTIONS = [
           "I will keep out of her way. I am the overtaking vessel and am obliged to keep clear under rule 13",
           "This is a vessel engaged in towing and I am seeing the stern light of the tow. The tug is not however showing any lights indicating she is restricted in her ability to manoeuvre. I will however display good seamanship and keep out of her way"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image565.jpg"
       },
       {
@@ -6142,7 +6142,7 @@ const TEST_SECTIONS = [
           "The Safety Management Certificate",
           "The Document of Conformance"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image230.jpg"
       },
       {
@@ -6164,7 +6164,7 @@ const TEST_SECTIONS = [
           "Either in a vertical or horizontal separation: if the intervening decks are not resistant to fire and liquid, then only in a longitudinal separation is acceptable. For \"on deck\" stowage, this means a distance of at least 12 metres. This distance also applies to one package stowed \"on deck\" and another in an upper compartment.",
           "Effectively segregated so that the incompatible goods cannot interact dangerously in the event of an accident, but may be transported in the same compartment or hold or on deck, provided a horizontal separation, projected vertically, of 3 metres is obtained."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image499.jpg"
       },
       {
@@ -6175,7 +6175,7 @@ const TEST_SECTIONS = [
           "Maintenance and repair of all the life-saving equipments will be carried out ashore in work shop only",
           "Instructions for onboard maintenance of life-saving appliances in accordance with the regulations shall be provided"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image21.jpg"
       },
       {
@@ -6186,7 +6186,7 @@ const TEST_SECTIONS = [
           "Plan for next voyage",
           "Plan for safety preparedness"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image43.jpg"
       },
       {
@@ -6208,7 +6208,7 @@ const TEST_SECTIONS = [
           "The aftermost cargo hold",
           "Any cargo hold"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image826.jpg"
       },
       {
@@ -6219,7 +6219,7 @@ const TEST_SECTIONS = [
           "The ship moves laterally because it has a single hull",
           "The hydrodynamics of the hull cause a drift angle to be produced, which is not in the fore and aft line of the vessel"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image503.jpg"
       },
       {
@@ -6230,7 +6230,7 @@ const TEST_SECTIONS = [
           "2",
           "3"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -6274,7 +6274,7 @@ const TEST_SECTIONS = [
           "Handling of stowaways",
           "Donning of fire protection clothing"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image83.jpg"
       },
       {
@@ -6285,7 +6285,7 @@ const TEST_SECTIONS = [
           "Cheer",
           "Change"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image75.jpg"
       },
       {
@@ -6296,7 +6296,7 @@ const TEST_SECTIONS = [
           "Because of using inadequately sized lasing wires",
           "Because of inadequate dunnage placed over the tank top"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image815.jpg"
       },
       {
@@ -6307,7 +6307,7 @@ const TEST_SECTIONS = [
           "The density of the water",
           "The occurrence of weed and fish in fresh water"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image585.jpg"
       },
       {
@@ -6340,7 +6340,7 @@ const TEST_SECTIONS = [
           "Inform the vessel owners of their decision and resume passage at the earliest opportunity",
           "Inform the Search and Rescue Mission Coordinator(SMC) of their decision and enter the reason in the vessel's logbook"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image60.jpg"
       },
       {
@@ -6362,7 +6362,7 @@ const TEST_SECTIONS = [
           "Yes, the food waste can be dumped if it is ground so that the resulting particles can pass through a screen with 25 mm openings",
           "No, food waste can not be dumped overboard"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image260.jpg"
       },
       {
@@ -6373,7 +6373,7 @@ const TEST_SECTIONS = [
           "Ship's deck log",
           "Radio Log"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image6.jpg"
       },
       {
@@ -6384,7 +6384,7 @@ const TEST_SECTIONS = [
           "With the wind fine on the bow opposite to the helicopter operating area",
           "Directly into the wind"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image134.jpg"
       },
       {
@@ -6395,7 +6395,7 @@ const TEST_SECTIONS = [
           "the use of SART transponders",
           "the use of SARSAT COSPAS Epirbs"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image6.jpg"
       },
       {
@@ -6406,7 +6406,7 @@ const TEST_SECTIONS = [
           "Select the European datum as this is similar to the WGS84 datum",
           "Select the same datum that the paper chart has"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image493.jpg"
       },
       {
@@ -6428,7 +6428,7 @@ const TEST_SECTIONS = [
           "Enhanced Group Call",
           "Exchange Group Call"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       }
     ]
@@ -6444,7 +6444,7 @@ const TEST_SECTIONS = [
           "Once every week",
           "Once every month"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image89.jpg"
       },
       {
@@ -6455,7 +6455,7 @@ const TEST_SECTIONS = [
           "The fact that the user is on board a liferaft, a lifeboat or ship",
           "Instructions or diagrams printed on its casing by the manufacturer"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image170.jpg"
       },
       {
@@ -6466,7 +6466,7 @@ const TEST_SECTIONS = [
           "Bills of Lading to be signed \"Clean\" by Master.",
           "Ask for a draft survey to be carried in the presence of P& I Club representative"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image835.jpg"
       },
       {
@@ -6477,7 +6477,7 @@ const TEST_SECTIONS = [
           "200 meters",
           "4200 meters"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image15.jpg"
       },
       {
@@ -6488,7 +6488,7 @@ const TEST_SECTIONS = [
           "LUT before the satellite is actually seen by this ground station",
           "Coast station"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image6.jpg"
       },
       {
@@ -6499,7 +6499,7 @@ const TEST_SECTIONS = [
           "All passenger ships, all cargo ships of 500GRT or above",
           "Only tankers and Ro-ros"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image52.jpg"
       },
       {
@@ -6510,7 +6510,7 @@ const TEST_SECTIONS = [
           "They are fixed and the cargo has a stowage factor of 0.5 cubic metres/tonne",
           "The bulk density is standard at 900 kg/cubic metre"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image828.jpg"
       },
       {
@@ -6521,7 +6521,7 @@ const TEST_SECTIONS = [
           "Call sign",
           "AAIC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image1.jpg"
       },
       {
@@ -6532,7 +6532,7 @@ const TEST_SECTIONS = [
           "Yes, glass bottles can be dumped overboard",
           "Yes, the bottles can be dumped if they are ground so that the resulting particles can pass through a screen with 25 mm openings"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image251.jpg"
       },
       {
@@ -6554,7 +6554,7 @@ const TEST_SECTIONS = [
           "The Cargo Ship Safety Construction Certificate.",
           "The Safety Management Certificate."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image572.jpg"
       },
       {
@@ -6576,7 +6576,7 @@ const TEST_SECTIONS = [
           "They shall be given on both whistles simultaneously",
           "They shall be given on one whistle only"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image486.jpg"
       },
       {
@@ -6598,7 +6598,7 @@ const TEST_SECTIONS = [
           ".",
           "."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image151.jpg"
       },
       {
@@ -6609,7 +6609,7 @@ const TEST_SECTIONS = [
           "A device that is responsible for initiating a dangerous reaction.",
           "Something that is packed within a freight container."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image513.jpg"
       },
       {
@@ -6631,7 +6631,7 @@ const TEST_SECTIONS = [
           "Turn on the right frequency",
           "Indicate on what frequency communication will be continued"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -6642,7 +6642,7 @@ const TEST_SECTIONS = [
           "Because the vessel may pass under a bridge(s) whilst approaching or leaving the berth",
           "Because of movement of the bulk cargo loader or unloaders"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image833.jpg"
       },
       {
@@ -6653,7 +6653,7 @@ const TEST_SECTIONS = [
           "The racon may not be transmitting a pulse.",
           "The radar may be suppressing the mark with application of the Interference Rejection control."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image487.jpg"
       },
       {
@@ -6664,7 +6664,7 @@ const TEST_SECTIONS = [
           "Use the mapping facility provided by the ARPA, create a map of the channel then display it for entry",
           "Alter course so that own-ships ground stabilised true vector passes through the entrance to the channel"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image586.jpg"
       },
       {
@@ -6675,7 +6675,7 @@ const TEST_SECTIONS = [
           "Listen for a distress message on the appropriate radio frequency for five minutes",
           "Contact SAR Authorities via nearest coast Radio station"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image239.jpg"
       },
       {
@@ -6686,7 +6686,7 @@ const TEST_SECTIONS = [
           "I Organization and Management II Mission Co-ordination III Mobile Facilities",
           "A Command and Control  B Communications  C Rescue Procedures"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image576.jpg"
       },
       {
@@ -6697,7 +6697,7 @@ const TEST_SECTIONS = [
           "The shear forces exerted on the hull structure associated with the entered loaded weight distribution",
           "The segregation requirements of the cargoes carried."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image826.jpg"
       },
       {
@@ -6730,7 +6730,7 @@ const TEST_SECTIONS = [
           "SECURITE",
           "RESCUE-RESCUE"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image28.jpg"
       },
       {
@@ -6741,7 +6741,7 @@ const TEST_SECTIONS = [
           "Implement measures to address weaknesses in ship security.",
           "Assign security duties to ship personnel."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image64.jpg"
       },
       {
@@ -6752,7 +6752,7 @@ const TEST_SECTIONS = [
           "Must be re-charged weekly",
           "Charged condition must be checked weekly"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image5.jpg"
       },
       {
@@ -6763,7 +6763,7 @@ const TEST_SECTIONS = [
           "ampere x hours",
           "volt x ampere"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -6774,7 +6774,7 @@ const TEST_SECTIONS = [
           "1 Min",
           "10 Min"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image170.jpg"
       },
       {
@@ -6796,7 +6796,7 @@ const TEST_SECTIONS = [
           "Only be sent with MF/HF-installation on other frequencies than the DSC-distress frequencies, if the tele-command 'test' is used",
           "Be sent by any installation"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -6807,7 +6807,7 @@ const TEST_SECTIONS = [
           "A passage plan is only required up to the destination pilot station",
           "A passage plan is always required, even with an authorised pilot"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image508.jpg"
       },
       {
@@ -6829,7 +6829,7 @@ const TEST_SECTIONS = [
           "SART transponder",
           "COSPAS-SARSAT EPIRBS"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image22.jpg"
       },
       {
@@ -6851,7 +6851,7 @@ const TEST_SECTIONS = [
           "International Marine Association (IMA)",
           "International Labor Organization (ILO)"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image161.jpg"
       },
       {
@@ -6862,7 +6862,7 @@ const TEST_SECTIONS = [
           "Sailing vessel A must keep out of the way of sailing vessel B.",
           "Sailing vessel B must keep out of the way of sailing vessel A."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image488.jpg"
       },
       {
@@ -6873,7 +6873,7 @@ const TEST_SECTIONS = [
           "Reduction of metacentric height (GM) and loss of freeboard forward",
           "Reduction of speed and additional fuel consumption"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image843.jpg"
       },
       {
@@ -6884,7 +6884,7 @@ const TEST_SECTIONS = [
           "Have a slow roll and very small righting levers",
           "Have a slow roll and large righting levers"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image848.jpg"
       },
       {
@@ -6906,7 +6906,7 @@ const TEST_SECTIONS = [
           "The international DSC-urgent frequency",
           "The international DSC-distress frequencies"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -6917,7 +6917,7 @@ const TEST_SECTIONS = [
           "The master and chief engineer",
           "The master"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image835.jpg"
       },
       {
@@ -6928,7 +6928,7 @@ const TEST_SECTIONS = [
           "The Nassau Protocol.",
           "The Hague-Visby Rules."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image511.jpg"
       },
       {
@@ -6939,7 +6939,7 @@ const TEST_SECTIONS = [
           "This is a fishing vessel, not making way through the water, with its nets fast upon an obstruction, seen from astern",
           "This vessel is not under command and is not making way through the water"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image517.jpg"
       },
       {
@@ -6950,7 +6950,7 @@ const TEST_SECTIONS = [
           "Preparation and launching of survival crafts",
           "Type of fires that can be encountered on board"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image85.jpg"
       },
       {
@@ -6961,7 +6961,7 @@ const TEST_SECTIONS = [
           "Monthly",
           "This is only required when he joins the ship"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image47.jpg"
       },
       {
@@ -6972,7 +6972,7 @@ const TEST_SECTIONS = [
           "An experienced AB",
           "A responsible Officer"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image539.jpg"
       },
       {
@@ -6983,7 +6983,7 @@ const TEST_SECTIONS = [
           "Personnel to be involved in the search.",
           "Known hiding spots to be searched."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image131.jpg"
       },
       {
@@ -6994,7 +6994,7 @@ const TEST_SECTIONS = [
           "Every 12 months.",
           "Every 36 months."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image48.jpg"
       },
       {
@@ -7016,7 +7016,7 @@ const TEST_SECTIONS = [
           "Survival craft portable radio",
           "Rocket parachute flare"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image233.jpg"
       },
       {
@@ -7038,7 +7038,7 @@ const TEST_SECTIONS = [
           "Wait on this channel for one hour",
           "Wait until the coast-station calls again"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image1.jpg"
       },
       {
@@ -7049,7 +7049,7 @@ const TEST_SECTIONS = [
           "Survival craft distress pyrotechnic signals",
           "Survival craft portable radio"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image232.jpg"
       },
       {
@@ -7060,7 +7060,7 @@ const TEST_SECTIONS = [
           "Not less than half the total number of lifebuoys shall be provided with self-ignighting lights",
           "At least one lifebuoy with self-activating smoke shall be placed within the vicinity of the stern"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image150.jpg"
       },
       {
@@ -7071,7 +7071,7 @@ const TEST_SECTIONS = [
           "SITREP",
           "SARREP"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image575.jpg"
       },
       {
@@ -7082,7 +7082,7 @@ const TEST_SECTIONS = [
           "Ship Security Officer",
           "Chief Officer"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image152.jpg"
       },
       {
@@ -7093,7 +7093,7 @@ const TEST_SECTIONS = [
           "Send a all stations urgent priority MF DSC call",
           "Send a selective distress priority MF DSC call to the nearest MRCC– Inform it that a false distress alert has been transmited"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image8.jpg"
       },
       {
@@ -7104,7 +7104,7 @@ const TEST_SECTIONS = [
           "National language of the LES",
           "ASCII"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image12.jpg"
       },
       {
@@ -7115,7 +7115,7 @@ const TEST_SECTIONS = [
           "Searchlights to be provided at the launching station.",
           "Muster and embarkation stations shall be readily accessible from accommondation and work areas."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image79.jpg"
       },
       {
@@ -7137,7 +7137,7 @@ const TEST_SECTIONS = [
           "Gyro heading, compass heading and position information",
           "Position fixing, radar over-lay and log value"
         ],
-        "correctIndex": 0
+        "correctIndex": 1
       },
       {
         "question": "For a ship operating or calling in US waters, COTP can request (OPA-90)",
@@ -7147,7 +7147,7 @@ const TEST_SECTIONS = [
           "Maximum one drill a year",
           "Participation in all announced drills"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image40.jpg"
       },
       {
@@ -7158,7 +7158,7 @@ const TEST_SECTIONS = [
           "SECURITE",
           "PAN-PAN"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image8.jpg"
       },
       {
@@ -7169,7 +7169,7 @@ const TEST_SECTIONS = [
           "H3E",
           "F1B/J2B"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image6.jpg"
       },
       {
@@ -7180,7 +7180,7 @@ const TEST_SECTIONS = [
           "The manager orders",
           "The O.O.W deems it necessary"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image14.jpg"
       },
       {
@@ -7191,7 +7191,7 @@ const TEST_SECTIONS = [
           "The vessel will have a great bending moment?",
           "The vessel's tweendeck heights is too high?"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image199.jpg"
       },
       {
@@ -7202,7 +7202,7 @@ const TEST_SECTIONS = [
           "Epierb",
           "Rocket parachute flares"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image231.jpg"
       },
       {
@@ -7213,7 +7213,7 @@ const TEST_SECTIONS = [
           "G3E",
           "J3E"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image6.jpg"
       },
       {
@@ -7224,7 +7224,7 @@ const TEST_SECTIONS = [
           "Possible liquefaction of cargo, en route",
           "Spontaneous combustion and self-heating"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image834.jpg"
       },
       {
@@ -7235,7 +7235,7 @@ const TEST_SECTIONS = [
           "'Figures less than the safety depth are highlighted in bold'",
           "'The display looks the same as it did before and is unchanged'"
         ],
-        "correctIndex": 0
+        "correctIndex": 2
       },
       {
         "question": "According to the International Labour Organisation, how often should lifting appliances be re-tested?",
@@ -7245,7 +7245,7 @@ const TEST_SECTIONS = [
           "5 years.",
           "2 1/2 years."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image507.jpg"
       },
       {
@@ -7256,7 +7256,7 @@ const TEST_SECTIONS = [
           "Classification Society Grain Rules?",
           "IMO Solid Bulk cargo Code or IMO Solid Bulk?"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image831.jpg"
       },
       {
@@ -7267,7 +7267,7 @@ const TEST_SECTIONS = [
           "Infectious substances.",
           "Organic peroxides."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image500.jpg"
       },
       {
@@ -7278,7 +7278,7 @@ const TEST_SECTIONS = [
           "8414.5 kHz (DSC distress frequency in 8 MHz)",
           "The radio telephony distress frequency in the band in which the DSC distress alert was received"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -7289,7 +7289,7 @@ const TEST_SECTIONS = [
           "The cargo pile is stable and unlikely to shift",
           "The cargo should not be accepted to load"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image835.jpg"
       },
       {
@@ -7300,7 +7300,7 @@ const TEST_SECTIONS = [
           "...it influences the colours on the display",
           "...it is where the files for maintenance of the system software are stored"
         ],
-        "correctIndex": 0
+        "correctIndex": 1
       },
       {
         "question": "According to the International Labour Organisation, how often should lifting appliances and items of loose gear be thoroughly inspected by a competent person?",
@@ -7321,7 +7321,7 @@ const TEST_SECTIONS = [
           "Plugging the sounding pipes",
           "Driving wooden plugs into the vents"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image42.jpg"
       },
       {
@@ -7332,7 +7332,7 @@ const TEST_SECTIONS = [
           "Made fast on a line through the centre lead aft",
           "Pushing alongside - either side"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image562.jpg"
       },
       {
@@ -7354,7 +7354,7 @@ const TEST_SECTIONS = [
           "There are no restrictions on discharge of cargo residues to sea",
           "Follow actions of previous crews"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image839.jpg"
       },
       {
@@ -7376,7 +7376,7 @@ const TEST_SECTIONS = [
           "Reduce the \"noise\" in the background",
           "Switch to another channel"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image13.jpg"
       },
       {
@@ -7387,7 +7387,7 @@ const TEST_SECTIONS = [
           "The equipment appendix",
           "The safety certificate"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image6.jpg"
       },
       {
@@ -7398,7 +7398,7 @@ const TEST_SECTIONS = [
           "Relative vectors, ground stabilised",
           "Relative vectors, sea stabilised"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image579.jpg"
       },
       {
@@ -7409,7 +7409,7 @@ const TEST_SECTIONS = [
           "60 ppm/n.m",
           "15 ppm"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image42.jpg"
       },
       {
@@ -7420,7 +7420,7 @@ const TEST_SECTIONS = [
           "Has an very urgent message concerning the safety of a vessel, a plane or another means of conveyance",
           "Is going to be under repairs"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image8.jpg"
       },
       {
@@ -7431,7 +7431,7 @@ const TEST_SECTIONS = [
           "Vapour detectors",
           "Anti-intruder devices"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image88.jpg"
       },
       {
@@ -7442,7 +7442,7 @@ const TEST_SECTIONS = [
           "You set watch on channel 13",
           "You send immediatly a DSC DISTRESS RELAY call"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image8.jpg"
       },
       {
@@ -7453,7 +7453,7 @@ const TEST_SECTIONS = [
           "The specific duties assigned to passengers that are in charge of a group of others",
           "The muster list has been prepared and approved by the administration before the ship proceeds to sea"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image61.jpg"
       },
       {
@@ -7464,7 +7464,7 @@ const TEST_SECTIONS = [
           "So that cargoes are self-trimming during loading",
           "To make it easier for cargo to be discharged by grabs"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image835.jpg"
       },
       {
@@ -7486,7 +7486,7 @@ const TEST_SECTIONS = [
           "For radiotelex-traffic in the MF/HF band between the ship and shore stations",
           "For urgent message transmitting and receiving"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image6.jpg"
       },
       {
@@ -7497,7 +7497,7 @@ const TEST_SECTIONS = [
           "Wearing and fastening of lifejackets and associated equipment",
           "Location of immersion suits and thermal protective aids"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image52.jpg"
       },
       {
@@ -7508,7 +7508,7 @@ const TEST_SECTIONS = [
           "Regulation monthly test transmissions from RCC 's",
           "Test transmissions from Cospas-Sarsat satellites"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image9.jpg"
       },
       {
@@ -7530,7 +7530,7 @@ const TEST_SECTIONS = [
           "The gases specified in all of these answers",
           "The concentration of Oxygen only"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image833.jpg"
       }
     ]
@@ -7546,7 +7546,7 @@ const TEST_SECTIONS = [
           "Equal power on both tugs while monitoring the ship's gyro heading",
           "Considerably more power on the aft tug than the forward tug, while monitoring the ship's gyro heading"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image558.jpg"
       },
       {
@@ -7568,7 +7568,7 @@ const TEST_SECTIONS = [
           "'The safety depth contour value is best set at a low value'",
           "'The safety depth contour value is best set at a high value'"
         ],
-        "correctIndex": 0
+        "correctIndex": 1
       },
       {
         "question": "How often are \"abandon ship\" drills required to be held on cargo vessels according to SOLAS?",
@@ -7578,7 +7578,7 @@ const TEST_SECTIONS = [
           "Once every month.",
           "Once every 6 months."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image56.jpg"
       },
       {
@@ -7589,7 +7589,7 @@ const TEST_SECTIONS = [
           "This is a vessel engaged in fishing other than trawling, making way through the water, with outlying gear extending more than 150m in the direction of the all-round white light. Looking at its port side",
           "This is a vessel engaged in pilotage operations, deploying or recovering a pilot. Looking at its port side"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image509.jpg"
       },
       {
@@ -7611,7 +7611,7 @@ const TEST_SECTIONS = [
           "The receiver should be checked and the vessel's position confirmed by other means",
           "The watchkeeper should call the master and then adjust the limit so that the alarm is removed"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image295.jpg"
       },
       {
@@ -7632,7 +7632,7 @@ const TEST_SECTIONS = [
           "Seelonce Mayday",
           "Seelonce Pan"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image14.jpg"
       },
       {
@@ -7643,7 +7643,7 @@ const TEST_SECTIONS = [
           "International Convention for the Safety of Lives at Sea",
           "International Conference for Security of Loads aboard Ships"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image58.jpg"
       },
       {
@@ -7654,7 +7654,7 @@ const TEST_SECTIONS = [
           "TX: 2177.0 kHz RX: 2177.0 kHz",
           "TX: 2187.5 kHz RX: 2187.5 kHz"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -7665,7 +7665,7 @@ const TEST_SECTIONS = [
           "Romeo, Alpha, Delta, India, October",
           "Romeo, Alfa, Delta, India, Oscar"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image1.jpg"
       },
       {
@@ -7676,7 +7676,7 @@ const TEST_SECTIONS = [
           "Yes, transit passage through US waters to a non US port",
           "Yes, if the vessel calls a US port for only a short stop"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image40.jpg"
       },
       {
@@ -7687,7 +7687,7 @@ const TEST_SECTIONS = [
           "Urgent call",
           "Safety call"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image8.jpg"
       },
       {
@@ -7698,7 +7698,7 @@ const TEST_SECTIONS = [
           "Annex II to SOLAS 1974.",
           "Protocol I of MARPOL."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image522.jpg"
       },
       {
@@ -7731,7 +7731,7 @@ const TEST_SECTIONS = [
           "A Due Title Bill of Lading.",
           "An endorsed Bill of Lading."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image518.jpg"
       },
       {
@@ -7742,7 +7742,7 @@ const TEST_SECTIONS = [
           "Two prolonged blasts",
           "One prolonged blast"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image536.jpg"
       },
       {
@@ -7753,7 +7753,7 @@ const TEST_SECTIONS = [
           "The chart detail is correct for its usage band",
           "It is only at this scale that a route can be plotted"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image487.jpg"
       },
       {
@@ -7764,7 +7764,7 @@ const TEST_SECTIONS = [
           "Every four years",
           "Every two years"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image15.jpg"
       },
       {
@@ -7775,7 +7775,7 @@ const TEST_SECTIONS = [
           "JRC",
           "FEC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image20.jpg"
       },
       {
@@ -7786,7 +7786,7 @@ const TEST_SECTIONS = [
           "Discharge at sea providing you are not in any river or estuary",
           "Discharge to a shore facility only"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image237.jpg"
       },
       {
@@ -7797,7 +7797,7 @@ const TEST_SECTIONS = [
           "These satellite systems give world-wide coverage 24 hours a day",
           "They are all made specifically for ships and marine operations"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image493.jpg"
       },
       {
@@ -7808,7 +7808,7 @@ const TEST_SECTIONS = [
           "Cargo not to be ventilated?",
           "Ventilation to be continuous?"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image846.jpg"
       },
       {
@@ -7819,7 +7819,7 @@ const TEST_SECTIONS = [
           "One that employs more than one position fixing system",
           "Gyro compass bearings from two lighthouses or fixed marks"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image247.jpg"
       },
       {
@@ -7841,7 +7841,7 @@ const TEST_SECTIONS = [
           "123.8 MHz and/or 247.6 MHz",
           "243.1 MHz and/or 486.2 MHz"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image29.jpg"
       },
       {
@@ -7852,7 +7852,7 @@ const TEST_SECTIONS = [
           "That there is a vessel aground in the vicinity",
           "That there is a vessel at anchor in the vicinity. It is less than 100 metres in length"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image489.jpg"
       },
       {
@@ -7863,7 +7863,7 @@ const TEST_SECTIONS = [
           "TX: 2187.5 kHz RX: 2187.5 kHz",
           "TX: 2177.0 kHz RX: 2177.0 kHz"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -7874,7 +7874,7 @@ const TEST_SECTIONS = [
           "All information reagrding the onboard training is given to the ship manager",
           "concerned personnel carry out the on-board traing progamme effectively"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image53.jpg"
       },
       {
@@ -7885,7 +7885,7 @@ const TEST_SECTIONS = [
           "550 kHz, 2367 kHz and 121.5 MHz",
           "500 kHz, 2367 kHz and 243 MHz"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image7.jpg"
       },
       {
@@ -7896,7 +7896,7 @@ const TEST_SECTIONS = [
           "Continuously after having been immersed for a period of 1 minute under 1m of water",
           "When under water"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image248.jpg"
       },
       {
@@ -7907,7 +7907,7 @@ const TEST_SECTIONS = [
           "This is prohibited",
           "12 miles"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image42.jpg"
       },
       {
@@ -7918,7 +7918,7 @@ const TEST_SECTIONS = [
           "Move into the inshore traffic zone",
           "Call the rogue vessel and point out its position"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image315.jpg"
       },
       {
@@ -7929,7 +7929,7 @@ const TEST_SECTIONS = [
           "An exemption certificate must be applied for",
           "The grain surfaces in some or all of the cargo spaces must be secured"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image837.jpg"
       },
       {
@@ -7940,7 +7940,7 @@ const TEST_SECTIONS = [
           "Assembling passengers at muster station",
           "Ensuring that extra food and water is taken to the survival craft"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image153.jpg"
       },
       {
@@ -7951,7 +7951,7 @@ const TEST_SECTIONS = [
           "Yes, it would be a much smaller turning circle at half ahead",
           "No, the diameter of the turning circle would be almost the same."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image551.jpg"
       },
       {
@@ -7962,7 +7962,7 @@ const TEST_SECTIONS = [
           "If the failure cannot be repaired onboard, the ODME must be repaired before the ship commences its next voyage",
           "All of the mentioned must be performed"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image259.jpg"
       },
       {
@@ -7973,7 +7973,7 @@ const TEST_SECTIONS = [
           "Month",
           "14 days"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image5.jpg"
       },
       {
@@ -7984,7 +7984,7 @@ const TEST_SECTIONS = [
           "39",
           "37"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -8006,7 +8006,7 @@ const TEST_SECTIONS = [
           "The vessel stopping shifts the pivot point forward and creates a turning moment and results in the ship swinging towards the bank.",
           "The shallow water reduces the effectiveness of the rudder and when the vessel stops any applied rudder will become suddenly more effective."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image531.jpg"
       },
       {
@@ -8028,7 +8028,7 @@ const TEST_SECTIONS = [
           "Checking the lifeboat provisions and supplies",
           "Checking the distress signal rockets and other distress signals"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image80.jpg"
       },
       {
@@ -8039,7 +8039,7 @@ const TEST_SECTIONS = [
           "Once every week",
           "Once every 6 months"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image49.jpg"
       },
       {
@@ -8050,7 +8050,7 @@ const TEST_SECTIONS = [
           "STCW deals with minimum recommendation of education for seafarers and minimum standards for training centre and schools",
           "STCW deals with training centre and schools and standards for watch keepers"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image84.jpg"
       },
       {
@@ -8061,7 +8061,7 @@ const TEST_SECTIONS = [
           "Wait three minutes and if no acknowledgement is heard from a coast station you should relay the alert.",
           "No response is necessary providing the vessel is more than 24 hours away."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -8072,7 +8072,7 @@ const TEST_SECTIONS = [
           "Request for a collect call",
           "Inform the telephone number on whom to charge the call"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       },
       {
@@ -8083,7 +8083,7 @@ const TEST_SECTIONS = [
           "Quarter",
           "Week"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image8.jpg"
       },
       {
@@ -8094,7 +8094,7 @@ const TEST_SECTIONS = [
           "Part B of the ISPS Code and Chapter II of the Maritime Transport and Offshore Facilities Act.",
           "Chapter V of SOLAS and Annex II of MARPOL."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image513.jpg"
       },
       {
@@ -8105,7 +8105,7 @@ const TEST_SECTIONS = [
           "For all vessels.",
           "For tankers and other vessels carrying persistent oil as cargo."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image58.jpg"
       },
       {
@@ -8149,7 +8149,7 @@ const TEST_SECTIONS = [
           "With the Loadline Certificate.",
           "With the Classification Records."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image498.jpg"
       },
       {
@@ -8160,7 +8160,7 @@ const TEST_SECTIONS = [
           "Unforeseeable circumstances",
           "Human error"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image42.jpg"
       },
       {
@@ -8204,7 +8204,7 @@ const TEST_SECTIONS = [
           "By Rule 18, a power-driven vessel underway shall keep out of the way of a sailing vessel. I will maintain my course and speed, but will continue to monitor situation to ensure the other vessel takes avoiding action",
           "Risk of collision is deemed to exist and, as the other vessel is on a steady bearing on my starboard side, I am required to keep out of the way. I will make a broad alteration of course to starboard"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image563.jpg"
       },
       {
@@ -8215,7 +8215,7 @@ const TEST_SECTIONS = [
           "All the mentioned alternatives.",
           "Check the detector with heat and/or smoke (in accordance with instructions in its manual)"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image86.jpg"
       },
       {
@@ -8226,7 +8226,7 @@ const TEST_SECTIONS = [
           "AF-gain",
           "RF-gain"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -8237,7 +8237,7 @@ const TEST_SECTIONS = [
           "Will only send a non-delivery notification (NDN) to the sender if so requested by him",
           "Automatically send a non-delivery notification (NDN) to the sender"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -8248,7 +8248,7 @@ const TEST_SECTIONS = [
           "To ensure that cabins and common spaces are maintained in a clean, safe and hygienic condition",
           "To check for alcohol in cabins"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image240.jpg"
       },
       {
@@ -8259,7 +8259,7 @@ const TEST_SECTIONS = [
           "Risk of collision is deemed not to exist and I will maintain my course and speed. I will continue to monitor the situation",
           "Risk of collision is deemed not to to exist. However, to be sure of a safe passing distance, I will reduce my speed to allow the other vessel to pass ahead"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image494.jpg"
       },
       {
@@ -8270,7 +8270,7 @@ const TEST_SECTIONS = [
           "Acknowledgement request",
           "Acknowledgment broadcast"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image6.jpg"
       },
       {
@@ -8281,7 +8281,7 @@ const TEST_SECTIONS = [
           "Position.",
           "Weather on-scene."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image27.jpg"
       },
       {
@@ -8292,7 +8292,7 @@ const TEST_SECTIONS = [
           "In case of accidents, it is important that a wide range of personnel must be permitted and trained to operate the pump.",
           "Only senior deck officers should operate the emergency pump."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image243.jpg"
       },
       {
@@ -8303,7 +8303,7 @@ const TEST_SECTIONS = [
           "Record a lower draught and sail",
           "There is not a problem as over loading is permitted"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image461.jpg"
       },
       {
@@ -8314,7 +8314,7 @@ const TEST_SECTIONS = [
           "HF-gain",
           "RC-gain"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -8336,7 +8336,7 @@ const TEST_SECTIONS = [
           "There is proper relative humidity in the space where the batteries are stored",
           "The space is not oily"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -8369,7 +8369,7 @@ const TEST_SECTIONS = [
           "IMO Code of Practice for the carriage of Timber Deck cargoes",
           "Grain Regulations"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image843.jpg"
       },
       {
@@ -8380,7 +8380,7 @@ const TEST_SECTIONS = [
           "Suitable for 518 kHz NAVTEX receiver",
           "A radio officer on board"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -8391,7 +8391,7 @@ const TEST_SECTIONS = [
           "Mayday (1x), call-sign of ship in distress (3x) / this is / own call-sign (3x) / received mayday",
           "Mayday (3x) / this is / own call-sign (1x) / received mayday / call-sign of ship in distress (1x)"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image8.jpg"
       },
       {
@@ -8402,7 +8402,7 @@ const TEST_SECTIONS = [
           "STCW.",
           "MARPOL."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image81.jpg"
       },
       {
@@ -8424,7 +8424,7 @@ const TEST_SECTIONS = [
           "Around hatch corners and upper ballast tanks amidships",
           "In after peak area"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image802.jpg"
       },
       {
@@ -8435,7 +8435,7 @@ const TEST_SECTIONS = [
           "The use of SARSAT COSPAS Epirbs",
           "The use of VHF DSC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image10.jpg"
       },
       {
@@ -8446,7 +8446,7 @@ const TEST_SECTIONS = [
           "Yes with VHF DSC",
           "Yes, with the MF/HF-DSC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image6.jpg"
       },
       {
@@ -8468,7 +8468,7 @@ const TEST_SECTIONS = [
           "Urgent (3x)",
           "SOS (3x)"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image13.jpg"
       },
       {
@@ -8479,7 +8479,7 @@ const TEST_SECTIONS = [
           "Position information from electronic systems",
           "All of these suggested answers"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image487.jpg"
       },
       {
@@ -8490,7 +8490,7 @@ const TEST_SECTIONS = [
           "PAN PAN",
           "URGENCE"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image13.jpg"
       },
       {
@@ -8501,7 +8501,7 @@ const TEST_SECTIONS = [
           "424432010",
           "424432020"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image1.jpg"
       },
       {
@@ -8512,7 +8512,7 @@ const TEST_SECTIONS = [
           "You must check if it is attached properly to a railing with the required line",
           "You must check the manufacturer of the battery"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image15.jpg"
       },
       {
@@ -8523,7 +8523,7 @@ const TEST_SECTIONS = [
           "One on each end (only).",
           "One on each side (only)."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image538.jpg"
       },
       {
@@ -8534,7 +8534,7 @@ const TEST_SECTIONS = [
           "The approach speed is essential to maintain steerage when coming alongside",
           "The approach speed is way too fast, even for a vessel in ballast."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image528.jpg"
       },
       {
@@ -8545,7 +8545,7 @@ const TEST_SECTIONS = [
           "This hold does not have ventilators",
           "The ballast hold hatch cover must be fitted with additional securing devices"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image835.jpg"
       },
       {
@@ -8556,7 +8556,7 @@ const TEST_SECTIONS = [
           "Each lifeboat shall be launched, and maneuvered in the water with its assigned crew at least once every three months during an abandon ship drill",
           "All lifeboats shall be lowered during drills"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image21.jpg"
       },
       {
@@ -8567,7 +8567,7 @@ const TEST_SECTIONS = [
           "In the wheelhouse",
           "Both in a conspicuous place in each machinery space and in a conspicuous place at the bilge and ballast pump control station"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image176.jpg"
       },
       {
@@ -8578,7 +8578,7 @@ const TEST_SECTIONS = [
           "Three minutes.",
           "Two minutes."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image13.jpg"
       },
       {
@@ -8589,7 +8589,7 @@ const TEST_SECTIONS = [
           "Rocket parachute flares",
           "Radar transponder"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image253.jpg"
       },
       {
@@ -8600,7 +8600,7 @@ const TEST_SECTIONS = [
           "If the whip-antenna is replaced by an antenna of about the same length as the original one",
           "If the whip-antenna is replaced by a Sat C antenna"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -8611,7 +8611,7 @@ const TEST_SECTIONS = [
           "Make broadcast to all stations on VHF 16",
           "Call the nearest coast station and inform it that a false distress alert has been transmited"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image2.jpg"
       },
       {
@@ -8622,7 +8622,7 @@ const TEST_SECTIONS = [
           "On the basis of a six second minimum charge with six second incremental steps",
           "On the number of kilobits of information transmitted per block of 1024 bits"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image12.jpg"
       },
       {
@@ -8633,7 +8633,7 @@ const TEST_SECTIONS = [
           "The ITU List of Ship Stations",
           "The ITU List of Radiodetermination and Special Services"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       }
     ]
@@ -8649,7 +8649,7 @@ const TEST_SECTIONS = [
           "The SOLAS convention",
           "there isn't any conventions that take care of the human safety at sea"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image159.jpg"
       },
       {
@@ -8660,7 +8660,7 @@ const TEST_SECTIONS = [
           "Maximum is 30 litre pr nautical mile and total is 1/10000 part of full cargo on the ballast voyage.",
           "Maximum is 30 litre pr nautical mile and total is 1/30000 part of full cargo on the ballast voyage."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image42.jpg"
       },
       {
@@ -8671,7 +8671,7 @@ const TEST_SECTIONS = [
           "The use of the ship's line throwing apparatus.",
           "The use of navigational equipment for survival crafts."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image83.jpg"
       },
       {
@@ -8682,7 +8682,7 @@ const TEST_SECTIONS = [
           "The meteorological station connected with the CES used",
           "KNMI in Holland"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image6.jpg"
       },
       {
@@ -8693,7 +8693,7 @@ const TEST_SECTIONS = [
           "Securite Securite (3 times)",
           "Pan Pan  (3 times)"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image13.jpg"
       },
       {
@@ -8704,7 +8704,7 @@ const TEST_SECTIONS = [
           "Every week",
           "Every 3 weeks"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image174.jpg"
       },
       {
@@ -8715,7 +8715,7 @@ const TEST_SECTIONS = [
           "Only at sea, outside territorial waters",
           "At sea, outside territorial waters, and in port or harbour"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image5.jpg"
       },
       {
@@ -8726,7 +8726,7 @@ const TEST_SECTIONS = [
           "The master.",
           "Statutory authorities."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image13.jpg"
       },
       {
@@ -8737,7 +8737,7 @@ const TEST_SECTIONS = [
           "'There are source data diagrams on the chart that can be read'",
           "'The chart has a Zone of Confidence function'"
         ],
-        "correctIndex": 0
+        "correctIndex": 3
       },
       {
         "question": "A distress alert on board may only be transmitted on explicit order of:",
@@ -8769,7 +8769,7 @@ const TEST_SECTIONS = [
           "The testing-mode of the ever present VHF-DSC-EPIRB",
           "The built-in test facility in the modem"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image17.jpg"
       },
       {
@@ -8780,7 +8780,7 @@ const TEST_SECTIONS = [
           "A DSC- message for all vessels within a certain area from a position in the DSC message, and the degrees are given in northerly and westerly direction",
           "A DSC- message for all ships in a particular ocean region"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -8791,7 +8791,7 @@ const TEST_SECTIONS = [
           "Sail at full speed.",
           "Plan to arrive at port at night."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image69.jpg"
       },
       {
@@ -8835,7 +8835,7 @@ const TEST_SECTIONS = [
           "The applicant on board wishes to have a conversation with a person whose name is known",
           "The applicant on board request the coast-station to personally guard the conversation with the shore subscriber"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       },
       {
@@ -8857,7 +8857,7 @@ const TEST_SECTIONS = [
           "This is a feature only seen on radar displays",
           "Land is stopped with the vessel symbol moving across the sea floor"
         ],
-        "correctIndex": 0
+        "correctIndex": 1
       },
       {
         "question": "What is definition on clean ballast as per MARPOL Annex 1?",
@@ -8878,7 +8878,7 @@ const TEST_SECTIONS = [
           "Distance to the fire station and the size of the fire brigade, what is burning, possibility to get water",
           "Where the fire break out, the ships mobility, distance to the fire station and the size of the fire brigade"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image25.jpg"
       },
       {
@@ -8889,7 +8889,7 @@ const TEST_SECTIONS = [
           "The other vessel is in distress and if possible I will render assistance",
           "You should continue on with the voyage if your damage is not serious"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image506.jpg"
       },
       {
@@ -8900,7 +8900,7 @@ const TEST_SECTIONS = [
           "Vessel symbol shows the heading fixed vertically on the screen'",
           "'Vessel symbol moves across the screen'"
         ],
-        "correctIndex": 0
+        "correctIndex": 3
       },
       {
         "question": "An Oil Record Book, Part 1,shall be provided to every ship of 400 tons gross tonnage and above to record machinery space operations.Out of below mentioned operations, it is compulsory to record:",
@@ -8910,7 +8910,7 @@ const TEST_SECTIONS = [
           "Bunkering of bulk lubricating oil.",
           "Discharge of water from Aft, Peak Tank."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image42.jpg"
       },
       {
@@ -8932,7 +8932,7 @@ const TEST_SECTIONS = [
           "the use of SART transponders",
           "the use of HF DSC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image6.jpg"
       },
       {
@@ -8943,7 +8943,7 @@ const TEST_SECTIONS = [
           "The type of weapons being carried by the pirates/highjackers.",
           "Your ship's name and call sign."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image69.jpg"
       },
       {
@@ -8954,7 +8954,7 @@ const TEST_SECTIONS = [
           "On the basis of a one minute minimum charge with one minute incremental steps",
           "On the basis of a three minute minimum charge with one minute incremental steps"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image1.jpg"
       },
       {
@@ -8965,7 +8965,7 @@ const TEST_SECTIONS = [
           "Stop the engine and let the vessel momentum and the wind drop the vessel onto the berth",
           "Full starboard rudder and stop engines"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image521.jpg"
       },
       {
@@ -8976,7 +8976,7 @@ const TEST_SECTIONS = [
           "Duplex",
           "Simplex"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image6.jpg"
       },
       {
@@ -8987,7 +8987,7 @@ const TEST_SECTIONS = [
           "The transmitter will automatically keep operating on the MF and HF distress frequencies",
           "You can transmit but can not receive"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -9009,7 +9009,7 @@ const TEST_SECTIONS = [
           "Every week.",
           "Every two weeks."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image120.jpg"
       },
       {
@@ -9020,7 +9020,7 @@ const TEST_SECTIONS = [
           "Do not reply to any questions from outside parties, except the Solicitor appointed by your company.",
           "To make sure that all parties are informed about the facts, show them the extracts of the log-book."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image93.jpg"
       },
       {
@@ -9031,7 +9031,7 @@ const TEST_SECTIONS = [
           "Your ship is operating at a lower security level than the ship or port it is interfacing with.",
           "Your ship has added a new port to its list of ports of call."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image66.jpg"
       },
       {
@@ -9042,7 +9042,7 @@ const TEST_SECTIONS = [
           "Less than 24 hours because of hypothermia",
           "Less than 12 hours if they have little body fat"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image533.jpg"
       },
       {
@@ -9053,7 +9053,7 @@ const TEST_SECTIONS = [
           "Singapore, Hotel, India, Paris",
           "Sierra, Hotel, India, Papa"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image1.jpg"
       },
       {
@@ -9064,7 +9064,7 @@ const TEST_SECTIONS = [
           "To keep to the correct Inmarsat-region",
           "To have the correct position in case of accidents"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image12.jpg"
       },
       {
@@ -9075,7 +9075,7 @@ const TEST_SECTIONS = [
           "A report giving the result of the Conformance Test issued by an Application Service Provider on behalf of an Administration",
           "A report giving the result of the Performance Test, issued by the manufacturer in compliance with the Flag State Authority requirements."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image512.jpg"
       },
       {
@@ -9086,7 +9086,7 @@ const TEST_SECTIONS = [
           "You inform the NCS that the SES is available for comunications.",
           "You select the CES through which you wish to send a message."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -9097,7 +9097,7 @@ const TEST_SECTIONS = [
           "A sailing vessel, at anchor",
           "A sailing vessel of less than 10 metres in length, displaying the mandatory combined lantern inlieu of sailing lights, seen head-on"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image492.jpg"
       },
       {
@@ -9119,7 +9119,7 @@ const TEST_SECTIONS = [
           "Emergency Position Indicating Radio Beacon.",
           "Electronic Pressure Indication Radar Buoy."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image22.jpg"
       },
       {
@@ -9130,7 +9130,7 @@ const TEST_SECTIONS = [
           "The Ship Security Officer",
           "The Classification Society."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image60.jpg"
       },
       {
@@ -9141,7 +9141,7 @@ const TEST_SECTIONS = [
           "Ch.70",
           "Ch.06"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image17.jpg"
       },
       {
@@ -9152,7 +9152,7 @@ const TEST_SECTIONS = [
           "The authorities.",
           "The master."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image74.jpg"
       },
       {
@@ -9174,7 +9174,7 @@ const TEST_SECTIONS = [
           "2128 kHz/VHF channel 16",
           "2182 kHz/VHF channel 6"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image13.jpg"
       },
       {
@@ -9185,7 +9185,7 @@ const TEST_SECTIONS = [
           "In urgent cases",
           "Always"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image8.jpg"
       },
       {
@@ -9196,7 +9196,7 @@ const TEST_SECTIONS = [
           "25 litters per nautical mile",
           "20 litters per nautical mile"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image42.jpg"
       },
       {
@@ -9207,7 +9207,7 @@ const TEST_SECTIONS = [
           "Security arrangements",
           "Ship security survey"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image91.jpg"
       },
       {
@@ -9218,7 +9218,7 @@ const TEST_SECTIONS = [
           "Direct Turn",
           "Scharnow Turn"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image553.jpg"
       },
       {
@@ -9262,7 +9262,7 @@ const TEST_SECTIONS = [
           "NCS",
           "LUT"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -9273,7 +9273,7 @@ const TEST_SECTIONS = [
           "It comes from a vessel at anchor, less than 100 metres in length",
           "It comes from a vessel restricted in her ability to manoeuvre"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image519.jpg"
       },
       {
@@ -9284,7 +9284,7 @@ const TEST_SECTIONS = [
           "It reduces because the hull acts to block the flow of current",
           "It rises very considerably because of the shallow water under the hull"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image544.jpg"
       },
       {
@@ -9295,7 +9295,7 @@ const TEST_SECTIONS = [
           "The position of the applied tug force relative to the ship's pivot point",
           "Having a tug attached to a fairlead close to the pivot point"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image534.jpg"
       },
       {
@@ -9306,7 +9306,7 @@ const TEST_SECTIONS = [
           "The ITU List of Coast Station",
           "The ITU List of Radiodetermination and Special Services"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       },
       {
@@ -9328,7 +9328,7 @@ const TEST_SECTIONS = [
           "Be taken by the crew to the rescue-boat and turned on manually",
           "Automatically released and then automatically activated"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image5.jpg"
       },
       {
@@ -9361,7 +9361,7 @@ const TEST_SECTIONS = [
           "Launching and recovery of a survival craft.",
           "Checking that life-jackets are correctly donned."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image56.jpg"
       },
       {
@@ -9372,7 +9372,7 @@ const TEST_SECTIONS = [
           "Activating it by extracting the antenna",
           "Actvating the SART and checking the effect on the radar screen"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image5.jpg"
       },
       {
@@ -9405,7 +9405,7 @@ const TEST_SECTIONS = [
           "To prove fault conditions in the O.D.M.E",
           "To prove that oil has been pumped overboard according to regulations"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image235.jpg"
       },
       {
@@ -9427,7 +9427,7 @@ const TEST_SECTIONS = [
           "TRUE",
           "FALSE"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image67.jpg"
       },
       {
@@ -9448,7 +9448,7 @@ const TEST_SECTIONS = [
           "The use of HF DSC and INMARSAT Epirbs",
           "The use of MF DSC and INMARSAT Epirbs"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image39.jpg"
       },
       {
@@ -9459,7 +9459,7 @@ const TEST_SECTIONS = [
           "The nature of distress is unknown",
           "Number of person at risk is unknown"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -9470,7 +9470,7 @@ const TEST_SECTIONS = [
           "Five prolonged blasts (flashes)",
           "Five short and rapid blasts (flashes)"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image581.jpg"
       },
       {
@@ -9481,7 +9481,7 @@ const TEST_SECTIONS = [
           "Channel 70 DSC",
           "Channel 6 DSC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -9503,7 +9503,7 @@ const TEST_SECTIONS = [
           "In specially designated areas (ref. MARPOL).",
           "In coastal waters."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image117.jpg"
       },
       {
@@ -9514,7 +9514,7 @@ const TEST_SECTIONS = [
           "Until all crew members and passengers have reported to their respective muster stations",
           "3 minutes"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image56.jpg"
       },
       {
@@ -9525,7 +9525,7 @@ const TEST_SECTIONS = [
           "Fight back.",
           "Assure your captors that you're not planning an attack to overthrow them."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image241.jpg"
       },
       {
@@ -9558,7 +9558,7 @@ const TEST_SECTIONS = [
           "The ship would be detained indefinitely",
           "The deficiencies would be recorded in the ship's register and the ship allowed to sail"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image52.jpg"
       },
       {
@@ -9569,7 +9569,7 @@ const TEST_SECTIONS = [
           "Supplementary to classification rules.",
           "Should be consulted when the vessel is in distress."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image58.jpg"
       },
       {
@@ -9580,7 +9580,7 @@ const TEST_SECTIONS = [
           "Automatically repeated after 3 and a half to 4 and a half minutes",
           "Automatically repeated after 1 to 1 and a half minutes"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -9602,7 +9602,7 @@ const TEST_SECTIONS = [
           "The girders",
           "Forecastle deck"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image842.jpg"
       },
       {
@@ -9613,7 +9613,7 @@ const TEST_SECTIONS = [
           "Requesting a \"self test\"",
           "Doing a \"recommissioning test\""
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -9624,7 +9624,7 @@ const TEST_SECTIONS = [
           "A vessel engaged on pilotage duty, engaged in deploying or recovering a pilot, seen head-on or a power-driven vessel underway, lmore than 50 metres in length or less than 50 metres in length and showing the second masthead light, seen head-on",
           "A power-driven vessel engaged in towing, less than 50 metres in length, length of tow under 200 metres, towing vessel and tow restricted in their ability to manoeuvre, seen head-on OR a power-driven vessel underway, more than 50 metres in length, or less than 50 metres in length and showing a second masthead light, restricted in her ability to manoeuvre, seen head-on"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image584.jpg"
       },
       {
@@ -9635,7 +9635,7 @@ const TEST_SECTIONS = [
           "Oil filtering equipment only.",
           "Sludge separating tank."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image42.jpg"
       },
       {
@@ -9679,7 +9679,7 @@ const TEST_SECTIONS = [
           "16",
           "85"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image13.jpg"
       },
       {
@@ -9701,7 +9701,7 @@ const TEST_SECTIONS = [
           "Develop an onboard security survey checklist",
           "Create a list of potential motives for security incidents against your ship."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image82.jpg"
       },
       {
@@ -9712,7 +9712,7 @@ const TEST_SECTIONS = [
           "Send a PDN, if the message has arrived in the mailbox",
           "Not send any PDN for this message"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -9723,7 +9723,7 @@ const TEST_SECTIONS = [
           "Checking the lifeboat provisions and supplies",
           "Checking that passengers and crew are suitably dressed and lifejackets correctly donned"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image49.jpg"
       },
       {
@@ -9734,7 +9734,7 @@ const TEST_SECTIONS = [
           "Bow and stern attraction/rejection force caused by the closeness of the river sides",
           "The only likely outside force effecting the vessel will be from wind and river flow"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image561.jpg"
       }
     ]
@@ -9750,7 +9750,7 @@ const TEST_SECTIONS = [
           "One (1).",
           "Five (5)."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -9783,7 +9783,7 @@ const TEST_SECTIONS = [
           "An adjustment of the semi-duplex transmitting power",
           "An indication of aerial problem"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -9794,7 +9794,7 @@ const TEST_SECTIONS = [
           "Routine",
           "Safety"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image11.jpg"
       },
       {
@@ -9805,7 +9805,7 @@ const TEST_SECTIONS = [
           "A vessel at anchor, more than 100 metres in length. She is sounding the additional signal to give warning of her position",
           "A vessel at anchor, less than 100 metres in length. She is sounding the additional signal top give warning of her position"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image519.jpg"
       },
       {
@@ -9816,7 +9816,7 @@ const TEST_SECTIONS = [
           "The ITU List of coast stations",
           "The ITU List of Ship Stations"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       },
       {
@@ -9849,7 +9849,7 @@ const TEST_SECTIONS = [
           "The Ship Security Officer",
           "The Company Security Officer"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image131.jpg"
       },
       {
@@ -9871,7 +9871,7 @@ const TEST_SECTIONS = [
           "Attract the attention of the person on watch.",
           "Activate bridge watchkeeping receivers."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image13.jpg"
       },
       {
@@ -9893,7 +9893,7 @@ const TEST_SECTIONS = [
           "Within US waters",
           "Within 200 nm of US waters including Guam, Hawaii, Alaska and San Juan"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image40.jpg"
       },
       {
@@ -9904,7 +9904,7 @@ const TEST_SECTIONS = [
           "FALSE",
           "."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image92.jpg"
       },
       {
@@ -9915,7 +9915,7 @@ const TEST_SECTIONS = [
           "20 miles",
           "20 meters"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image15.jpg"
       },
       {
@@ -9926,7 +9926,7 @@ const TEST_SECTIONS = [
           "A high standard of personal hygiene",
           "The restricted loading of certain cargoes which may be excessively dusty"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image826.jpg"
       },
       {
@@ -9937,7 +9937,7 @@ const TEST_SECTIONS = [
           "An Inmarsat-antenna",
           "A MF/HF-antenna"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -9948,7 +9948,7 @@ const TEST_SECTIONS = [
           "Survival craft distress pyrotechnic signals",
           "Rocket parachute flares"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image122.jpg"
       },
       {
@@ -9959,7 +9959,7 @@ const TEST_SECTIONS = [
           "That there is a vessel in distress nearby",
           "That there is a vessel aground in the vicinity"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image489.jpg"
       },
       {
@@ -9970,7 +9970,7 @@ const TEST_SECTIONS = [
           "All of the suggested answers",
           "Touching the bottom if there is any swell and causing damage due to the wake or wash of the vessel"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image516.jpg"
       },
       {
@@ -9992,7 +9992,7 @@ const TEST_SECTIONS = [
           "A dish aerial",
           "A flexible wire aerial"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -10003,7 +10003,7 @@ const TEST_SECTIONS = [
           "A safety officer not being nominated for the vessel",
           "Official log book entries not being completed correctly"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image52.jpg"
       },
       {
@@ -10025,7 +10025,7 @@ const TEST_SECTIONS = [
           "Crew only",
           "Keep access free"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -10036,7 +10036,7 @@ const TEST_SECTIONS = [
           "There should be no overtaking in these confined waters",
           "The overtaking vessel should request permission to overtake from the Port Control VTS"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image591.jpg"
       },
       {
@@ -10047,7 +10047,7 @@ const TEST_SECTIONS = [
           "227005300",
           "227530000"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -10058,7 +10058,7 @@ const TEST_SECTIONS = [
           "200 nm and capacity for evacuating more then 15 persons.",
           "150 nm and capacity for evacuating more than 12 persons."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image134.jpg"
       },
       {
@@ -10069,7 +10069,7 @@ const TEST_SECTIONS = [
           "A checklist jointly completed by the Ship Security Officer and the U.S. Coast Guard",
           "A document between the port and the cargo owner stating security"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image87.jpg"
       },
       {
@@ -10080,7 +10080,7 @@ const TEST_SECTIONS = [
           "0,04 %",
           "0,1 %"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image143.jpg"
       },
       {
@@ -10091,7 +10091,7 @@ const TEST_SECTIONS = [
           "\"SILENCE DISTRESS\" followed by call sign of the ship in distress",
           "\"SEELONCE MAYDAY\" followed by the silencing station's call-sign"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image13.jpg"
       },
       {
@@ -10102,7 +10102,7 @@ const TEST_SECTIONS = [
           "As shown in 'A', pushing but also made fast to check the vessel's movement towards the berth with a pull off",
           "As shown in 'B', made fast forward and aft using the centre leads to enable the ship to be positioned"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image550.jpg"
       },
       {
@@ -10113,7 +10113,7 @@ const TEST_SECTIONS = [
           "Preparation of immersion suits for passengers.",
           "Operation of the vessel's propulsion system."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image85.jpg"
       },
       {
@@ -10124,7 +10124,7 @@ const TEST_SECTIONS = [
           "Lack of sleep and fatigue of bridge officers",
           "All of these answers"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image537.jpg"
       },
       {
@@ -10135,7 +10135,7 @@ const TEST_SECTIONS = [
           "At least 100 metres",
           "It exceeds 200 metres"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image580.jpg"
       },
       {
@@ -10146,7 +10146,7 @@ const TEST_SECTIONS = [
           "9 GHz",
           "6 GHz"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image5.jpg"
       },
       {
@@ -10168,7 +10168,7 @@ const TEST_SECTIONS = [
           "Every available VHF-channel should always be used",
           "Only necessary radio conversations are made in a concise and businesslike way"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image6.jpg"
       },
       {
@@ -10179,7 +10179,7 @@ const TEST_SECTIONS = [
           "This is a sailing vessel underway, seen head-on. It is my responsibility to keep clear under rule 18 and I will take appropriate avoiding action",
           "This is a vessel engaged in fishing. It is my responsibility to keep clear under rule 18 and I will alter course to starboard, sounding one short blast"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image496.jpg"
       },
       {
@@ -10190,7 +10190,7 @@ const TEST_SECTIONS = [
           "To ALL vessels that go to sea",
           "To all vessels and all voyages with exceptions"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image34.jpg"
       },
       {
@@ -10212,7 +10212,7 @@ const TEST_SECTIONS = [
           "The ship's management team must organise the fire teams and then the teams have to rescue missing personnel",
           "The ship's management team must fight the fire and then call the fire teams"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image25.jpg"
       },
       {
@@ -10223,7 +10223,7 @@ const TEST_SECTIONS = [
           "To prevent contact with earth",
           "To prevent burns when touching the aerial"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -10245,7 +10245,7 @@ const TEST_SECTIONS = [
           "1",
           "4"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image4.jpg"
       },
       {
@@ -10256,7 +10256,7 @@ const TEST_SECTIONS = [
           "Destination.",
           "Identification of the ship."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image7.jpg"
       },
       {
@@ -10267,7 +10267,7 @@ const TEST_SECTIONS = [
           "Call the bridge and request for position and permission to discharge directly overboard.",
           "Call the bridge and request for position and permission to discharge overboard through oily water separating and filtering equipment."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image42.jpg"
       },
       {
@@ -10278,7 +10278,7 @@ const TEST_SECTIONS = [
           "To ask for maritime inquiries",
           "To ask for medical assistance"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -10289,7 +10289,7 @@ const TEST_SECTIONS = [
           "Yes, you must attend a one week course at a approved course center.",
           "No, the only thing you need is one hour instruction from a deck officer."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image177.jpg"
       },
       {
@@ -10300,7 +10300,7 @@ const TEST_SECTIONS = [
           "Inform the vessel's agent.",
           "Start clean-up operations."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image178.jpg"
       },
       {
@@ -10311,7 +10311,7 @@ const TEST_SECTIONS = [
           "The International Convention on Standards of Training, Certification and Watchkeeping of Seafarers",
           "Seafarer's Training and Competence of Watchkeepers"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image84.jpg"
       },
       {
@@ -10322,7 +10322,7 @@ const TEST_SECTIONS = [
           "Equal power required by both tugs as they are the same distance from bow and stern",
           "Usually there would be greater power on the aft tug than on the forward tug"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image559.jpg"
       },
       {
@@ -10344,7 +10344,7 @@ const TEST_SECTIONS = [
           "the use of MF DSC",
           "the use of SART transponders"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image6.jpg"
       },
       {
@@ -10355,7 +10355,7 @@ const TEST_SECTIONS = [
           "Get beneath the outer shell of an individual to obtain a more complete picture.",
           "Make judgements about people based on heir appearance."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image158.jpg"
       },
       {
@@ -10366,7 +10366,7 @@ const TEST_SECTIONS = [
           "Distress alert",
           "Receipt of a distress alert"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image8.jpg"
       },
       {
@@ -10377,7 +10377,7 @@ const TEST_SECTIONS = [
           "A vessel which from the nature of her work is restricted in her ability to manoeuvre as required by the Rules and is therefore unable to keep out of the way of another vessel",
           "A vessel which because of her draught in relation to the available depth of navigable water is restricted in her ability to deviate from her course and keep out of the way of another vessel"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image525.jpg"
       },
       {
@@ -10388,7 +10388,7 @@ const TEST_SECTIONS = [
           "67",
           "70"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -10399,7 +10399,7 @@ const TEST_SECTIONS = [
           "Four (4) days",
           "Three (3) days"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image5.jpg"
       },
       {
@@ -10410,7 +10410,7 @@ const TEST_SECTIONS = [
           "To inform the authorities.",
           "To relieve the master."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image42.jpg"
       },
       {
@@ -10432,7 +10432,7 @@ const TEST_SECTIONS = [
           "Details a ship's security measures.",
           "Addresses the security requirements shared between ships or between a port facility and a ship."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image87.jpg"
       },
       {
@@ -10443,7 +10443,7 @@ const TEST_SECTIONS = [
           "Charlie, Hotel, Able, November, November, Echo, Liverpool",
           "Cornelies, Hotel, Alfa, November, November, Echo, Lima"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image1.jpg"
       },
       {
@@ -10454,7 +10454,7 @@ const TEST_SECTIONS = [
           "An urgent call",
           "A priority calll"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       },
       {
@@ -10465,7 +10465,7 @@ const TEST_SECTIONS = [
           "A direct call",
           "A collect call"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image1.jpg"
       },
       {
@@ -10476,7 +10476,7 @@ const TEST_SECTIONS = [
           "The master and department heads.",
           "The safety officer."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image60.jpg"
       },
       {
@@ -10498,7 +10498,7 @@ const TEST_SECTIONS = [
           "The ITU List of Callsigns and Numerical Identities of Stations used by the Maritime Mobile and Maritime Mobile-Satellite Services",
           "The ITU List of Radiodetermination and Special Services"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       },
       {
@@ -10509,7 +10509,7 @@ const TEST_SECTIONS = [
           "Notify the Corps of Engineers",
           "Notify the US Coast Guard"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image262.jpg"
       },
       {
@@ -10520,7 +10520,7 @@ const TEST_SECTIONS = [
           "32",
           "38"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -10531,7 +10531,7 @@ const TEST_SECTIONS = [
           "1 - 2 years.",
           "8 years."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image89.jpg"
       },
       {
@@ -10542,7 +10542,7 @@ const TEST_SECTIONS = [
           "1/3 of the vessel's length from the bow.",
           "Normally varies dependant on the speed ahead"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image503.jpg"
       },
       {
@@ -10564,7 +10564,7 @@ const TEST_SECTIONS = [
           "Urgent call",
           "Distress relay call"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image8.jpg"
       },
       {
@@ -10575,7 +10575,7 @@ const TEST_SECTIONS = [
           "These are two vessels engaged in fishing (pair trawling), showing the additional volutary signals for hauling nets",
           "These are two vessels engaged in fishing (pair trawling), showing the additional voluntary signals for shooting nets"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image587.jpg"
       },
       {
@@ -10586,7 +10586,7 @@ const TEST_SECTIONS = [
           "Near the gangway",
           "On the bridge"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image8.jpg"
       },
       {
@@ -10608,7 +10608,7 @@ const TEST_SECTIONS = [
           "The Operator should immediately set continuous watch on the radiotelephone frequency that is associated with frquency band on which the distress alert was received.",
           "The Operator should immediately set continuous watch on the NBDP frequency that is associated with frequency band on which the distress alert was received."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -10619,7 +10619,7 @@ const TEST_SECTIONS = [
           "FR01",
           "2187.5"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       },
       {
@@ -10630,7 +10630,7 @@ const TEST_SECTIONS = [
           "Only send a positive delivery notification (PDN) to the sender if the sender requested, so in the send menu",
           "The sender has to confirm delivery by sending another separate message"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -10641,7 +10641,7 @@ const TEST_SECTIONS = [
           "Because there is increased wave action",
           "It does not, it stays at the same speed"
         ],
-        "correctIndex": 0
+        "correctIndex": 1
       },
       {
         "question": "Which type of call will be sent by a ship in danger of capsizing and needing assistance from all vessels in her vicinity ?",
@@ -10651,7 +10651,7 @@ const TEST_SECTIONS = [
           "Urgent call",
           "Distress call"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image6.jpg"
       },
       {
@@ -10673,7 +10673,7 @@ const TEST_SECTIONS = [
           "A vessel that is engaged in towing",
           "A vessel not under command"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image495.jpg"
       },
       {
@@ -10684,7 +10684,7 @@ const TEST_SECTIONS = [
           "Recognized Security Organization",
           "Company Security Officer"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image131.jpg"
       },
       {
@@ -10695,7 +10695,7 @@ const TEST_SECTIONS = [
           "at least 150 % N (lifeboat capacity: 100 % N; liferaft capacity: 50 % N) (*)",
           "at least 200 % N (lifeboat capacity: 100 % N; liferaft capacity: 100 % N) (*)"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image48.jpg"
       },
       {
@@ -10706,7 +10706,7 @@ const TEST_SECTIONS = [
           "Any person holding a ticket and travelling with a passenger ship",
           "Any person paying their voyage regardless of ship type"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image159.jpg"
       },
       {
@@ -10717,7 +10717,7 @@ const TEST_SECTIONS = [
           "every 2 months",
           "every 4 months"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image61.jpg"
       },
       {
@@ -10728,7 +10728,7 @@ const TEST_SECTIONS = [
           "\"Piracy, Hijacking and Smuggling\"",
           "All alternatives"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image179.jpg"
       },
       {
@@ -10739,7 +10739,7 @@ const TEST_SECTIONS = [
           "All alternatives",
           "Monitoring of restricted areas"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image118.jpg"
       },
       {
@@ -10750,7 +10750,7 @@ const TEST_SECTIONS = [
           "Distress alert",
           "MAYDAY RELAY"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image13.jpg"
       },
       {
@@ -10783,7 +10783,7 @@ const TEST_SECTIONS = [
           "Using the vessel's emergency towing arrangement",
           "Using a bridle made up from the vessel's anchor chains"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image583.jpg"
       },
       {
@@ -10794,7 +10794,7 @@ const TEST_SECTIONS = [
           "Sierra, Alfa, Tango, Charlie, Oscar, Mike",
           "Sierra, Able, Tripoli, Charlie, Oscar, Mike"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       },
       {
@@ -10805,7 +10805,7 @@ const TEST_SECTIONS = [
           "When coming up with another vessel from any direction abaft its beam",
           "When coming up with another vessel from a direction more than 22.5 degrees abaft its beam"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image556.jpg"
       },
       {
@@ -10816,7 +10816,7 @@ const TEST_SECTIONS = [
           "Within 48 hrs",
           "Within 12 hrs"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image53.jpg"
       },
       {
@@ -10838,7 +10838,7 @@ const TEST_SECTIONS = [
           "One prolonged blast, followed by two short blasts, at intervals of not more than two minutes",
           "Two prolonged blasts, followed by one short blast, at intervals of not more than two minutes"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image589.jpg"
       }
     ]
@@ -10854,7 +10854,7 @@ const TEST_SECTIONS = [
           "Channel 70",
           "A working channel of the nearest shore-station of that coast-station"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image1.jpg"
       },
       {
@@ -10865,7 +10865,7 @@ const TEST_SECTIONS = [
           "On the starboard side of the ship.",
           "In a state of readiness so that two crew-members can prepare for embarkation and launching in less than 15 minutes."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image79.jpg"
       },
       {
@@ -10876,7 +10876,7 @@ const TEST_SECTIONS = [
           "A deck officer or certificated person shall be placed in charge of each survival craft to be used",
           "Every motorised survival craft shall have a certificated engineer assigned"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image21.jpg"
       },
       {
@@ -10887,7 +10887,7 @@ const TEST_SECTIONS = [
           "Espionage",
           "Subversion"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image138.jpg"
       },
       {
@@ -10909,7 +10909,7 @@ const TEST_SECTIONS = [
           "Be repeated after 15 minutes",
           "Be repeated after 3.5 to 4.5 minutes"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -10920,7 +10920,7 @@ const TEST_SECTIONS = [
           "Ch.13",
           "Ch.16"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image23.jpg"
       },
       {
@@ -10931,7 +10931,7 @@ const TEST_SECTIONS = [
           "The detonating gas can be discharged",
           "The production of detonating gas can be prevented"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -10942,7 +10942,7 @@ const TEST_SECTIONS = [
           "Have the operator read the message by phone",
           "Is to deliver a message by telephone via a modem on the computer of the suscriber"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -10953,7 +10953,7 @@ const TEST_SECTIONS = [
           "Ensure the witness to the discovery signs your incident report.",
           "Write a report a few days after the event and describe everything that occurred."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image137.jpg"
       },
       {
@@ -10964,7 +10964,7 @@ const TEST_SECTIONS = [
           "Do not leave the transmitter on stand-by for too long, if not required",
           "Clean the dust filter of the fan regularly"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -10975,7 +10975,7 @@ const TEST_SECTIONS = [
           "Turn off the transmitter",
           "Wait until an RCC reports"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image12.jpg"
       },
       {
@@ -10986,7 +10986,7 @@ const TEST_SECTIONS = [
           "One in each lifeboat",
           "One on each side of the ship"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image3.jpg"
       },
       {
@@ -11019,7 +11019,7 @@ const TEST_SECTIONS = [
           "Preparation and launching of the survival craft",
           "Operation of the vessel's propulsion system"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image80.jpg"
       },
       {
@@ -11030,7 +11030,7 @@ const TEST_SECTIONS = [
           "Your vessel's own cargo owner",
           "Your vessel's position, name, call sign and speed"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image27.jpg"
       },
       {
@@ -11052,7 +11052,7 @@ const TEST_SECTIONS = [
           "4",
           "2"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image45.jpg"
       },
       {
@@ -11063,7 +11063,7 @@ const TEST_SECTIONS = [
           "SOLAS",
           "Class Rules"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image62.jpg"
       },
       {
@@ -11074,7 +11074,7 @@ const TEST_SECTIONS = [
           "A random selection process must be established.",
           "Detection equipment can be used in place of profiling."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image173.jpg"
       },
       {
@@ -11085,7 +11085,7 @@ const TEST_SECTIONS = [
           "General",
           "Industrial"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image158.jpg"
       },
       {
@@ -11107,7 +11107,7 @@ const TEST_SECTIONS = [
           "DSC-calls are repeated untill received",
           "DSC-symbol is sent twice and checked extra by Error Check Character"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -11118,7 +11118,7 @@ const TEST_SECTIONS = [
           "The use of SARSAT COSPAS Epirbs",
           "The use of INMARSAT Epirbs"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image24.jpg"
       },
       {
@@ -11129,7 +11129,7 @@ const TEST_SECTIONS = [
           "Higher crime rates around the world.",
           "More crew involvement."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image72.jpg"
       },
       {
@@ -11151,7 +11151,7 @@ const TEST_SECTIONS = [
           "32",
           "Radiomedical"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image12.jpg"
       },
       {
@@ -11195,7 +11195,7 @@ const TEST_SECTIONS = [
           "TX: 2177.0 kHz RX: 2189.5 kHz",
           "TX: 2189.5 kHz RX: 2177.0 kHz"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -11206,7 +11206,7 @@ const TEST_SECTIONS = [
           "A Ship-Owners Permitted Entry Plan",
           "A Shipboard Oil Pollution Emergency Plan"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image52.jpg"
       },
       {
@@ -11217,7 +11217,7 @@ const TEST_SECTIONS = [
           "3 nautical miles off the coast",
           "This is prohibited"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image117.jpg"
       },
       {
@@ -11228,7 +11228,7 @@ const TEST_SECTIONS = [
           "All sea-areas (A1 to A4)",
           "Only in sea-area A4"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image22.jpg"
       },
       {
@@ -11250,7 +11250,7 @@ const TEST_SECTIONS = [
           "Maintenance manual",
           "Ship's radio log"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image6.jpg"
       },
       {
@@ -11261,7 +11261,7 @@ const TEST_SECTIONS = [
           "9 digits",
           "The call sign followed by 4 digits"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -11283,7 +11283,7 @@ const TEST_SECTIONS = [
           "Vessel Response Procurement",
           "Vessel Response Plan"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image40.jpg"
       },
       {
@@ -11294,7 +11294,7 @@ const TEST_SECTIONS = [
           "Routine",
           "Urgency"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -11305,7 +11305,7 @@ const TEST_SECTIONS = [
           "100 PPM",
           "50 PPM"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image81.jpg"
       },
       {
@@ -11316,7 +11316,7 @@ const TEST_SECTIONS = [
           "I am faster than you. Get out of the way",
           "I intend to overtake you on your starboard side"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image1.jpg"
       },
       {
@@ -11338,7 +11338,7 @@ const TEST_SECTIONS = [
           "That the vessel is altering its course to starboard",
           "That the vessel is operating astern propulsion"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image581.jpg"
       },
       {
@@ -11349,7 +11349,7 @@ const TEST_SECTIONS = [
           "There will be very little change to the effects of squat",
           "There will be a significant change in the reduction of underkeel clearance, but the amount varies from ship to ship"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image547.jpg"
       },
       {
@@ -11360,7 +11360,7 @@ const TEST_SECTIONS = [
           "The ship's company",
           "The ship's Master"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image537.jpg"
       },
       {
@@ -11371,7 +11371,7 @@ const TEST_SECTIONS = [
           "It is the MARPOL conventions that take care of the human safety at sea",
           "It is the STCW 78/95 that take care of the human safety at sea"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image76.jpg"
       },
       {
@@ -11382,7 +11382,7 @@ const TEST_SECTIONS = [
           "Any immediate action to prevent loss of time",
           "Safety of ship and crew"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image40.jpg"
       },
       {
@@ -11404,7 +11404,7 @@ const TEST_SECTIONS = [
           "That the vessel does not agree with my proposed manoeuvre",
           "That the vessel suggests I overtake on the starboard side instead"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image486.jpg"
       },
       {
@@ -11415,7 +11415,7 @@ const TEST_SECTIONS = [
           "Two years.",
           "One year."
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image116.jpg"
       },
       {
@@ -11426,7 +11426,7 @@ const TEST_SECTIONS = [
           "A group of vessels",
           "A coast-station or coast guard-station"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -11437,7 +11437,7 @@ const TEST_SECTIONS = [
           "Urgency",
           "Routine"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -11448,7 +11448,7 @@ const TEST_SECTIONS = [
           "You must call on another working channel",
           "You can repeat your call after 2 minutes"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1.jpg"
       },
       {
@@ -11459,7 +11459,7 @@ const TEST_SECTIONS = [
           "Clean up - report - stop pumps?",
           "Stop pumps - clean up - report?"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image121.jpg"
       },
       {
@@ -11470,7 +11470,7 @@ const TEST_SECTIONS = [
           "The Company Security Officer and the Port Facility Security Officer",
           "The Local Coast Guard Officer and the Port Facility Security Officer"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image87.jpg"
       },
       {
@@ -11481,7 +11481,7 @@ const TEST_SECTIONS = [
           "Band cable",
           "Coaxial cable"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -11492,7 +11492,7 @@ const TEST_SECTIONS = [
           "\"The preventative measures you incorporate into your ship's security plan should be exhaustive, regardless of the level of threat identified by your ship's security assessment.\"",
           "Drugs are difficult to conceal onboard a ship."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image69.jpg"
       },
       {
@@ -11503,7 +11503,7 @@ const TEST_SECTIONS = [
           "Every report or message must be logged including time and date",
           "Only verbal reports for documentation"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image40.jpg"
       },
       {
@@ -11514,7 +11514,7 @@ const TEST_SECTIONS = [
           "This is prohibited",
           "12 miles"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image42.jpg"
       },
       {
@@ -11525,7 +11525,7 @@ const TEST_SECTIONS = [
           "Known hiding spot search",
           "Crew search"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image59.jpg"
       },
       {
@@ -11536,7 +11536,7 @@ const TEST_SECTIONS = [
           "Buy the most expensive equipment on the market.",
           "Buy the newest models."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image70.jpg"
       },
       {
@@ -11547,7 +11547,7 @@ const TEST_SECTIONS = [
           "Company safety officer",
           "Only with the master"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image25.jpg"
       },
       {
@@ -11580,7 +11580,7 @@ const TEST_SECTIONS = [
           "The maintain a record of all ship and their crews, and produce statistics involving ships from their country.",
           "The have responsibility for ensuring that ships are correctly manned and that crews' terms and conditions of employment are met satisfactorily"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image52.jpg"
       },
       {
@@ -11591,7 +11591,7 @@ const TEST_SECTIONS = [
           "Amount and opacity only",
           "Colour only"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image55.jpg"
       },
       {
@@ -11602,7 +11602,7 @@ const TEST_SECTIONS = [
           ".",
           "TRUE"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image87.jpg"
       },
       {
@@ -11613,7 +11613,7 @@ const TEST_SECTIONS = [
           "Fuel oil",
           "Oil refuse"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image57.jpg"
       },
       {
@@ -11624,7 +11624,7 @@ const TEST_SECTIONS = [
           "Once a month",
           "Once a year"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image40.jpg"
       },
       {
@@ -11635,7 +11635,7 @@ const TEST_SECTIONS = [
           ".",
           "."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image91.jpg"
       },
       {
@@ -11646,7 +11646,7 @@ const TEST_SECTIONS = [
           "Take the package and open it.",
           "Call for help on the radio."
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image46.jpg"
       },
       {
@@ -11668,7 +11668,7 @@ const TEST_SECTIONS = [
           "Equally spaced and not less than 300 mm or more than 380 mm",
           "equally spaced, not less than 200 mm or more than 280 mm"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image65.jpg"
       },
       {
@@ -11679,7 +11679,7 @@ const TEST_SECTIONS = [
           "The use of HF DSC and INMARSAT Epirbs",
           "The use of MF DSC and INMARSAT Epirbs"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image39.jpg"
       },
       {
@@ -11701,7 +11701,7 @@ const TEST_SECTIONS = [
           "the use of SART transponders",
           "the use of SARSAT COSPAS Epirbs"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image6.jpg"
       },
       {
@@ -11712,7 +11712,7 @@ const TEST_SECTIONS = [
           "The use of SART transponders",
           "The use of SARSAT COSPAS Epirbs"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -11723,7 +11723,7 @@ const TEST_SECTIONS = [
           "the use of SARSAT COSPAS Epirb",
           "the use of MF and/or HF R/T"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image8.jpg"
       },
       {
@@ -11734,7 +11734,7 @@ const TEST_SECTIONS = [
           "Crew comes to know each others problems",
           "It will prevent accidents from happening"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image1.jpg"
       },
       {
@@ -11745,7 +11745,7 @@ const TEST_SECTIONS = [
           "It does not contravene with the rest hours of the crew and each crew member is trained individually",
           "It is an integral part of the overall training plan and does not contravene with the rest hours of the crew"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image84.jpg"
       },
       {
@@ -11756,7 +11756,7 @@ const TEST_SECTIONS = [
           "Everyone",
           "Only the ratings"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image246.jpg"
       },
       {
@@ -11767,7 +11767,7 @@ const TEST_SECTIONS = [
           "the use of INMARSAT Epirbs",
           "the use of VHF DSC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image70.jpg"
       },
       {
@@ -11778,7 +11778,7 @@ const TEST_SECTIONS = [
           "the use of MF DSC",
           "the use of VHF DSC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image330.jpg"
       },
       {
@@ -11789,7 +11789,7 @@ const TEST_SECTIONS = [
           "The use of VHF DSC",
           "The use of SARSAT COSPAS Epirbs"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image536.jpg"
       },
       {
@@ -11800,7 +11800,7 @@ const TEST_SECTIONS = [
           "Test transmissions specially broadcast for this purpose once a week",
           "A testing program built in for this purpose"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image15.jpg"
       },
       {
@@ -11811,7 +11811,7 @@ const TEST_SECTIONS = [
           "The testing function of the device",
           "Test transmissions from Cospas-Sarsat satellites"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image412.jpg"
       },
       {
@@ -11822,7 +11822,7 @@ const TEST_SECTIONS = [
           "Three categories, numbered I, II and III.",
           "5 categories, labelled A-E."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image499.jpg"
       },
       {
@@ -11866,7 +11866,7 @@ const TEST_SECTIONS = [
           "245329000",
           "002453290"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -11921,7 +11921,7 @@ const TEST_SECTIONS = [
           "H3E",
           "F1B"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image4.jpg"
       },
       {
@@ -11932,7 +11932,7 @@ const TEST_SECTIONS = [
           "The use of HF/MF and/or VHF R/T and/or INMARSAT C",
           "The use of HF DSC"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image21.jpg"
       },
       {
@@ -11959,7 +11959,7 @@ const TEST_SECTIONS = [
           "Listen out on VHF channel 16",
           "Send a \"distress alert relay\""
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image4.jpg"
       },
       {
@@ -11970,7 +11970,7 @@ const TEST_SECTIONS = [
           "Telex only",
           "E-mail, SMS, telex, chart and weather updates."
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image12.jpg"
       },
       {
@@ -11981,7 +11981,7 @@ const TEST_SECTIONS = [
           "Discharge at sea providing you are more than 25 miles offshore",
           "MARPOL demands discharge to a shore facility, regardless of content"
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "image": "images/image230.jpg"
       },
       {
@@ -11992,7 +11992,7 @@ const TEST_SECTIONS = [
           "To transit with maximum safe speed",
           "To turn off all lights"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image72.jpg"
       },
       {
@@ -12003,7 +12003,7 @@ const TEST_SECTIONS = [
           "The vessel will roll violently",
           "The vessel will have a great bending moment"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1000.jpg"
       },
       {
@@ -12014,7 +12014,7 @@ const TEST_SECTIONS = [
           "The use of HF DSC",
           "The use of SART transponders"
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "image": "images/image295.jpg"
       },
       {
@@ -12025,7 +12025,7 @@ const TEST_SECTIONS = [
           "for a total period of not less than 3 minutes every week",
           "for a total period of not less than 5 minutes every month"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1000.jpg"
       },
       {
@@ -12036,7 +12036,7 @@ const TEST_SECTIONS = [
           "It lowers",
           "It first rises then lowers"
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "image": "images/image1000.jpg"
       },
       {
