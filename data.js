@@ -1,4 +1,4 @@
-// CES Tests — lazy loading
+// CES Tests — lazy loading index
 
 const DATA_FILES = {
   "GMDSS": "gmdss.js",
@@ -38,20 +38,23 @@ const TEST_SECTIONS = [];
 const LOADED_CATS = {};
 
 async function loadCategory(cat) {
-  if (LOADED_CATS[cat]) return;
+  if (LOADED_CATS[cat]) return; // уже загружено
   const fname = DATA_FILES[cat];
-  if (!fname) return;
-  await new Promise((resolve, reject) => {
+  if (!fname) { console.error('No file for cat:', cat); return; }
+
+  // Проверяем что скрипт ещё не добавлен в DOM
+  if (document.querySelector(`script[data-cat="${cat}"]`)) {
+    // Скрипт уже в DOM — просто ждём пока переменная появится
+    await new Promise(resolve => setTimeout(resolve, 100));
+    return;
+  }
+
+  return new Promise((resolve, reject) => {
     const s = document.createElement('script');
-    s.src = fname;
-    s.onload = resolve;
-    s.onerror = reject;
+    s.src = fname + '?v=3';
+    s.setAttribute('data-cat', cat);
+    s.onload = () => { console.log('Loaded:', fname); resolve(); };
+    s.onerror = (e) => { console.error('Failed:', fname, e); reject(e); };
     document.head.appendChild(s);
   });
-  const varname = DATA_VARS[cat];
-  const data = window[varname];
-  if (data) {
-    data.forEach(sec => TEST_SECTIONS.push(sec));
-    LOADED_CATS[cat] = true;
-  }
 }
