@@ -285,19 +285,10 @@
   if (tg) { tg.ready(); tg.expand(); }
 
   // ---- Категории ----
-  const CATEGORY_ICONS = {
-    'GMDSS':'📡','Bulk Carrier Management':'🚢','Container Ship Management':'🏗️',
-    'Chemical Tanker Management':'⚗️','General Cargo Management':'📦',
-    'LPG Tanker Management':'🔥','Oil Tanker Management':'🛢️','RoRo Management':'🚗',
-    'ETO':'⚡','Slow Speed Management':'🐢','Medium Speed Management':'⚙️','Steam Management':'💧',
-    'Slow Speed Operational':'🔄','Medium Speed Operational':'🔁',
-    'Bulk Carrier Operational':'🚢','Container Ship Operational':'🏗️',
-    'Chemical Tanker Operational':'⚗️','General Cargo Operational':'📦',
-    'LPG Tanker Operational':'🔥','Oil Tanker Operational':'🛢️','RoRo Operational':'🚗',
-    'Bulk Carrier Support':'🚢','Container Ship Support':'🏗️',
-    'Chemical Tanker Support':'⚗️','General Cargo Support':'📦',
-    'LPG Tanker Support':'🔥','Oil Tanker Support':'🛢️','RoRo Support':'🚗',
-  };
+  // Иконки берём из CATEGORY_META в data.js
+  const CATEGORY_ICONS = Object.fromEntries(
+    Object.entries(CATEGORY_META).map(([k,v]) => [k, v.icon])
+  );
   const FINAL_COUNTS = {
     'GMDSS': 50, 'Bulk Carrier Management': 71,
   };
@@ -405,9 +396,30 @@
     });
   }
 
-  function openCategory(name, fromScreen) {
+  async function openCategory(name, fromScreen) {
     currentCategory = name;
     prevDeptScreen = fromScreen;
+
+    // Показываем экран с индикатором загрузки
+    showScreen('screen-sub');
+    document.getElementById('sub-eyebrow').textContent = name;
+    document.getElementById('sub-title').textContent = 'Выберите раздел';
+    document.getElementById('sub-subtitle').textContent = '';
+    document.getElementById('sub-back-btn').onclick = () => showScreen(fromScreen);
+    document.getElementById('sub-sections').innerHTML = '<div style="text-align:center;padding:40px;color:var(--foam-dim)">⏳ Загрузка...</div>';
+
+    // Загружаем данные с сервера если нужно
+    if (!LOADED_CATS[name]) {
+      const ok = await loadCategory(name);
+      if (!ok) {
+        document.getElementById('sub-sections').innerHTML = '<div style="text-align:center;padding:40px;color:var(--danger)">❌ Ошибка загрузки. Проверь интернет.</div>';
+        return;
+      }
+      // Добавляем в CATEGORIES
+      const sections = LOADED_CATS[name];
+      CATEGORIES[name] = { icon: CATEGORY_ICONS[name] || '📄', sections };
+    }
+
     const cat = CATEGORIES[name];
     const total = cat.sections.reduce((s, sec) => s + sec.questions.length, 0);
     const fc = FINAL_COUNTS[name] || 50;
@@ -436,11 +448,15 @@
     showScreen('screen-sub');
   }
 
-  function startCategoryFinal() {
-    const all = CATEGORIES[currentCategory].sections.flatMap(s => s.questions);
+  async function startCategoryFinal() {
     const fc = FINAL_COUNTS[currentCategory] || 50;
-    const shuffled = [...all].sort(() => Math.random() - 0.5).slice(0, fc);
-    startSection(shuffled, true);
+    document.getElementById('sub-sections').innerHTML = '<div style="text-align:center;padding:20px;color:var(--foam-dim)">⏳ Готовим экзамен...</div>';
+    const questions = await loadFinal(currentCategory, fc);
+    if (!questions) {
+      alert('Ошибка загрузки. Попробуй ещё раз.');
+      return;
+    }
+    startSection(questions, true);
   }
 
   // ---- Quiz ----

@@ -162,3 +162,35 @@ try {
 } catch(e) {
   console.log('Bot error:', e.message);
 }
+
+// ---- Serve category data ----
+const categoriesData = require('./server_data/categories.json');
+
+// Список категорий (без данных)
+app.get('/api/categories', (req, res) => {
+  const list = Object.entries(categoriesData).map(([name, sections]) => ({
+    name,
+    sectionCount: sections.length,
+    questionCount: sections.reduce((s, sec) => s + sec.questions.length, 0)
+  }));
+  res.json(list);
+});
+
+// Данные одной категории
+app.get('/api/category/:name', (req, res) => {
+  const name = decodeURIComponent(req.params.name);
+  const data = categoriesData[name];
+  if (!data) return res.status(404).json({ error: 'Not found' });
+  res.json(data);
+});
+
+// Случайные вопросы для финального теста
+app.get('/api/final/:name/:count', (req, res) => {
+  const name = decodeURIComponent(req.params.name);
+  const count = parseInt(req.params.count) || 50;
+  const data = categoriesData[name];
+  if (!data) return res.status(404).json({ error: 'Not found' });
+  const all = data.flatMap(s => s.questions);
+  const shuffled = all.sort(() => Math.random() - 0.5).slice(0, count);
+  res.json(shuffled);
+});
