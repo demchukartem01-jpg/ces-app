@@ -118,26 +118,71 @@
   </div>
 </div>
 
-<!-- ЭКРАН 2: Deck Department -->
+<!-- ЭКРАН 2: Deck Department — выбор уровня -->
 <div id="screen-deck" class="hidden">
   <div class="header">
     <button class="back-btn" onclick="showScreen('screen-main')">← Назад</button>
     <div class="eyebrow">Deck Department</div>
-    <h1>Выберите тест</h1>
+    <h1>Выберите уровень</h1>
+    <p>Management, Operational или Support</p>
   </div>
-  <div class="card-list" id="deck-list"></div>
+  <div class="card-list">
+    <div class="dept-card dept-deck" onclick="showDeckGroup('gmdss')">
+      <div class="dept-icon">📡</div>
+      <div class="card-body">
+        <div class="dept-title">GMDSS</div>
+        <div class="dept-sub">Все должности</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+    <div class="dept-card dept-deck" onclick="showDeckGroup('management')">
+      <div class="dept-icon">📋</div>
+      <div class="card-body">
+        <div class="dept-title">Management Level</div>
+        <div class="dept-sub">Master & Ch.Officer</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+    <div class="dept-card dept-deck" onclick="showDeckGroup('operational')">
+      <div class="dept-icon">🧭</div>
+      <div class="card-body">
+        <div class="dept-title">Operational Level</div>
+        <div class="dept-sub">2nd & 3rd Officer</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+    <div class="dept-card dept-deck" onclick="showDeckGroup('support')">
+      <div class="dept-icon">⚓</div>
+      <div class="card-body">
+        <div class="dept-title">Support Level</div>
+        <div class="dept-sub">Deck Rating</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+  </div>
 </div>
 
-<!-- ЭКРАН 3: Engine Department -->
+<!-- ЭКРАН 2b: Deck — список тестов уровня -->
+<div id="screen-deck-group" class="hidden">
+  <div class="header">
+    <button class="back-btn" onclick="showScreen('screen-deck')">← Назад</button>
+    <div class="eyebrow" id="deck-group-eyebrow"></div>
+    <h1 id="deck-group-title">Выберите тест</h1>
+  </div>
+  <div class="card-list" id="deck-group-list"></div>
+</div>
+
+<!-- ЭКРАН 3: Engine Department — выбор уровня -->
 <div id="screen-engine" class="hidden">
   <div class="header">
     <button class="back-btn" onclick="showScreen('screen-main')">← Назад</button>
     <div class="eyebrow">Engine Department</div>
     <h1>Выберите уровень</h1>
+    <p>Management или Operational</p>
   </div>
   <div class="card-list">
     <div class="dept-card dept-engine" onclick="showEngineGroup('management')">
-      <div class="dept-icon">👨‍✈️</div>
+      <div class="dept-icon">📋</div>
       <div class="card-body">
         <div class="dept-title">Management Level</div>
         <div class="dept-sub">Ch.Engineer & 2nd Engineer</div>
@@ -155,11 +200,11 @@
   </div>
 </div>
 
-<!-- ЭКРАН 3b: Engine подгруппа -->
+<!-- ЭКРАН 3b: Engine — список тестов уровня -->
 <div id="screen-engine-group" class="hidden">
   <div class="header">
     <button class="back-btn" onclick="showScreen('screen-engine')">← Назад</button>
-    <div class="eyebrow" id="engine-group-eyebrow">Engine Department</div>
+    <div class="eyebrow" id="engine-group-eyebrow"></div>
     <h1 id="engine-group-title">Выберите тест</h1>
   </div>
   <div class="card-list" id="engine-group-list"></div>
@@ -226,20 +271,55 @@
     'LPG Tanker Management':'🔥','Oil Tanker Management':'🛢️','RoRo Management':'🚗',
     'ETO':'⚡','Slow Speed Management':'🐢','Medium Speed Management':'⚙️','Steam Management':'💧',
     'Slow Speed Operational':'🔄','Medium Speed Operational':'🔁',
+    'Bulk Carrier Operational':'🚢','Container Ship Operational':'🏗️',
+    'Chemical Tanker Operational':'⚗️','General Cargo Operational':'📦',
+    'LPG Tanker Operational':'🔥','Oil Tanker Operational':'🛢️','RoRo Operational':'🚗',
+    'Bulk Carrier Support':'🚢','Container Ship Support':'🏗️',
+    'Chemical Tanker Support':'⚗️','General Cargo Support':'📦',
+    'LPG Tanker Support':'🔥','Oil Tanker Support':'🛢️','RoRo Support':'🚗',
   };
   const FINAL_COUNTS = {
     'GMDSS': 50, 'Bulk Carrier Management': 71,
   };
   const DECK_CATS = ['GMDSS','Bulk Carrier Management','Container Ship Management','Chemical Tanker Management','General Cargo Management','LPG Tanker Management','Oil Tanker Management','RoRo Management'];
+  const DECK_GMDSS = ['GMDSS'];
+  const DECK_MANAGEMENT_CATS = ['Bulk Carrier Management','Container Ship Management','Chemical Tanker Management','General Cargo Management','LPG Tanker Management','Oil Tanker Management','RoRo Management'];
+  const DECK_OPERATIONAL_CATS = ['Bulk Carrier Operational','Container Ship Operational','Chemical Tanker Operational','General Cargo Operational','LPG Tanker Operational','Oil Tanker Operational','RoRo Operational'];
+  const DECK_SUPPORT_CATS = ['Bulk Carrier Support','Container Ship Support','Chemical Tanker Support','General Cargo Support','LPG Tanker Support','Oil Tanker Support','RoRo Support'];
   const ENGINE_MANAGEMENT_CATS = ['ETO','Slow Speed Management','Medium Speed Management','Steam Management'];
   const ENGINE_OPERATIONAL_CATS = ['Slow Speed Operational','Medium Speed Operational'];
   const ENGINE_CATS = [...ENGINE_MANAGEMENT_CATS, ...ENGINE_OPERATIONAL_CATS];
 
   const SECTION_MAP = [
-    ['GMDSS','GMDSS'],['Bulk Carrier','Bulk Carrier Management'],
-    ['Container Ship','Container Ship Management'],['Chemical Tanker','Chemical Tanker Management'],
-    ['General Cargo','General Cargo Management'],['LPG Tanker','LPG Tanker Management'],
-    ['Oil Tanker','Oil Tanker Management'],['RoRo','RoRo Management'],
+    ['GMDSS','GMDSS'],
+    ['Bulk Carrier Management','Bulk Carrier Management'],
+    ['Bulk Carrier Operational','Bulk Carrier Operational'],
+    ['Bulk Carrier Support','Bulk Carrier Support'],
+    ['Bulk Carrier','Bulk Carrier Management'],
+    ['Container Ship Management','Container Ship Management'],
+    ['Container Ship Operational','Container Ship Operational'],
+    ['Container Ship Support','Container Ship Support'],
+    ['Container Ship','Container Ship Management'],
+    ['Chemical Tanker Management','Chemical Tanker Management'],
+    ['Chemical Tanker Operational','Chemical Tanker Operational'],
+    ['Chemical Tanker Support','Chemical Tanker Support'],
+    ['Chemical Tanker','Chemical Tanker Management'],
+    ['General Cargo Management','General Cargo Management'],
+    ['General Cargo Operational','General Cargo Operational'],
+    ['General Cargo Support','General Cargo Support'],
+    ['General Cargo','General Cargo Management'],
+    ['LPG Tanker Management','LPG Tanker Management'],
+    ['LPG Tanker Operational','LPG Tanker Operational'],
+    ['LPG Tanker Support','LPG Tanker Support'],
+    ['LPG Tanker','LPG Tanker Management'],
+    ['Oil Tanker Management','Oil Tanker Management'],
+    ['Oil Tanker Operational','Oil Tanker Operational'],
+    ['Oil Tanker Support','Oil Tanker Support'],
+    ['Oil Tanker','Oil Tanker Management'],
+    ['RoRo Management','RoRo Management'],
+    ['RoRo Operational','RoRo Operational'],
+    ['RoRo Support','RoRo Support'],
+    ['RoRo','RoRo Management'],
     ['ETO','ETO'],
     ['Slow Speed Op','Slow Speed Operational'],
     ['Medium Speed Op','Medium Speed Operational'],
@@ -490,6 +570,21 @@
     showScreen('screen-sub');
   }
 
+  // ---- Deck groups ----
+  function showDeckGroup(group) {
+    const map = {
+      'gmdss':       { cats: DECK_GMDSS,            title: 'GMDSS',            eyebrow: 'Все должности' },
+      'management':  { cats: DECK_MANAGEMENT_CATS,   title: 'Management Level', eyebrow: 'Master & Ch.Officer' },
+      'operational': { cats: DECK_OPERATIONAL_CATS,  title: 'Operational Level',eyebrow: '2nd & 3rd Officer' },
+      'support':     { cats: DECK_SUPPORT_CATS,       title: 'Support Level',    eyebrow: 'Deck Rating' },
+    };
+    const { cats, title, eyebrow } = map[group];
+    document.getElementById('deck-group-title').textContent = title;
+    document.getElementById('deck-group-eyebrow').textContent = eyebrow;
+    buildDeptList('deck-group-list', cats, 'screen-deck-group');
+    showScreen('screen-deck-group');
+  }
+
   // ---- Engine groups ----
   function showEngineGroup(group) {
     const cats = group === 'management' ? ENGINE_MANAGEMENT_CATS : ENGINE_OPERATIONAL_CATS;
@@ -502,7 +597,7 @@
   }
 
   // ---- Init ----
-  buildDeptList('deck-list', DECK_CATS, 'screen-deck');
+  // deck-list больше не используется — через showDeckGroup
 </script>
 </body>
 </html>
