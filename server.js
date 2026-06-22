@@ -1,61 +1,30 @@
 const express = require('express');
-const Database = require('better-sqlite3');
+const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const BOT_TOKEN = process.env.BOT_TOKEN || '8088758959:AAGykmqDij8lixaPEkROqcaskVHpzRB79f4';
-const ADMIN_ID = process.env.ADMIN_ID || ''; // твой Telegram ID
+const DATA_FILE = path.join(__dirname, 'stats_data.json');
 
-// База данных
-const db = new Database('stats.db');
+// Загружаем/инициализируем данные
+function loadData() {
+  try {
+    if (fs.existsSync(DATA_FILE)) return JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+  } catch(e) {}
+  return { users: {}, results: [] };
+}
 
-// Создаём таблицы
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY,
-    telegram_id TEXT UNIQUE,
-    username TEXT,
-    first_name TEXT,
-    first_seen INTEGER,
-    last_seen INTEGER
-  );
-
-  CREATE TABLE IF NOT EXISTS results (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    telegram_id TEXT,
-    category TEXT,
-    section TEXT,
-    is_final INTEGER,
-    score INTEGER,
-    total INTEGER,
-    time_spent INTEGER,
-    created_at INTEGER
-  );
-`);
+function saveData(data) {
+  try { fs.writeFileSync(DATA_FILE, JSON.stringify(data)); } catch(e) {}
+}
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
-// Проверка подписи Telegram Mini App
-function verifyTelegramData(initData) {
-  try {
-    const params = new URLSearchParams(initData);
-    const hash = params.get('hash');
-    params.delete('hash');
-    const dataCheckString = [...params.entries()]
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([k, v]) => `${k}=${v}`)
-      .join('\n');
-    const secretKey = crypto.createHmac('sha256', 'WebAppData').update(BOT_TOKEN).digest();
-    const expectedHash = crypto.createHmac('sha256', secretKey).update(dataCheckString).digest('hex');
-    return hash === expectedHash;
-  } catch { return false; }
-}
-
-// Middleware для получения пользователя из Telegram initData
-function getUser(req) {
+// Проверка подписи Telegram
+function getTelegramUser(req) {
   try {
     const initData = req.headers['x-telegram-init-data'];
     if (!initData) return null;
@@ -67,83 +36,102 @@ function getUser(req) {
 
 // ---- API ----
 
-// Сохранить результат теста
+// Сохранить результат
 app.post('/api/result', (req, res) => {
-  const user = getUser(req);
+  const user = getTelegramUser(req);
   if (!user) return res.status(401).json({ error: 'Unauthorized' });
 
-  const { category, section, is_final, score, total, time_spent } = req.body;
+  const data = loadData();
+  const tid = String(user.id);
   const now = Date.now();
 
-  // Upsert пользователя
-  db.prepare(`
-    INSERT INTO users (telegram_id, username, first_name, first_seen, last_seen)
-    VALUES (?, ?, ?, ?, ?)
-    ON CONFLICT(telegram_id) DO UPDATE SET
-      username = excluded.username,
-      first_name = excluded.first_name,
-      last_seen = excluded.last_seen
-  `).run(String(user.id), user.username || '', user.first_name || '', now, now);
+  // Обновляем пользователя
+  if (!data.users[tid]) {
+    data.users[tid] = { first_name: user.first_name || '', username: user.username || '', first_seen: now };
+  }
+  data.users[tid].last_seen = now;
+  data.users[tid].first_name = user.first_name || data.users[tid].first_name;
 
-  // Сохранить результат
-  db.prepare(`
-    INSERT INTO results (telegram_id, category, section, is_final, score, total, time_spent, created_at)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-  `).run(String(user.id), category, section, is_final ? 1 : 0, score, total, time_spent || 0, now);
+  // Добавляем результат
+  data.results.push({
+    tid,
+    category: req.body.category || '',
+    section: req.body.section || '',
+    is_final: req.body.is_final ? 1 : 0,
+    score: req.body.score || 0,
+    total: req.body.total || 0,
+    time_spent: req.body.time_spent || 0,
+    created_at: now
+  });
 
+  // Храним только последние 10000 результатов
+  if (data.results.length > 10000) data.results = data.results.slice(-10000);
+
+  saveData(data);
   res.json({ ok: true });
 });
 
-// Получить статистику пользователя
+// Статистика пользователя
 app.get('/api/stats', (req, res) => {
-  const user = getUser(req);
+  const user = getTelegramUser(req);
   if (!user) return res.status(401).json({ error: 'Unauthorized' });
 
+  const data = loadData();
   const tid = String(user.id);
+  const myResults = data.results.filter(r => r.tid === tid);
 
-  const totalTests = db.prepare('SELECT COUNT(*) as c FROM results WHERE telegram_id = ?').get(tid).c;
-  const totalTime = db.prepare('SELECT SUM(time_spent) as t FROM results WHERE telegram_id = ?').get(tid).t || 0;
-  const avgScore = db.prepare('SELECT AVG(CAST(score AS FLOAT)/total*100) as a FROM results WHERE telegram_id = ? AND total > 0').get(tid).a || 0;
-  const finals = db.prepare('SELECT COUNT(*) as c FROM results WHERE telegram_id = ? AND is_final = 1').get(tid).c;
+  const totalTests = myResults.length;
+  const totalTime = myResults.reduce((s, r) => s + (r.time_spent || 0), 0);
+  const finals = myResults.filter(r => r.is_final).length;
+  const avgScore = totalTests > 0
+    ? myResults.reduce((s, r) => s + (r.total > 0 ? r.score / r.total * 100 : 0), 0) / totalTests
+    : 0;
 
-  const recent = db.prepare(`
-    SELECT category, section, score, total, is_final, time_spent, created_at
-    FROM results WHERE telegram_id = ?
-    ORDER BY created_at DESC LIMIT 20
-  `).all(tid);
+  const recent = [...myResults].reverse().slice(0, 20);
 
-  const byCategory = db.prepare(`
-    SELECT category, COUNT(*) as tests, AVG(CAST(score AS FLOAT)/total*100) as avg_pct
-    FROM results WHERE telegram_id = ? AND total > 0
-    GROUP BY category ORDER BY tests DESC
-  `).all(tid);
+  // По категориям
+  const catMap = {};
+  myResults.forEach(r => {
+    if (!catMap[r.category]) catMap[r.category] = { tests: 0, totalPct: 0 };
+    catMap[r.category].tests++;
+    if (r.total > 0) catMap[r.category].totalPct += r.score / r.total * 100;
+  });
+  const byCategory = Object.entries(catMap)
+    .map(([category, v]) => ({ category, tests: v.tests, avg_pct: v.totalPct / v.tests }))
+    .sort((a, b) => b.tests - a.tests);
 
   res.json({ totalTests, totalTime, avgScore, finals, recent, byCategory });
 });
 
 // Админ статистика
 app.get('/api/admin', (req, res) => {
-  const adminKey = req.headers['x-admin-key'];
-  if (adminKey !== BOT_TOKEN) return res.status(403).json({ error: 'Forbidden' });
+  if (req.headers['x-admin-key'] !== BOT_TOKEN) return res.status(403).json({ error: 'Forbidden' });
 
-  const totalUsers = db.prepare('SELECT COUNT(*) as c FROM users').get().c;
-  const totalResults = db.prepare('SELECT COUNT(*) as c FROM results').get().c;
-  const todayUsers = db.prepare('SELECT COUNT(DISTINCT telegram_id) as c FROM results WHERE created_at > ?').get(Date.now() - 86400000).c;
+  const data = loadData();
+  const totalUsers = Object.keys(data.users).length;
+  const totalResults = data.results.length;
+  const yesterday = Date.now() - 86400000;
+  const todayUsers = new Set(data.results.filter(r => r.created_at > yesterday).map(r => r.tid)).size;
 
-  const topCategories = db.prepare(`
-    SELECT category, COUNT(*) as tests, AVG(CAST(score AS FLOAT)/total*100) as avg_pct
-    FROM results WHERE total > 0 GROUP BY category ORDER BY tests DESC LIMIT 10
-  `).all();
+  const catMap = {};
+  data.results.forEach(r => {
+    if (!catMap[r.category]) catMap[r.category] = { tests: 0, totalPct: 0 };
+    catMap[r.category].tests++;
+    if (r.total > 0) catMap[r.category].totalPct += r.score / r.total * 100;
+  });
+  const topCategories = Object.entries(catMap)
+    .map(([category, v]) => ({ category, tests: v.tests, avg_pct: v.totalPct / v.tests }))
+    .sort((a, b) => b.tests - a.tests).slice(0, 10);
 
-  const recentUsers = db.prepare(`
-    SELECT u.first_name, u.username, u.last_seen,
-      COUNT(r.id) as tests,
-      AVG(CAST(r.score AS FLOAT)/r.total*100) as avg_pct
-    FROM users u LEFT JOIN results r ON u.telegram_id = r.telegram_id
-    GROUP BY u.telegram_id ORDER BY u.last_seen DESC LIMIT 20
-  `).all();
+  const recentUsers = Object.entries(data.users)
+    .map(([tid, u]) => {
+      const myR = data.results.filter(r => r.tid === tid);
+      const avg = myR.length > 0 ? myR.reduce((s, r) => s + (r.total > 0 ? r.score/r.total*100 : 0), 0) / myR.length : 0;
+      return { ...u, tests: myR.length, avg_pct: avg };
+    })
+    .sort((a, b) => (b.last_seen || 0) - (a.last_seen || 0)).slice(0, 20);
 
   res.json({ totalUsers, totalResults, todayUsers, topCategories, recentUsers });
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`CES Server running on port ${PORT}`));
