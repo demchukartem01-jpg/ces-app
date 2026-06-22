@@ -179,6 +179,16 @@
     ['Steam', 'Steam Management'],
   ];
 
+  // Deck и Engine категории
+  const DECK_CATS = [
+    'GMDSS',
+    'Bulk Carrier Management', 'Container Ship Management', 'Chemical Tanker Management',
+    'General Cargo Management', 'LPG Tanker Management', 'Oil Tanker Management', 'RoRo Management',
+  ];
+  const ENGINE_CATS = [
+    'ETO', 'Slow Speed Management', 'Medium Speed Management', 'Steam Management',
+  ];
+
   function getCategoryName(title) {
     for (const [prefix, catName] of SECTION_TO_CATEGORY) {
       if (title.startsWith(prefix)) return catName;
@@ -210,19 +220,7 @@
     document.getElementById(id).classList.remove('hidden');
   }
 
-  const DECK_CATS = [
-    'GMDSS',
-    'Bulk Carrier Management','Container Ship Management','Chemical Tanker Management',
-    'General Cargo Management','LPG Tanker Management','Oil Tanker Management','RoRo Management',
-    'Bulk Carrier Operational','Container Ship Operational','Chemical Tanker Operational',
-    'General Cargo Operational','LPG Tanker Operational','Oil Tanker Operational','RoRo Operational',
-    'Bulk Carrier Support','Container Ship Support','Chemical Tanker Support',
-    'General Cargo Support','LPG Tanker Support','Oil Tanker Support','RoRo Support',
-  ];
-  const ENGINE_CATS = [
-    'ETO','Slow Speed Management','Medium Speed Management','Steam Management',
-    'Slow Speed Operational','Medium Speed Operational',
-  ];
+
 
   function renderMainMenu() {
     const container = document.getElementById('main-menu');
@@ -234,7 +232,7 @@
     if (deckCats.length) {
       const d = document.createElement('div');
       d.className = 'section-divider';
-      d.textContent = '⚓ Deck Department';
+      d.innerHTML = '&#9875; Deck Department';
       container.appendChild(d);
       deckCats.forEach(([name, cat]) => addCategoryCard(container, name, cat));
     }
@@ -242,9 +240,19 @@
     if (engineCats.length) {
       const d = document.createElement('div');
       d.className = 'section-divider';
-      d.textContent = '⚙️ Engine Department';
+      d.innerHTML = '&#9881;&#65039; Engine Department';
       container.appendChild(d);
       engineCats.forEach(([name, cat]) => addCategoryCard(container, name, cat));
+    }
+
+    // Неизвестные категории
+    const otherCats = Object.entries(CATEGORIES).filter(([n]) => !DECK_CATS.includes(n) && !ENGINE_CATS.includes(n));
+    if (otherCats.length) {
+      const d = document.createElement('div');
+      d.className = 'section-divider';
+      d.textContent = 'Other';
+      container.appendChild(d);
+      otherCats.forEach(([name, cat]) => addCategoryCard(container, name, cat));
     }
   }
 
