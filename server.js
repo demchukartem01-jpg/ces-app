@@ -2,22 +2,27 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { MongoClient } = require('mongodb');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const BOT_TOKEN = process.env.BOT_TOKEN || '8088758959:AAH3GdKy488-deT01kgR1av7y1DTpIDIwIY';
-const DATA_FILE = path.join(__dirname, 'stats_data.json');
+// MongoDB connection
+const MONGODB_URI = process.env.MONGODB_URI;
+let db = null;
 
-// Загружаем/инициализируем данные
-function loadData() {
+async function connectDB() {
+  if (db) return db;
   try {
-    if (fs.existsSync(DATA_FILE)) return JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-  } catch(e) {}
-  return { users: {}, results: [] };
-}
-
-function saveData(data) {
-  try { fs.writeFileSync(DATA_FILE, JSON.stringify(data)); } catch(e) {}
+    const client = new MongoClient(MONGODB_URI);
+    await client.connect();
+    db = client.db('cesapp');
+    console.log('MongoDB connected!');
+    return db;
+  } catch(e) {
+    console.error('MongoDB connection error:', e.message);
+    return null;
+  }
 }
 
 app.use(express.json());
@@ -44,23 +49,26 @@ function getTelegramUser(req) {
 // ---- API ----
 
 // Сохранить результат
-app.post('/api/result', (req, res) => {
+app.post('/api/result', async (req, res) => {
   const user = getTelegramUser(req);
   if (!user) return res.status(401).json({ error: 'Unauthorized' });
 
-  const data = loadData();
+  const database = await connectDB();
+  if (!database) return res.status(500).json({ error: 'DB unavailable' });
+
   const tid = String(user.id);
   const now = Date.now();
 
-  // Обновляем пользователя
-  if (!data.users[tid]) {
-    data.users[tid] = { first_name: user.first_name || '', username: user.username || '', first_seen: now };
-  }
-  data.users[tid].last_seen = now;
-  data.users[tid].first_name = user.first_name || data.users[tid].first_name;
+  // Upsert пользователя
+  await database.collection('users').updateOne(
+    { tid },
+    { $set: { first_name: user.first_name || '', username: user.username || '', last_seen: now },
+      $setOnInsert: { first_seen: now } },
+    { upsert: true }
+  );
 
-  // Добавляем результат
-  data.results.push({
+  // Сохраняем результат
+  await database.collection('results').insertOne({
     tid,
     category: req.body.category || '',
     section: req.body.section || '',
@@ -71,21 +79,19 @@ app.post('/api/result', (req, res) => {
     created_at: now
   });
 
-  // Храним только последние 10000 результатов
-  if (data.results.length > 10000) data.results = data.results.slice(-10000);
-
-  saveData(data);
   res.json({ ok: true });
 });
 
 // Статистика пользователя
-app.get('/api/stats', (req, res) => {
+app.get('/api/stats', async (req, res) => {
   const user = getTelegramUser(req);
   if (!user) return res.status(401).json({ error: 'Unauthorized' });
 
-  const data = loadData();
+  const database = await connectDB();
+  if (!database) return res.status(500).json({ error: 'DB unavailable' });
+
   const tid = String(user.id);
-  const myResults = data.results.filter(r => r.tid === tid);
+  const myResults = await database.collection('results').find({ tid }).toArray();
 
   const totalTests = myResults.length;
   const totalTime = myResults.reduce((s, r) => s + (r.time_spent || 0), 0);
@@ -94,9 +100,8 @@ app.get('/api/stats', (req, res) => {
     ? myResults.reduce((s, r) => s + (r.total > 0 ? r.score / r.total * 100 : 0), 0) / totalTests
     : 0;
 
-  const recent = [...myResults].reverse().slice(0, 20);
+  const recent = [...myResults].sort((a,b) => b.created_at - a.created_at).slice(0, 20);
 
-  // По категориям
   const catMap = {};
   myResults.forEach(r => {
     if (!catMap[r.category]) catMap[r.category] = { tests: 0, totalPct: 0 };
@@ -111,32 +116,27 @@ app.get('/api/stats', (req, res) => {
 });
 
 // Админ статистика
-app.get('/api/admin', (req, res) => {
+app.get('/api/admin', async (req, res) => {
   if (req.headers['x-admin-key'] !== BOT_TOKEN) return res.status(403).json({ error: 'Forbidden' });
 
-  const data = loadData();
-  const totalUsers = Object.keys(data.users).length;
-  const totalResults = data.results.length;
+  const database = await connectDB();
+  if (!database) return res.status(500).json({ error: 'DB unavailable' });
+
+  const totalUsers = await database.collection('users').countDocuments();
+  const totalResults = await database.collection('results').countDocuments();
   const yesterday = Date.now() - 86400000;
-  const todayUsers = new Set(data.results.filter(r => r.created_at > yesterday).map(r => r.tid)).size;
+  const todayDocs = await database.collection('results').distinct('tid', { created_at: { $gt: yesterday } });
+  const todayUsers = todayDocs.length;
 
-  const catMap = {};
-  data.results.forEach(r => {
-    if (!catMap[r.category]) catMap[r.category] = { tests: 0, totalPct: 0 };
-    catMap[r.category].tests++;
-    if (r.total > 0) catMap[r.category].totalPct += r.score / r.total * 100;
-  });
-  const topCategories = Object.entries(catMap)
-    .map(([category, v]) => ({ category, tests: v.tests, avg_pct: v.totalPct / v.tests }))
-    .sort((a, b) => b.tests - a.tests).slice(0, 10);
+  const pipeline = [
+    { $group: { _id: '$category', tests: { $sum: 1 }, totalPct: { $sum: { $cond: [{ $gt: ['$total', 0] }, { $multiply: [{ $divide: ['$score', '$total'] }, 100] }, 0] } } } },
+    { $sort: { tests: -1 } },
+    { $limit: 10 }
+  ];
+  const topCats = await database.collection('results').aggregate(pipeline).toArray();
+  const topCategories = topCats.map(c => ({ category: c._id, tests: c.tests, avg_pct: c.totalPct / c.tests }));
 
-  const recentUsers = Object.entries(data.users)
-    .map(([tid, u]) => {
-      const myR = data.results.filter(r => r.tid === tid);
-      const avg = myR.length > 0 ? myR.reduce((s, r) => s + (r.total > 0 ? r.score/r.total*100 : 0), 0) / myR.length : 0;
-      return { ...u, tests: myR.length, avg_pct: avg };
-    })
-    .sort((a, b) => (b.last_seen || 0) - (a.last_seen || 0)).slice(0, 20);
+  const recentUsers = await database.collection('users').find().sort({ last_seen: -1 }).limit(20).toArray();
 
   res.json({ totalUsers, totalResults, todayUsers, topCategories, recentUsers });
 });
@@ -174,25 +174,27 @@ try {
       return;
     }
     try {
-      const data = loadData();
-      const totalUsers = Object.keys(data.users).length;
-      const totalResults = data.results.length;
+      const database = await connectDB();
+      if (!database) { bot.sendMessage(chatId, 'DB недоступна'); return; }
+
+      const totalUsers = await database.collection('users').countDocuments();
+      const totalResults = await database.collection('results').countDocuments();
       const yesterday = Date.now() - 86400000;
-      const todayUsers = new Set(data.results.filter(function(r){ return r.created_at > yesterday; }).map(function(r){ return r.tid; })).size;
-      const weekUsers = new Set(data.results.filter(function(r){ return r.created_at > Date.now() - 7*86400000; }).map(function(r){ return r.tid; })).size;
+      const todayDocs = await database.collection('results').distinct('tid', { created_at: { $gt: yesterday } });
+      const todayUsers = todayDocs.length;
+      const weekDocs = await database.collection('results').distinct('tid', { created_at: { $gt: Date.now() - 7*86400000 } });
+      const weekUsers = weekDocs.length;
 
-      const catMap = {};
-      data.results.forEach(function(r) {
-        if (!catMap[r.category]) catMap[r.category] = 0;
-        catMap[r.category]++;
-      });
-      const topCats = Object.entries(catMap)
-        .sort(function(a,b){ return b[1]-a[1]; }).slice(0,5)
-        .map(function(e){ return '  ' + e[0] + ': ' + e[1]; }).join('\n');
+      const pipeline = [
+        { $group: { _id: '$category', count: { $sum: 1 } } },
+        { $sort: { count: -1 } },
+        { $limit: 5 }
+      ];
+      const topCatsArr = await database.collection('results').aggregate(pipeline).toArray();
+      const topCats = topCatsArr.map(function(e){ return '  ' + e._id + ': ' + e.count; }).join('\n');
 
-      const recentUsers = Object.values(data.users)
-        .sort(function(a,b){ return (b.last_seen||0) - (a.last_seen||0); }).slice(0,5)
-        .map(function(u){ return '  ' + (u.first_name||'?') + ' (@' + (u.username||'-') + ')'; }).join('\n');
+      const recentUsersArr = await database.collection('users').find().sort({ last_seen: -1 }).limit(5).toArray();
+      const recentUsers = recentUsersArr.map(function(u){ return '  ' + (u.first_name||'?') + ' (@' + (u.username||'-') + ')'; }).join('\n');
 
       const lines = [
         'Статистика CES бота',
