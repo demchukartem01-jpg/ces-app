@@ -672,6 +672,7 @@
     document.getElementById('sub-title').textContent = T.selectSection;
     document.getElementById('sub-subtitle').textContent = T.loading;
     document.getElementById('sub-back-btn').onclick = () => showScreen(fromScreen);
+    document.getElementById('sub-back-btn').textContent = T.back;
     document.getElementById('sub-sections').innerHTML = '<div style="text-align:center;padding:40px;color:var(--foam-dim)">⏳ Загрузка...</div>';
 
     // Загружаем данные с сервера если нужно
@@ -695,6 +696,7 @@
     document.getElementById('sub-subtitle').textContent = total + ' ' + T.questions + ' · ' + cat.sections.length + ' ' + T.parts;
     document.getElementById('sub-final-sub').textContent = fc + ' ' + T.finalSub;
     document.getElementById('sub-back-btn').onclick = () => showScreen(fromScreen);
+    document.getElementById('sub-back-btn').textContent = T.back;
 
     const container = document.getElementById('sub-sections');
     container.innerHTML = '';
