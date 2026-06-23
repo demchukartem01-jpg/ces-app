@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const BOT_TOKEN = process.env.BOT_TOKEN || '8088758959:AAGykmqDij8lixaPEkROqcaskVHpzRB79f4';
+const BOT_TOKEN = process.env.BOT_TOKEN || '8088758959:AAH3GdKy488-deT01kgR1av7y1DTpIDIwIY';
 const DATA_FILE = path.join(__dirname, 'stats_data.json');
 
 // Загружаем/инициализируем данные
