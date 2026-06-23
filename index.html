@@ -608,18 +608,21 @@
     set('txt-stats-sub', T.statsSub);
     // Deck экран
     set('txt-deck-h1', T.selectLevel);
+    set('txt-deck-p', T.deckLevelSub);
     set('txt-d-gmdss', T.gmdss);
     set('txt-d-gmdss-sub', T.gmdssSub);
     set('txt-d-mgmt', T.management);
     set('txt-d-mgmt-sub', T.managementSub);
     // Engine экран
     set('txt-eng-h1', T.selectLevel);
+    set('txt-eng-p', T.engineLevelSub);
     set('txt-eng-mgmt', T.engineManagement);
     set('txt-eng-mgmt-sub', T.engineManagementSub);
     set('txt-eng-op', T.engineOperational);
     set('txt-eng-op-sub', T.engineOperationalSub);
     // Финальный
     set('txt-final-title', T.finalExam);
+    set('sub-final-sub', T.finalFullSub);
     // Квиз
     set('txt-exit-btn', T.exit);
     // Статистика
@@ -628,8 +631,15 @@
     // Результат
     set('txt-back-btn', T.backToSections);
     set('txt-review-title', T.reviewTitle);
+    // Все кнопки назад
+    document.querySelectorAll('.back-btn').forEach(btn => {
+      if (btn.id === 'txt-exit-btn') return;
+      if (btn.id === 'sub-back-btn') return;
+      btn.textContent = T.back;
+    });
     // Разделы
-    set('sub-title', document.getElementById('sub-title')?.textContent === 'Загрузка...' ? T.loading : T.selectSection);
+    const subTitle = document.getElementById('sub-title');
+    if (subTitle && subTitle.textContent !== T.loading) set('sub-title', T.selectSection);
   }
 
   // ---- Build dept lists ----
