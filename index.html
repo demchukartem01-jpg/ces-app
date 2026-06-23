@@ -634,7 +634,6 @@
     // Все кнопки назад
     document.querySelectorAll('.back-btn').forEach(btn => {
       if (btn.id === 'txt-exit-btn') return;
-      if (btn.id === 'sub-back-btn') return;
       btn.textContent = T.back;
     });
     // Разделы
@@ -671,7 +670,7 @@
     showScreen('screen-sub');
     document.getElementById('sub-eyebrow').textContent = name;
     document.getElementById('sub-title').textContent = T.selectSection;
-    document.getElementById('sub-subtitle').textContent = '';
+    document.getElementById('sub-subtitle').textContent = T.loading;
     document.getElementById('sub-back-btn').onclick = () => showScreen(fromScreen);
     document.getElementById('sub-sections').innerHTML = '<div style="text-align:center;padding:40px;color:var(--foam-dim)">⏳ Загрузка...</div>';
 
@@ -693,8 +692,8 @@
 
     document.getElementById('sub-eyebrow').textContent = name;
     document.getElementById('sub-title').textContent = T.selectSection;
-    document.getElementById('sub-subtitle').textContent = `${total} вопросов · ${cat.sections.length} частей`;
-    document.getElementById('sub-final-sub').textContent = `${fc} случайных · 60 минут`;
+    document.getElementById('sub-subtitle').textContent = total + ' ' + T.questions + ' · ' + cat.sections.length + ' ' + T.parts;
+    document.getElementById('sub-final-sub').textContent = fc + ' ' + T.finalSub;
     document.getElementById('sub-back-btn').onclick = () => showScreen(fromScreen);
 
     const container = document.getElementById('sub-sections');
