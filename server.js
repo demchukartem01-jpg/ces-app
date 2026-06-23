@@ -146,7 +146,13 @@ app.listen(PORT, () => console.log(`CES Server running on port ${PORT}`));
 // Запускаем Telegram бота
 try {
   const TelegramBot = require('node-telegram-bot-api');
-  const bot = new TelegramBot(BOT_TOKEN, { polling: true });
+  const RENDER_URL = process.env.RENDER_EXTERNAL_URL || 'https://ces-bot.onrender.com';
+  const bot = new TelegramBot(BOT_TOKEN, { webHook: { port: PORT } });
+  bot.setWebHook(`${RENDER_URL}/bot${BOT_TOKEN}`);
+  app.post(`/bot${BOT_TOKEN}`, (req, res) => {
+    bot.processUpdate(req.body);
+    res.sendStatus(200);
+  });
   const APP_URL = process.env.APP_URL || 'https://ces-app.onrender.com';
 
   bot.onText(/\/start/, (msg) => {
