@@ -155,6 +155,16 @@ try {
   });
   const APP_URL = process.env.APP_URL || 'https://ces-app.onrender.com';
 
+  // ===== НОВОСТНОЙ КОНВЕЙЕР =====
+    const { startNewsPipeline } = require('./news');
+    const { handleNewsCallback } = require('./news/publish');
+
+    bot.on('callback_query', (cb) => {
+      handleNewsCallback(bot, cb).catch(e => console.error('[news]', e.message));
+    });
+
+    startNewsPipeline(bot).catch(e => console.error('[news] старт:', e.message));
+  
   bot.onText(/\/start/, (msg) => {
     bot.sendMessage(msg.chat.id, 'Добро пожаловать в CES тренажёр! 🚢\n\nНажми кнопку ниже чтобы начать:', {
       reply_markup: {
