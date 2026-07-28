@@ -11,10 +11,21 @@ const COVER = path.join(__dirname, 'cover.png');
 
 const OPTS = { parse_mode: 'HTML', disable_web_page_preview: true };
 
-// Сводка длинная — картинка отдельным сообщением, текст следом.
-// Так не упираемся в лимит подписи 1024.
+// Подпись под фото — 1024 символа, обычное сообщение — 4096.
+const CAPTION_LIMIT = 1024;
+
+// Влезает — одним сообщением с подписью. Не влезает — картинка и текст раздельно.
 async function deliver(bot, chatId, text, extra) {
-  if (fs.existsSync(COVER)) {
+  const hasCover = fs.existsSync(COVER);
+
+  if (hasCover && text.length <= CAPTION_LIMIT) {
+    return bot.sendPhoto(chatId, COVER, Object.assign({
+      caption: text,
+      parse_mode: 'HTML',
+    }, extra || {}));
+  }
+
+  if (hasCover) {
     await bot.sendPhoto(chatId, COVER).catch((e) => console.error('[digest:cover]', e.message));
   }
   return bot.sendMessage(chatId, text, Object.assign({}, OPTS, extra || {}));
