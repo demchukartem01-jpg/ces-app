@@ -14,6 +14,9 @@ const OPTS = { parse_mode: 'HTML', disable_web_page_preview: true };
 // Подпись под фото — 1024 символа, обычное сообщение — 4096.
 const CAPTION_LIMIT = 1024;
 
+// Явный тип файла — иначе библиотека сыплет DeprecationWarning в логи.
+const FILE_OPTS = { filename: 'cover.png', contentType: 'image/png' };
+
 // Влезает — одним сообщением с подписью. Не влезает — картинка и текст раздельно.
 async function deliver(bot, chatId, text, extra) {
   const hasCover = fs.existsSync(COVER);
@@ -22,11 +25,12 @@ async function deliver(bot, chatId, text, extra) {
     return bot.sendPhoto(chatId, COVER, Object.assign({
       caption: text,
       parse_mode: 'HTML',
-    }, extra || {}));
+    }, extra || {}), FILE_OPTS);
   }
 
   if (hasCover) {
-    await bot.sendPhoto(chatId, COVER).catch((e) => console.error('[digest:cover]', e.message));
+    await bot.sendPhoto(chatId, COVER, {}, FILE_OPTS)
+      .catch((e) => console.error('[digest:cover]', e.message));
   }
   return bot.sendMessage(chatId, text, Object.assign({}, OPTS, extra || {}));
 }
