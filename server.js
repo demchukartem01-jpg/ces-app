@@ -173,13 +173,55 @@ try {
       })
       .catch(e => console.error('[news] старт:', e.message));
   
-  bot.onText(/\/start/, (msg) => {
-    bot.sendMessage(msg.chat.id, 'Добро пожаловать в CES тренажёр! 🚢\n\nНажми кнопку ниже чтобы начать:', {
-      reply_markup: {
-        inline_keyboard: [[{ text: '📋 Открыть тесты', web_app: { url: APP_URL } }]]
-      }
+ // ===== ПРИВЕТСТВИЕ =====
+    const CHANNEL_URL = 'https://t.me/MaritimeHubb';
+
+    const WELCOME = {
+      ru: '⚓ <b>CES Trainer</b>\n\n' +
+          'Подготовка к Computer Based Assessment — тесты по всем категориям, ' +
+          'разбор ошибок, статистика прогресса.\n\n' +
+          '🇬🇧 EN · 🇷🇺 RU · 🇺🇦 UA\n\n' +
+          'Жми кнопку ниже, чтобы начать.',
+
+      uk: '⚓ <b>CES Trainer</b>\n\n' +
+          'Підготовка до Computer Based Assessment — тести за всіма категоріями, ' +
+          'розбір помилок, статистика прогресу.\n\n' +
+          '🇬🇧 EN · 🇷🇺 RU · 🇺🇦 UA\n\n' +
+          'Тисни кнопку нижче, щоб почати.',
+
+      en: '⚓ <b>CES Trainer</b>\n\n' +
+          'Prepare for your Computer Based Assessment — full question sets, ' +
+          'mistake review and progress tracking.\n\n' +
+          '🇬🇧 EN · 🇷🇺 RU · 🇺🇦 UA\n\n' +
+          'Tap the button below to start.',
+    };
+
+    const BTN = {
+      ru: { open: '📋 Открыть тесты', news: '📰 Морские новости' },
+      uk: { open: '📋 Відкрити тести', news: '📰 Морські новини' },
+      en: { open: '📋 Open tests',     news: '📰 Maritime news' },
+    };
+
+    // Язык берём из настроек Telegram самого пользователя
+    function langOf(msg) {
+      const code = ((msg.from && msg.from.language_code) || '').toLowerCase();
+      if (code.startsWith('uk')) return 'uk';
+      if (code.startsWith('ru') || code.startsWith('be')) return 'ru';
+      return 'en';
+    }
+
+    bot.onText(/\/start/, (msg) => {
+      const l = langOf(msg);
+      bot.sendMessage(msg.chat.id, WELCOME[l], {
+        parse_mode: 'HTML',
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: BTN[l].open, web_app: { url: APP_URL } }],
+            [{ text: BTN[l].news, url: CHANNEL_URL }],
+          ],
+        },
+      });
     });
-  });
 
   bot.onText(/\/stats/, (msg) => {
     bot.sendMessage(msg.chat.id, 'Твоя статистика:', {
