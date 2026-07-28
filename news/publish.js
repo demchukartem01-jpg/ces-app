@@ -8,6 +8,9 @@ const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').
 // Подпись к фото — 1024 символа. Текстовое сообщение — 4096.
 const CAPTION_LIMIT = 1024;
 
+// Явный тип файла — иначе библиотека сыплет DeprecationWarning в логи.
+const FILE_OPTS = { filename: 'cover.png', contentType: 'image/png' };
+
 const firstTag = (d) => (d.tags && d.tags[0] || '').toLowerCase();
 
 const emojiFor = (d) => EMOJI[firstTag(d)] || EMOJI.default;
@@ -69,7 +72,7 @@ async function send(bot, chatId, doc, extra) {
   if (cover) {
     const caption = renderCaption(d, doc.link, doc.source);
     if (caption.length <= CAPTION_LIMIT) {
-      return bot.sendPhoto(chatId, cover, Object.assign({ caption }, opts));
+      return bot.sendPhoto(chatId, cover, Object.assign({ caption }, opts), FILE_OPTS);
     }
   }
 
