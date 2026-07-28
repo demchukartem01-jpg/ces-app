@@ -9,6 +9,9 @@ let db;
 async function initStore(existingDb) {
   if (existingDb) {
     db = existingDb;
+  } else if (db) {
+    // Уже подключено — второе соединение не открываем.
+    return db;
   } else {
     const client = new MongoClient(process.env.MONGODB_URI);
     await client.connect();
