@@ -1,10 +1,22 @@
+const fs = require('fs');
+const path = require('path');
 const { setStatus, getById } = require('./store');
 
 // Telegram HTML-режим ломается на <, >, &
 const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-// Русский блок в <blockquote expandable>: пост выглядит англоязычным
-// и коротким, свои раскрывают перевод одним касанием.
+// Подпись к фото — максимум 1024 символа. Текстовое сообщение — 4096.
+const CAPTION_LIMIT = 1024;
+
+// Обложка по первому тегу. Нет подходящей — вернём null, уйдёт без картинки.
+function coverFor(draft) {
+  const tag = (draft.tags && draft.tags[0] || '').toLowerCase();
+  if (!tag) return null;
+  const file = path.join(__dirname, 'covers', tag + '.png');
+  return fs.existsSync(file) ? file : null;
+}
+
+// Полная версия: EN сверху, RU в разворачиваемой цитате.
 function render(d, link, source) {
   const tags = (d.tags || []).map((t) => '#' + t).join(' ');
 
@@ -27,30 +39,61 @@ function render(d, link, source) {
   ].join('\n');
 }
 
-const OPTS = { parse_mode: 'HTML', disable_web_page_preview: true };
+// Ужатая версия — если полная не влезает в подпись под фото.
+// Режем русский пересказ, оставляем заголовок и практический вывод.
+function renderShort(d, link, source) {
+  const tags = (d.tags || []).map((t) => '#' + t).join(' ');
 
-function publishToChannel(bot, doc) {
-  return bot.sendMessage(process.env.CHANNEL_ID, render(doc.draft, doc.link, doc.source), OPTS);
+  return [
+    `⚓ <b>${esc(d.title_en)}</b>`,
+    '',
+    esc(d.body_en),
+    '',
+    `▸ <i>On board:</i> ${esc(d.onboard_en)}`,
+    '',
+    `<a href="${esc(link)}">${esc(source)}</a>`,
+    '',
+    `<blockquote expandable><b>${esc(d.title_ru)}</b>`,
+    '',
+    `▸ <i>На борту:</i> ${esc(d.onboard_ru)}</blockquote>`,
+    '',
+    tags,
+  ].join('\n');
 }
 
-// Черновик тебе в личку с кнопками. Первые недели — обязательно.
-function sendForReview(bot, doc) {
-  return bot.sendMessage(
-    process.env.ADMIN_CHAT_ID,
-    render(doc.draft, doc.link, doc.source),
-    Object.assign({}, OPTS, {
-      reply_markup: {
-        inline_keyboard: [[
-          { text: '✅ Опубликовать', callback_data: `news:ok:${doc._id}` },
-          { text: '🗑 Удалить',      callback_data: `news:no:${doc._id}` },
-        ]],
-      },
-    })
-  );
+// Выбирает, что отправить: фото с подписью или обычный текст.
+async function send(bot, chatId, doc, extra) {
+  const d = doc.draft;
+  const cover = coverFor(d);
+  const full = render(d, doc.link, doc.source);
+  const opts = Object.assign({ parse_mode: 'HTML' }, extra || {});
+
+  if (cover) {
+    if (full.length <= CAPTION_LIMIT) {
+      return bot.sendPhoto(chatId, cover, Object.assign({ caption: full }, opts));
+    }
+    const short = renderShort(d, doc.link, doc.source);
+    if (short.length <= CAPTION_LIMIT) {
+      return bot.sendPhoto(chatId, cover, Object.assign({ caption: short }, opts));
+    }
+  }
+
+  // Картинки нет или текст не влезает даже ужатым — отправляем текстом.
+  return bot.sendMessage(chatId, full, Object.assign({ disable_web_page_preview: true }, opts));
 }
 
-// Вернёт true, если кнопка была новостная — тогда твой код дальше не выполняется.
-// Вернёт false для всех кнопок CES — тогда отрабатывает существующая логика.
+const publishToChannel = (bot, doc) => send(bot, process.env.CHANNEL_ID, doc);
+
+// Черновик тебе в личку — в точности в том виде, в каком уйдёт в канал.
+const sendForReview = (bot, doc) => send(bot, process.env.ADMIN_CHAT_ID, doc, {
+  reply_markup: {
+    inline_keyboard: [[
+      { text: '✅ Опубликовать', callback_data: `news:ok:${doc._id}` },
+      { text: '🗑 Удалить',      callback_data: `news:no:${doc._id}` },
+    ]],
+  },
+});
+
 async function handleNewsCallback(bot, cb) {
   if (!cb.data || cb.data.indexOf('news:') !== 0) return false;
 
@@ -73,7 +116,6 @@ async function handleNewsCallback(bot, cb) {
       await bot.answerCallbackQuery(cb.id, { text: 'Удалено' });
     }
 
-    // Убираем кнопки, чтобы не нажать дважды.
     await bot.editMessageReplyMarkup(
       { inline_keyboard: [] },
       { chat_id: cb.message.chat.id, message_id: cb.message.message_id }
