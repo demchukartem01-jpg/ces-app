@@ -5,24 +5,23 @@ const DIGEST = {
   // день для Азии, вечер для Филиппин.
   CRON: '0 6 * * *',
 
+  // false — сводка уходит в канал сама, без твоего подтверждения.
+  // Флаг СВОЙ, отдельный от новостей: модерация новостей остаётся как была.
+  MODERATION: false,
+
   // Напоминание про Admiralty NM. 4 = четверг.
   NM_WEEKDAY: 4,
 
   // За сколько дней предупреждать о вступающих в силу требованиях
   CONVENTION_LOOKAHEAD_DAYS: 45,
-
-  // Проверять изменения на страницах военного риска и PSC — раз в сутки
-  WATCH_CRON: '0 5 * * *',
 };
 
-// Валюты в сводке. Ключ — код, значение — как подписать.
-// USD базовая, курсы показываются как «сколько за 1 доллар».
+// Валюты в сводке. Показывается «сколько за 1 доллар».
 const CURRENCIES = [
-  { code: 'PHP', label: '🇵🇭 Песо' },
-  { code: 'INR', label: '🇮🇳 Рупия' },
-  { code: 'UAH', label: '🇺🇦 Гривна' },
-  { code: 'RON', label: '🇷🇴 Лей' },
-  { code: 'EUR', label: '🇪🇺 Евро' },
+  { code: 'PHP', label: '🇵🇭 Peso' },
+  { code: 'INR', label: '🇮🇳 Rupee' },
+  { code: 'UAH', label: '🇺🇦 Hryvnia' },
+  { code: 'EUR', label: '🇪🇺 Euro' },
 ];
 
 // Страницы, за изменениями которых следим.
@@ -30,34 +29,34 @@ const CURRENCIES = [
 const WATCHED = [
   {
     id: 'jwc',
-    title: '⚔️ Зоны военного риска',
-    note: 'Joint War Committee обновил список районов',
+    title: '⚔️ <b>War risk areas</b>',
+    note: 'Joint War Committee has updated the listed areas',
     url: 'https://www.lmalloyds.com/LMA/Underwriting/Marine/JWC/Joint_War.aspx',
   },
   {
     id: 'parismou',
-    title: '🛃 Paris MoU',
-    note: 'Опубликован новый список задержаний',
+    title: '🛃 <b>Paris MoU</b>',
+    note: 'New detention list published',
     url: 'https://parismou.org/inspections-risk/inspection-results/detentions',
   },
   {
     id: 'tokyomou',
-    title: '🛃 Tokyo MoU',
-    note: 'Опубликован новый список задержаний',
+    title: '🛃 <b>Tokyo MoU</b>',
+    note: 'New detention list published',
     url: 'https://www.tokyo-mou.org/inspections_detentions/detention_list.php',
   },
 ];
 
 // ============ КАЛЕНДАРЬ КОНВЕНЦИЙ ============
 // Заполняешь сам. Бот достаёт то, что наступает в ближайшие 45 дней.
-// date — ISO, что вступает в силу. Проверяй даты по IMO, я их не выдумываю.
+// title пиши ПО-АНГЛИЙСКИ — он идёт прямо в пост.
+// Даты сверяй по IMO, я их не выдумываю.
 //
-// Формат:
-//   { date: '2027-01-01', title: 'Краткая суть', ref: 'SOLAS ch.II-1', url: '...' }
+//   { date: '2027-01-01', title: 'New requirements for ...', ref: 'SOLAS ch.II-1' }
 
 const CONVENTIONS = [
-  // ПРИМЕРЫ — замени на реальные, сверившись с IMO:
-  // { date: '2027-01-01', title: 'Новые требования к ...', ref: 'SOLAS', url: 'https://www.imo.org' },
+  // ПРИМЕР — замени на реальные:
+  // { date: '2027-01-01', title: 'Amendments enter into force', ref: 'MARPOL Annex VI' },
 ];
 
 module.exports = { DIGEST, CURRENCIES, WATCHED, CONVENTIONS };

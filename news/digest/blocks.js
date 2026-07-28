@@ -13,7 +13,6 @@ async function safe(name, fn) {
 }
 
 // ── 1. Тропические циклоны ──────────────────────────────────────────────
-// NHC: Атлантика и восточная часть Тихого. JTWC: запад Тихого и Индийский.
 async function cyclones() {
   const res = await fetch('https://www.nhc.noaa.gov/CurrentStorms.json');
   if (!res.ok) throw new Error('NHC ' + res.status);
@@ -21,7 +20,7 @@ async function cyclones() {
 
   const storms = (data.activeStorms || []).map((s) => {
     const cls = s.classification || '';
-    const wind = s.intensity ? `${s.intensity} узл` : '';
+    const wind = s.intensity ? `${s.intensity} kt` : '';
     const lat = s.latitudeNumeric, lon = s.longitudeNumeric;
     const pos = (lat != null && lon != null)
       ? `${Math.abs(lat).toFixed(1)}${lat >= 0 ? 'N' : 'S'} ${Math.abs(lon).toFixed(1)}${lon >= 0 ? 'E' : 'W'}`
@@ -29,10 +28,12 @@ async function cyclones() {
     return `  ${cls} ${s.name} — ${pos}${wind ? ', ' + wind : ''}`;
   });
 
-  if (!storms.length) return '🌀 <b>Циклоны</b>\n  Активных систем нет (Атлантика, вост. Тихий)';
+  if (!storms.length) {
+    return '🌀 <b>Tropical cyclones</b>\n  No active systems (Atlantic, E Pacific)';
+  }
 
-  return '🌀 <b>Циклоны</b>\n' + storms.join('\n') +
-         '\n  <i>Источник: NHC. Зап. Тихий и Индийский — JTWC</i>';
+  return '🌀 <b>Tropical cyclones</b>\n' + storms.join('\n') +
+         '\n  <i>Source: NHC. W Pacific and Indian Ocean — see JTWC</i>';
 }
 
 // ── 2. Курсы валют ──────────────────────────────────────────────────────
@@ -40,22 +41,20 @@ async function rates() {
   const res = await fetch('https://open.er-api.com/v6/latest/USD');
   if (!res.ok) throw new Error('rates ' + res.status);
   const data = await res.json();
-  if (!data.rates) throw new Error('нет поля rates');
+  if (!data.rates) throw new Error('no rates field');
 
   const lines = CURRENCIES
     .filter((c) => data.rates[c.code] != null)
     .map((c) => {
       const v = data.rates[c.code];
-      const shown = v >= 10 ? v.toFixed(2) : v.toFixed(4);
-      return `  ${c.label} ${shown}`;
+      return `  ${c.label} ${v >= 10 ? v.toFixed(2) : v.toFixed(4)}`;
     });
 
   if (!lines.length) return null;
-  return '💱 <b>Курс доллара</b>\n' + lines.join('\n');
+  return '💱 <b>USD exchange rates</b>\n' + lines.join('\n');
 }
 
 // ── 3. Admiralty Notices to Mariners ────────────────────────────────────
-// Выходят раз в неделю. Постим напоминание в нужный день, не парсим.
 function isoWeek(d) {
   const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
   const day = t.getUTCDay() || 7;
@@ -66,9 +65,7 @@ function isoWeek(d) {
 
 function admiraltyNM(now) {
   if (now.getUTCDay() !== DIGEST.NM_WEEKDAY) return null;
-  const week = isoWeek(now);
-  const year = now.getUTCFullYear();
-  return `📕 <b>Admiralty NM</b>\n  Неделя ${week}/${year} — время обновляться\n  ` +
+  return `📕 <b>Admiralty Notices to Mariners</b>\n  Week ${isoWeek(now)}/${now.getUTCFullYear()} — time to update\n  ` +
          `<a href="https://www.admiralty.co.uk/publications/notices-to-mariners">admiralty.co.uk</a>`;
 }
 
@@ -85,16 +82,14 @@ function conventions(now) {
 
   const lines = soon.map((c) => {
     const days = Math.ceil((c.when - now) / 86400000);
-    const d = c.when.toISOString().slice(0, 10);
-    return `  ${d} (через ${days} дн.) — ${c.title}${c.ref ? ` · ${c.ref}` : ''}`;
+    return `  ${c.when.toISOString().slice(0, 10)} (in ${days} days) — ${c.title}${c.ref ? ` · ${c.ref}` : ''}`;
   });
 
-  return '⚖️ <b>Вступает в силу</b>\n' + lines.join('\n');
+  return '⚖️ <b>Entering into force</b>\n' + lines.join('\n');
 }
 
 // ── 5. Отслеживание изменений: военный риск и PSC ───────────────────────
-// Скачиваем страницу, считаем хэш, сравниваем с прошлым.
-// Изменилась — сообщаем. Содержимое не публикуем, только факт и ссылку.
+// Публикуем только факт изменения и ссылку, содержимое не копируем.
 async function checkWatched(db) {
   const out = [];
 
@@ -104,7 +99,6 @@ async function checkWatched(db) {
       if (!res.ok) continue;
 
       const body = await res.text();
-      // Выкидываем скрипты, таймстемпы и прочий шум, иначе хэш скачет каждый раз
       const clean = body
         .replace(/<script[\s\S]*?<\/script>/gi, '')
         .replace(/\d{1,2}[:/]\d{2}(:\d{2})?/g, '')
@@ -120,7 +114,7 @@ async function checkWatched(db) {
 
       // Первый запуск — только запоминаем, не шумим
       if (prev && prev.hash !== hash) {
-        out.push(`${w.title}\n  ${w.note}\n  <a href="${w.url}">открыть</a>`);
+        out.push(`${w.title}\n  ${w.note}\n  <a href="${w.url}">open</a>`);
       }
     } catch (e) {
       console.error(`[digest:watch:${w.id}]`, e.message);
@@ -145,15 +139,13 @@ async function buildDigest(db) {
   const body = parts.filter(Boolean);
   if (!body.length) return null;
 
-  const date = now.toISOString().slice(0, 10);
-
   return [
-    `🌐 <b>BRIDGE BRIEF</b> · ${date}`,
+    `🌐 <b>BRIDGE BRIEF</b> · ${now.toISOString().slice(0, 10)}`,
     '',
     body.join('\n\n'),
     '',
-    '<i>Сводка для ознакомления. Официальные источники — NAVTEX, SafetyNET, ' +
-    'бюллетени администраций.</i>',
+    '<i>For information only. Official sources: NAVTEX, SafetyNET and ' +
+    'administration bulletins.</i>',
   ].join('\n');
 }
 
