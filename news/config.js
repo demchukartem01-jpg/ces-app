@@ -6,6 +6,21 @@ const SOURCES = [
   { name: 'Marine Insight',     url: 'https://www.marineinsight.com/feed/' },
 ];
 
+// Эмодзи по теме — ставится перед заголовком. Меняй свободно.
+// Ключ = тег в нижнем регистре, он же имя файла обложки.
+const EMOJI = {
+  psc:         '🛃',
+  regulation:  '⚖️',
+  casualty:    '🚨',
+  piracy:      '🏴‍☠️',
+  crewing:     '🧑‍✈️',
+  wages:       '💵',
+  environment: '🌊',
+  cargo:       '📦',
+  training:    '🎓',
+  default:     '⚓',
+};
+
 // Главный файл настройки. Его будешь править регулярно, код — нет.
 const AUDIENCE_BRIEF = `
 Аудитория канала — действующие моряки: палубные офицеры, механики, рядовой состав.
@@ -23,14 +38,16 @@ const CONFIG = {
   COLLECT_CRON: '0 * * * *',      // сбор раз в час
   PUBLISH_CRON: '*/25 * * * *',   // публикация максимум раз в 25 минут
   QUIET_HOURS_UTC: [23, 0, 1, 2, 3, 4],
-  DEDUPE_WINDOW: 300,             // сколько заголовков помнить для поиска дублей
-  SIMILARITY_THRESHOLD: 0.6,      // выше — считаем одной новостью
-  MAX_PER_SOURCE: 10,             // сколько статей брать за один обход
+  DEDUPE_WINDOW: 300,
+  SIMILARITY_THRESHOLD: 0.6,
+  MAX_PER_SOURCE: 10,
   MODEL: 'claude-haiku-4-5-20251001',
 
-  // true  — черновик уходит тебе в личку с кнопками
-  // false — публикуется автоматически. Переключать через 2-3 недели.
+  // Сколько слов в английском пересказе. Больше 55 — пост перестанет
+  // влезать в подпись под фото и начнёт уходить текстом без картинки.
+  BODY_WORDS: 50,
+
   MODERATION: true,
 };
 
-module.exports = { SOURCES, AUDIENCE_BRIEF, CONFIG };
+module.exports = { SOURCES, AUDIENCE_BRIEF, CONFIG, EMOJI };

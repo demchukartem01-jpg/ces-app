@@ -1,90 +1,87 @@
 const fs = require('fs');
 const path = require('path');
+const { EMOJI } = require('./config');
 const { setStatus, getById } = require('./store');
 
-// Telegram HTML-режим ломается на <, >, &
 const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-// Подпись к фото — максимум 1024 символа. Текстовое сообщение — 4096.
+// Подпись к фото — 1024 символа. Текстовое сообщение — 4096.
 const CAPTION_LIMIT = 1024;
 
-// Обложка по первому тегу. Нет подходящей — вернём null, уйдёт без картинки.
-function coverFor(draft) {
-  const tag = (draft.tags && draft.tags[0] || '').toLowerCase();
+const firstTag = (d) => (d.tags && d.tags[0] || '').toLowerCase();
+
+const emojiFor = (d) => EMOJI[firstTag(d)] || EMOJI.default;
+
+function coverFor(d) {
+  const tag = firstTag(d);
   if (!tag) return null;
   const file = path.join(__dirname, 'covers', tag + '.png');
   return fs.existsSync(file) ? file : null;
 }
 
-// Полная версия: EN сверху, RU в разворачиваемой цитате.
-function render(d, link, source) {
-  const tags = (d.tags || []).map((t) => '#' + t).join(' ');
-
+// Английская часть — одинаковая в обоих вариантах.
+function head(d, link, source) {
   return [
-    `⚓ <b>${esc(d.title_en)}</b>`,
+    `${emojiFor(d)} <b>${esc(d.title_en)}</b>`,
     '',
     esc(d.body_en),
     '',
-    `▸ <i>On board:</i> ${esc(d.onboard_en)}`,
+    `🧭 <i>On board:</i> ${esc(d.onboard_en)}`,
     '',
     `<a href="${esc(link)}">${esc(source)}</a>`,
+  ];
+}
+
+const tagLine = (d) => (d.tags || []).map((t) => '#' + t).join(' ');
+
+// Вариант под фото: русский блок компактный — заголовок и вывод, без пересказа.
+function renderCaption(d, link, source) {
+  return head(d, link, source).concat([
+    '',
+    `<blockquote expandable><b>${esc(d.title_ru)}</b>`,
+    '',
+    `🧭 <i>На борту:</i> ${esc(d.onboard_ru)}</blockquote>`,
+    '',
+    tagLine(d),
+  ]).join('\n');
+}
+
+// Вариант текстом: русский блок полный, лимит 4096 позволяет.
+function renderFull(d, link, source) {
+  return head(d, link, source).concat([
     '',
     `<blockquote expandable><b>${esc(d.title_ru)}</b>`,
     '',
     esc(d.body_ru),
     '',
-    `▸ <i>На борту:</i> ${esc(d.onboard_ru)}</blockquote>`,
+    `🧭 <i>На борту:</i> ${esc(d.onboard_ru)}</blockquote>`,
     '',
-    tags,
-  ].join('\n');
+    tagLine(d),
+  ]).join('\n');
 }
 
-// Ужатая версия — если полная не влезает в подпись под фото.
-// Режем русский пересказ, оставляем заголовок и практический вывод.
-function renderShort(d, link, source) {
-  const tags = (d.tags || []).map((t) => '#' + t).join(' ');
-
-  return [
-    `⚓ <b>${esc(d.title_en)}</b>`,
-    '',
-    esc(d.body_en),
-    '',
-    `▸ <i>On board:</i> ${esc(d.onboard_en)}`,
-    '',
-    `<a href="${esc(link)}">${esc(source)}</a>`,
-    '',
-    `<blockquote expandable><b>${esc(d.title_ru)}</b>`,
-    '',
-    `▸ <i>На борту:</i> ${esc(d.onboard_ru)}</blockquote>`,
-    '',
-    tags,
-  ].join('\n');
-}
-
-// Выбирает, что отправить: фото с подписью или обычный текст.
+// Есть обложка и подпись влезает — шлём фото. Иначе текстом, но с полным русским.
 async function send(bot, chatId, doc, extra) {
   const d = doc.draft;
   const cover = coverFor(d);
-  const full = render(d, doc.link, doc.source);
   const opts = Object.assign({ parse_mode: 'HTML' }, extra || {});
 
   if (cover) {
-    if (full.length <= CAPTION_LIMIT) {
-      return bot.sendPhoto(chatId, cover, Object.assign({ caption: full }, opts));
-    }
-    const short = renderShort(d, doc.link, doc.source);
-    if (short.length <= CAPTION_LIMIT) {
-      return bot.sendPhoto(chatId, cover, Object.assign({ caption: short }, opts));
+    const caption = renderCaption(d, doc.link, doc.source);
+    if (caption.length <= CAPTION_LIMIT) {
+      return bot.sendPhoto(chatId, cover, Object.assign({ caption }, opts));
     }
   }
 
-  // Картинки нет или текст не влезает даже ужатым — отправляем текстом.
-  return bot.sendMessage(chatId, full, Object.assign({ disable_web_page_preview: true }, opts));
+  return bot.sendMessage(
+    chatId,
+    renderFull(d, doc.link, doc.source),
+    Object.assign({ disable_web_page_preview: true }, opts)
+  );
 }
 
 const publishToChannel = (bot, doc) => send(bot, process.env.CHANNEL_ID, doc);
 
-// Черновик тебе в личку — в точности в том виде, в каком уйдёт в канал.
 const sendForReview = (bot, doc) => send(bot, process.env.ADMIN_CHAT_ID, doc, {
   reply_markup: {
     inline_keyboard: [[
@@ -128,4 +125,4 @@ async function handleNewsCallback(bot, cb) {
   return true;
 }
 
-module.exports = { render, publishToChannel, sendForReview, handleNewsCallback };
+module.exports = { renderCaption, renderFull, publishToChannel, sendForReview, handleNewsCallback };
