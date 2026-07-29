@@ -17,6 +17,7 @@ const CONTENT = {
 // ── Term of the week ────────────────────────────────────────────────────
 // Ротация по кругу, порядок — по порядку в массиве. Пиши по-английски.
 const TERMS = [
+  // ── General / mixed (original set) ──────────────────────────────────
   { term: 'SIRE 2.0', def: 'OCIMF\'s updated tanker vetting programme. Moves from a fixed checklist to risk-based Vessel HSSE Questions and inspector-observed behaviour, not just paperwork.' },
   { term: 'PSC Detention', def: 'A port state control order stopping a ship from sailing until deficiencies are corrected. Recorded against the vessel, operator and flag — affects your next inspection everywhere.' },
   { term: 'ISM Non-Conformity', def: 'A finding that the Safety Management System failed in practice, not just on paper. Major NC can suspend the Document of Compliance and ground the fleet.' },
@@ -27,6 +28,46 @@ const TERMS = [
   { term: 'Condition of Class', def: 'A class society requirement to fix something within a set time or lose class. Losing class can void P&I cover and stop the ship trading.' },
   { term: 'Bunker Delivery Note (BDN)', def: 'Paperwork proving what fuel was actually loaded. Mismatched BDN and sulphur test results are one of the most common PSC and MARPOL Annex VI findings.' },
   { term: 'Abandonment (ITF definition)', def: 'When the shipowner fails to cover repatriation, owed wages, or basic provisions for two months or more. Triggers ITF and flag-state intervention.' },
+
+  // ── Stability ────────────────────────────────────────────────────────
+  { term: 'GM (Metacentric Height)', def: 'The distance between the centre of gravity and the metacentre. Too low and the ship rolls sluggishly and risks capsizing; too high and it snaps back violently, straining lashings and crew.' },
+  { term: 'Free Surface Effect', def: 'A partially filled tank lets liquid shift as the ship heels, moving the effective centre of gravity upward and reducing stability. Slack tanks are treated as a stability hazard, not just an operational detail.' },
+  { term: 'Angle of Loll', def: 'The angle a ship with negative GM settles at without external force — it looks stable but isn\'t. Righting it the wrong way (ballasting the low side first) can capsize the vessel instead of saving it.' },
+  { term: 'Righting Arm (GZ)', def: 'The lever length driving the ship back upright at a given heel angle. Plotted across all angles it gives the GZ curve — the single chart that defines how much the ship can take before it doesn\'t come back.' },
+  { term: 'Downflooding Angle', def: 'The heel angle at which water starts entering the hull through an opening that isn\'t weathertight. Beyond it, stability calculations stop mattering — the ship is taking on water.' },
+  { term: 'Parametric Rolling', def: 'Violent, unexpected rolling in head or following seas caused by periodic changes in waterplane area as the ship pitches. Container ships are especially prone to it, and it can develop in minutes.' },
+  { term: 'Deadweight Scale', def: 'The reference chart linking draft, displacement, deadweight and TPC for a specific ship. Used constantly for loading, ballasting and confirming the vessel isn\'t exceeding load line limits.' },
+  { term: 'List vs Trim', def: 'List is a sideways lean (port or starboard); trim is fore-and-aft. Confusing the two in a report to the office isn\'t just wording — it points rescuers and surveyors at the wrong problem.' },
+
+  // ── Engine / Machinery ───────────────────────────────────────────────
+  { term: 'Scavenge Fire', def: 'A fire in the scavenge air space of a two-stroke engine, usually from unburnt fuel or lube oil accumulation. One of the most dangerous engine room emergencies — it can escalate to a crankcase explosion if not caught early.' },
+  { term: 'Crankcase Explosion', def: 'Hot spots inside the crankcase vaporise lube oil into a mist that ignites explosively when disturbed. The reason engineers wait before opening crankcase doors after a suspected overheat — early opening has killed people.' },
+  { term: 'Turbocharger Surge', def: 'A sudden reversal of airflow through the turbocharger, usually from fouling, overload or a rapid manoeuvre. Shows up as loud banging and vibration — ignoring it risks serious turbocharger damage.' },
+  { term: 'Cold Corrosion', def: 'Sulphuric acid forming on cylinder liners when jacket water temperature runs too low for the fuel\'s sulphur content, accelerating liner wear. A common finding when engines run low-sulphur fuel without adjusting cooling water temperature.' },
+  { term: 'Fuel Changeover Procedure', def: 'The scheduled switch between high- and low-sulphur fuel before entering an ECA, timed to allow fuel system viscosity and temperature to stabilise. Getting the timing wrong is one of the most common MARPOL Annex VI findings.' },
+  { term: 'Governor Overspeed Trip', def: 'A safety device that shuts down the engine if RPM exceeds a set limit, protecting against catastrophic mechanical failure. Testing it is a standard part of engine safety checks — and skipping the test is a classic PSC deficiency.' },
+  { term: 'Purifier / Separator', def: 'Centrifugal equipment that removes water and solid contaminants from fuel and lube oil before it reaches the engine. A poorly maintained purifier is a leading cause of fuel-related engine damage.' },
+  { term: 'Cylinder Liner Wear Rate', def: 'The rate at which the cylinder bore erodes, tracked in mm per 1,000 hours. Exceeding the maker\'s limit means reduced compression, higher lube oil consumption, and eventually a liner change.' },
+
+  // ── Navigation ───────────────────────────────────────────────────────
+  { term: 'CPA / TCPA', def: 'Closest Point of Approach and Time to CPA — the core numbers ARPA gives you to judge collision risk with another vessel. Watchkeepers are expected to know both for every tracked target, not just the ones that look close.' },
+  { term: 'Squat Effect', def: 'A ship moving through shallow or confined water increases in draft and can trim by the head or stern due to the pressure field around the hull. Misjudging squat in a channel has grounded ships that had UKC on paper.' },
+  { term: 'UKC (Under Keel Clearance)', def: 'The vertical gap between the keel and the seabed, adjusted for squat, tide, density and heel — not just the charted depth minus draft. Passage plans specify a minimum UKC for a reason; running it thin removes your margin for error.' },
+  { term: 'ROT (Rate of Turn)', def: 'How fast the heading is changing, in degrees per minute, shown on the ROT indicator and used to judge turn timing in pilotage and collision avoidance. A high ROT close to another vessel or a bank can surprise everyone watching.' },
+  { term: 'ECDIS Alarm Management', def: 'Configuring ECDIS safety contour, safety depth and alarm settings correctly for the passage — not leaving factory defaults. Wrong settings are a recurring PSC and MAIB finding, often cited after groundings where the alarm never fired.' },
+  { term: 'Passage Plan (Berth to Berth)', def: 'The full appraised, planned, executed and monitored route from departure berth to arrival berth, required under SOLAS — not just the open-water leg. A plan that starts at the pilot station is an incomplete plan.' },
+  { term: 'Traffic Separation Scheme (TSS)', def: 'IMO-adopted lanes separating opposing traffic in congested or narrow waters, governed by COLREG Rule 10. Crossing one at the wrong angle or against the flow is one of the more visible ways to draw an incident report.' },
+  { term: 'Compass Error (Variation & Deviation)', def: 'Variation is the difference between true and magnetic north at your position; deviation is the error your own ship\'s magnetism adds to the compass. Confusing the two, or forgetting to check the deviation card, sends your course line to the wrong place.' },
+
+  // ── Cargo Operations ─────────────────────────────────────────────────
+  { term: 'Angle of Repose', def: 'The steepest angle a bulk cargo can hold without sliding, critical for assessing shift risk in bulk carriers. Cargoes near their angle of repose need trimming, not just loading to the plan.' },
+  { term: 'TML (Transportable Moisture Limit)', def: 'The maximum moisture content at which a bulk cargo like nickel ore or bauxite fines can be safely carried before liquefaction risk sets in. Loading cargo above TML has caused bulk carriers to capsize in otherwise calm seas.' },
+  { term: 'Ullage', def: 'The empty space at the top of a tank, measured to calculate the volume of liquid cargo loaded — the inverse of sounding. Getting ullage wrong on a tanker means the cargo figures on the bill of lading are wrong too.' },
+  { term: 'Cargo Securing per CSS Code', def: 'The IMO Code of Safe Practice for Cargo Stowage and Securing, setting the standard for lashing arrangements against the forces a voyage is expected to generate. A lashing plan that meets the CSS Code on paper still needs someone checking it holds in practice.' },
+  { term: 'Reefer PTI (Pre-Trip Inspection)', def: 'A functional check of a reefer container\'s refrigeration unit before stuffing, confirming it can hold the required temperature for the voyage. Skipping PTI is how temperature-sensitive cargo claims happen.' },
+  { term: 'Hatch Cover Weathertightness Test', def: 'Ultrasonic or hose testing to confirm hatch covers are watertight before loading. A failed test found at PSC after loading is a far more expensive problem than one found before.' },
+  { term: 'Bill of Lading Clausing', def: 'Noting visible cargo defects — damage, short quantity, poor condition — on the bill of lading at loading. An unclaused B/L for cargo that was clearly damaged shifts liability onto the ship, not the shipper.' },
+  { term: 'Cargo Heating Coils', def: 'Steam or thermal oil coils in tanker cargo tanks used to keep viscous cargoes like heavy fuel oil or certain chemicals pumpable. Heating too fast or too hot can degrade temperature-sensitive cargo just as badly as not heating it enough.' },
 ];
 
 // ── Ship spotlight ───────────────────────────────────────────────────────
