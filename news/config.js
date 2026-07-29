@@ -1,9 +1,27 @@
 // Источники новостей. Начни с 4 — больше на старте только шум.
 const SOURCES = [
+  // ── Общие издания ─────────────────────────────────────────────
   { name: 'Splash 247',         url: 'https://splash247.com/feed/' },
   { name: 'Maritime Executive', url: 'https://maritime-executive.com/articles.rss' },
   { name: 'Safety4Sea',         url: 'https://safety4sea.com/feed/' },
   { name: 'Marine Insight',     url: 'https://www.marineinsight.com/feed/' },
+  { name: 'gCaptain',           url: 'https://gcaptain.com/feed/' },
+
+  // ── Расследования аварий: разборы, а не заметки ───────────────
+  { name: 'MAIB',    url: 'https://www.gov.uk/government/organisations/marine-accident-investigation-branch.atom' },
+  { name: 'NTSB',    url: 'https://www.ntsb.gov/news/press-releases/Pages/RSSFeed.aspx' },
+  { name: 'ATSB',    url: 'https://www.atsb.gov.au/rss.xml' },
+
+  // ── Экипаж, зарплаты, брошенные суда ──────────────────────────
+  { name: 'ITF Seafarers', url: 'https://www.itfseafarers.org/en/rss.xml' },
+  { name: 'Nautilus Int',  url: 'https://www.nautilusint.org/en/news-insight/news/rss/' },
+
+  // ── Регулирование и практика ──────────────────────────────────
+  { name: 'IMO',           url: 'https://www.imo.org/en/MediaCentre/Pages/rss.aspx' },
+  { name: 'Offshore Energy', url: 'https://www.offshore-energy.biz/feed/' },
+
+  // ПЛАТНЫЕ, RSS не отдают — не добавляй, потратишь время:
+  // TradeWinds, Lloyd's List, Fairplay
 ];
 
 // Эмодзи по теме — ставится перед заголовком. Меняй свободно.
