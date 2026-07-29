@@ -70,22 +70,32 @@ function admiraltyNM(now) {
 }
 
 // ── 4. Календарь конвенций ──────────────────────────────────────────────
+// Показываем и то, что скоро вступит в силу, и то, что вступило недавно —
+// человек мог быть в рейсе и пропустить.
 function conventions(now) {
-  const horizon = new Date(now.getTime() + DIGEST.CONVENTION_LOOKAHEAD_DAYS * 86400000);
+  const ahead = new Date(now.getTime() + DIGEST.CONVENTION_LOOKAHEAD_DAYS * 86400000);
+  const back  = new Date(now.getTime() - (DIGEST.CONVENTION_LOOKBACK_DAYS || 0) * 86400000);
 
-  const soon = CONVENTIONS
-    .map((c) => Object.assign({}, c, { when: new Date(c.date) }))
-    .filter((c) => c.when >= now && c.when <= horizon)
-    .sort((a, b) => a.when - b.when);
+  const dated = CONVENTIONS.map((c) => Object.assign({}, c, { when: new Date(c.date) }));
 
-  if (!soon.length) return null;
+  const upcoming = dated
+    .filter((c) => c.when >= now && c.when <= ahead)
+    .sort((a, b) => a.when - b.when)
+    .map((c) => {
+      const days = Math.ceil((c.when - now) / 86400000);
+      return `  ${c.when.toISOString().slice(0, 10)} (in ${days} days) — ${c.title}${c.ref ? ` · ${c.ref}` : ''}`;
+    });
 
-  const lines = soon.map((c) => {
-    const days = Math.ceil((c.when - now) / 86400000);
-    return `  ${c.when.toISOString().slice(0, 10)} (in ${days} days) — ${c.title}${c.ref ? ` · ${c.ref}` : ''}`;
-  });
+  const recent = dated
+    .filter((c) => c.when < now && c.when >= back)
+    .sort((a, b) => b.when - a.when)
+    .map((c) => `  In force since ${c.when.toISOString().slice(0, 10)} — ${c.title}${c.ref ? ` · ${c.ref}` : ''}`);
 
-  return '⚖️ <b>Entering into force</b>\n' + lines.join('\n');
+  const out = [];
+  if (upcoming.length) out.push('⚖️ <b>Entering into force</b>\n' + upcoming.join('\n'));
+  if (recent.length)   out.push('✅ <b>Recently in force</b>\n' + recent.join('\n'));
+
+  return out.length ? out.join('\n\n') : null;
 }
 
 // ── 5. Отслеживание изменений: военный риск и PSC ───────────────────────
