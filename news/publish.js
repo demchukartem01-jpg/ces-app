@@ -37,31 +37,13 @@ function head(d, link, source) {
 
 const tagLine = (d) => (d.tags || []).map((t) => '#' + t).join(' ');
 
-// Вариант под фото: русский блок компактный — заголовок и вывод, без пересказа.
+// Пост только на английском. Читателям с премиумом Telegram переводит сам.
 function renderCaption(d, link, source) {
-  return head(d, link, source).concat([
-    '',
-    `<blockquote expandable><b>${esc(d.title_ru)}</b>`,
-    '',
-    `🧭 <i>На борту:</i> ${esc(d.onboard_ru)}</blockquote>`,
-    '',
-    tagLine(d),
-  ]).join('\n');
+  return head(d, link, source).concat(['', tagLine(d)]).join('\n');
 }
 
-// Вариант текстом: русский блок полный, лимит 4096 позволяет.
-function renderFull(d, link, source) {
-  return head(d, link, source).concat([
-    '',
-    `<blockquote expandable><b>${esc(d.title_ru)}</b>`,
-    '',
-    esc(d.body_ru),
-    '',
-    `🧭 <i>На борту:</i> ${esc(d.onboard_ru)}</blockquote>`,
-    '',
-    tagLine(d),
-  ]).join('\n');
-}
+// Тот же текст — используется, когда обложки нет и уходим сообщением.
+const renderFull = renderCaption;
 
 // Есть обложка и подпись влезает — шлём фото. Иначе текстом, но с полным русским.
 async function send(bot, chatId, doc, extra) {

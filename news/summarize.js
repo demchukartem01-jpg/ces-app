@@ -29,16 +29,15 @@ body_en — до ${CONFIG.BODY_WORDS} слов. Уложись, но потра�
 Поле onboard — твоя добавленная ценность: одно предложение о том, что новость
 означает практически для человека на борту. Не пересказ, а вывод.
 
+ЯЗЫК ВЫВОДА — ТОЛЬКО АНГЛИЙСКИЙ. Русский текст в ответе недопустим.
+
 Верни ТОЛЬКО JSON, без markdown-обёртки и без пояснений:
 {
   "skip": false,
   "skip_reason": "",
-  "title_en": "заголовок своими словами, до 60 знаков",
+  "title_en": "заголовок своими словами, до 70 знаков",
   "body_en": "суть с конкретикой, до ${CONFIG.BODY_WORDS} слов",
-  "onboard_en": "что это значит на борту, одно предложение",
-  "title_ru": "то же по-русски",
-  "body_ru": "то же по-русски",
-  "onboard_ru": "то же по-русски",
+  "onboard_en": "что это значит на борту, одно-два предложения",
   "tags": ["PSC", "Regulation"]
 }
 
@@ -64,7 +63,7 @@ async function summarize(item) {
     },
     body: JSON.stringify({
       model: CONFIG.MODEL,
-      max_tokens: 900,
+      max_tokens: 700,
       system: SYSTEM,
       messages: [{ role: 'user', content: input }],
     }),
