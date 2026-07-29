@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const { CURRENCIES, WATCHED, CONVENTIONS, DIGEST,
+const { CURRENCIES, CRYPTO, WATCHED, CONVENTIONS, DIGEST,
         CHOKEPOINTS, SEA_STATE_ALERT_M, QUAKE_MIN_MAG } = require('./config');
 
 // Каждый блок возвращает строку или null.
@@ -37,7 +37,42 @@ async function cyclones() {
          '\n  <i>Source: NHC. W Pacific and Indian Ocean — see JTWC</i>';
 }
 
-// ── 2. Курсы валют ──────────────────────────────────────────────────────
+// ── 2. Курсы валют и крипта ─────────────────────────────────────────────
+// Фиат показываем как «сколько за 1 доллар», крипту наоборот —
+// ценой в долларах, иначе получаются нечитаемые нули.
+async function cryptoLines() {
+  if (!CRYPTO || !CRYPTO.length) return [];
+
+  try {
+    const ids = CRYPTO.map((c) => c.id).join(',');
+    const res = await fetch(
+      `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`
+    );
+    if (!res.ok) throw new Error('coingecko ' + res.status);
+
+    const data = await res.json();
+
+    return CRYPTO.map((c) => {
+      const row = data[c.id];
+      if (!row || row.usd == null) return null;
+
+      const price = row.usd >= 100
+        ? Math.round(row.usd).toLocaleString('en-US')
+        : row.usd.toFixed(row.usd >= 1 ? 2 : 4);
+
+      const ch = row.usd_24h_change;
+      const trend = (ch == null) ? ''
+        : ` (${ch >= 0 ? '+' : ''}${ch.toFixed(1)}% 24h)`;
+
+      return `  ${c.label} $${price}${trend}`;
+    }).filter(Boolean);
+  } catch (e) {
+    // Крипта не критична — фиат покажем всё равно
+    console.error('[digest:crypto]', e.message);
+    return [];
+  }
+}
+
 async function rates() {
   const res = await fetch('https://open.er-api.com/v6/latest/USD');
   if (!res.ok) throw new Error('rates ' + res.status);
@@ -51,8 +86,11 @@ async function rates() {
       return `  ${c.label} ${v >= 10 ? v.toFixed(2) : v.toFixed(4)}`;
     });
 
-  if (!lines.length) return null;
-  return '💱 <b>USD exchange rates</b>\n' + lines.join('\n');
+  const crypto = await cryptoLines();
+  const all = lines.concat(crypto);
+
+  if (!all.length) return null;
+  return '💱 <b>USD rates</b>\n' + all.join('\n');
 }
 
 // ── 3. Admiralty Notices to Mariners ────────────────────────────────────

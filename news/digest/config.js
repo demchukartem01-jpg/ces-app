@@ -56,6 +56,14 @@ const SEA_STATE_ALERT_M = 4.0;
 // Минимальная магнитуда землетрясения для попадания в сводку
 const QUAKE_MIN_MAG = 6.0;
 
+// Криптовалюты — показываются ценой в долларах, не наоборот.
+// Хочешь добавить — id берётся из адреса монеты на coingecko.com
+const CRYPTO = [
+  { id: 'bitcoin', label: '₿ Bitcoin' },
+  // { id: 'the-open-network', label: '💎 TON' },
+  // { id: 'tether',           label: '💵 USDT' },
+];
+
 // Страницы, за изменениями которых следим.
 // Меняется содержимое — бот сообщает и даёт ссылку.
 const WATCHED = [
@@ -120,4 +128,4 @@ const CONVENTIONS = [
   // title пиши ПО-АНГЛИЙСКИ, он идёт прямо в пост.
 ];
 
-module.exports = { DIGEST, CURRENCIES, WATCHED, CONVENTIONS, CHOKEPOINTS, SEA_STATE_ALERT_M, QUAKE_MIN_MAG };
+module.exports = { DIGEST, CURRENCIES, CRYPTO, WATCHED, CONVENTIONS, CHOKEPOINTS, SEA_STATE_ALERT_M, QUAKE_MIN_MAG };
