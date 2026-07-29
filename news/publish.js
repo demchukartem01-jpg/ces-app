@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { EMOJI } = require('./config');
+const { renderCard } = require('./card');
 const { setStatus, getById } = require('./store');
 
 const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -9,17 +10,25 @@ const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').
 const CAPTION_LIMIT = 1024;
 
 // Явный тип файла — иначе библиотека сыплет DeprecationWarning в логи.
-const FILE_OPTS = { filename: 'cover.png', contentType: 'image/png' };
+const FILE_OPTS = { filename: 'card.png', contentType: 'image/png' };
 
 const firstTag = (d) => (d.tags && d.tags[0] || '').toLowerCase();
 
 const emojiFor = (d) => EMOJI[firstTag(d)] || EMOJI.default;
 
+// Готовая обложка по теме — запасной вариант, если карточка не отрисовалась.
 function coverFor(d) {
   const tag = firstTag(d);
   if (!tag) return null;
   const file = path.join(__dirname, 'covers', tag + '.png');
   return fs.existsSync(file) ? file : null;
+}
+
+// Уникальная карточка под конкретный пост: свой заголовок, свой цвет темы.
+// Не вышло — молча откатываемся на статичную обложку, пост всё равно уйдёт.
+function imageFor(d, source) {
+  const png = renderCard(d.title_en, firstTag(d), source);
+  return png || coverFor(d);
 }
 
 // Английская часть — одинаковая в обоих вариантах.
@@ -48,7 +57,7 @@ const renderFull = renderCaption;
 // Есть обложка и подпись влезает — шлём фото. Иначе текстом, но с полным русским.
 async function send(bot, chatId, doc, extra) {
   const d = doc.draft;
-  const cover = coverFor(d);
+  const cover = imageFor(d, doc.source);
   const opts = Object.assign({ parse_mode: 'HTML' }, extra || {});
 
   if (cover) {
