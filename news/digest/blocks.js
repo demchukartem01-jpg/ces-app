@@ -70,30 +70,47 @@ function admiraltyNM(now) {
 }
 
 // ── 4. Календарь конвенций ──────────────────────────────────────────────
-// Показываем и то, что скоро вступит в силу, и то, что вступило недавно —
-// человек мог быть в рейсе и пропустить.
+// Напоминаем по контрольным точкам, а не сплошным окном: одна и та же
+// строка не должна висеть в сводке месяцами.
+
+// Разница в календарных днях по UTC — без влияния времени суток.
+function dayDiff(target, now) {
+  const a = Date.UTC(target.getUTCFullYear(), target.getUTCMonth(), target.getUTCDate());
+  const b = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  return Math.round((a - b) / 86400000);
+}
+
 function conventions(now) {
-  const ahead = new Date(now.getTime() + DIGEST.CONVENTION_LOOKAHEAD_DAYS * 86400000);
-  const back  = new Date(now.getTime() - (DIGEST.CONVENTION_LOOKBACK_DAYS || 0) * 86400000);
+  const ahead = DIGEST.CONVENTION_MILESTONES || [];
+  const after = DIGEST.CONVENTION_AFTER || [];
 
-  const dated = CONVENTIONS.map((c) => Object.assign({}, c, { when: new Date(c.date) }));
+  const upcoming = [];
+  const inForce = [];
 
-  const upcoming = dated
-    .filter((c) => c.when >= now && c.when <= ahead)
-    .sort((a, b) => a.when - b.when)
-    .map((c) => {
-      const days = Math.ceil((c.when - now) / 86400000);
-      return `  ${c.when.toISOString().slice(0, 10)} (in ${days} days) — ${c.title}${c.ref ? ` · ${c.ref}` : ''}`;
-    });
+  for (const c of CONVENTIONS) {
+    const days = dayDiff(new Date(c.date), now);
+    const tail = `${c.title}${c.ref ? ` · ${c.ref}` : ''}`;
 
-  const recent = dated
-    .filter((c) => c.when < now && c.when >= back)
-    .sort((a, b) => b.when - a.when)
-    .map((c) => `  In force since ${c.when.toISOString().slice(0, 10)} — ${c.title}${c.ref ? ` · ${c.ref}` : ''}`);
+    if (days === 0) {
+      inForce.push(`  <b>Today</b> — ${tail}`);
+    } else if (days > 0 && ahead.indexOf(days) !== -1) {
+      const when = days === 1 ? 'Tomorrow' : `In ${days} days`;
+      upcoming.push({ days, line: `  <b>${when}</b> · ${c.date} — ${tail}` });
+    } else if (days < 0 && after.indexOf(-days) !== -1) {
+      inForce.push(`  In force since ${c.date} — ${tail}`);
+    }
+  }
 
   const out = [];
-  if (upcoming.length) out.push('⚖️ <b>Entering into force</b>\n' + upcoming.join('\n'));
-  if (recent.length)   out.push('✅ <b>Recently in force</b>\n' + recent.join('\n'));
+
+  if (upcoming.length) {
+    upcoming.sort((a, b) => a.days - b.days);
+    out.push('⚖️ <b>Entering into force</b>\n' + upcoming.map((u) => u.line).join('\n'));
+  }
+
+  if (inForce.length) {
+    out.push('✅ <b>Now in force</b>\n' + inForce.join('\n'));
+  }
 
   return out.length ? out.join('\n\n') : null;
 }
