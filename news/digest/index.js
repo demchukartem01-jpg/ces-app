@@ -1,13 +1,16 @@
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const cron = require('node-cron');
 const { ObjectId } = require('mongodb');
 const { DIGEST } = require('./config');
-const { buildDigest } = require('./blocks');
+const { buildDigest, buildRegulatory } = require('./blocks');
 
 let database;
 
 const COVER = path.join(__dirname, 'cover.png');
+// Обложка регуляторного поста — переиспользуем ту, что уже есть у новостей
+const REG_COVER = path.join(__dirname, '..', 'covers', 'regulation.png');
 
 const OPTS = { parse_mode: 'HTML', disable_web_page_preview: true };
 
@@ -18,30 +21,47 @@ const CAPTION_LIMIT = 1024;
 const FILE_OPTS = { filename: 'cover.png', contentType: 'image/png' };
 
 // Влезает — одним сообщением с подписью. Не влезает — картинка и текст раздельно.
-async function deliver(bot, chatId, text, extra) {
-  const hasCover = fs.existsSync(COVER);
+async function deliver(bot, chatId, text, extra, coverPath) {
+  const COVER_FILE = coverPath || COVER;
+  const hasCover = fs.existsSync(COVER_FILE);
 
   if (hasCover && text.length <= CAPTION_LIMIT) {
-    return bot.sendPhoto(chatId, COVER, Object.assign({
+    return bot.sendPhoto(chatId, COVER_FILE, Object.assign({
       caption: text,
       parse_mode: 'HTML',
     }, extra || {}), FILE_OPTS);
   }
 
   if (hasCover) {
-    await bot.sendPhoto(chatId, COVER, {}, FILE_OPTS)
+    await bot.sendPhoto(chatId, COVER_FILE, {}, FILE_OPTS)
       .catch((e) => console.error('[digest:cover]', e.message));
   }
   return bot.sendMessage(chatId, text, Object.assign({}, OPTS, extra || {}));
 }
 
+// Хэш содержимого без строки с датой — чтобы сравнивать именно данные.
+function contentHash(text) {
+  const body = text.split('\n').slice(1).join('\n');
+  return crypto.createHash('sha1').update(body).digest('hex');
+}
+
 // Собираем сводку и сохраняем — кнопке нужно, что именно публиковать.
-async function prepare() {
+// force = true у ручной команды /digest: она собирает всегда.
+async function prepare(force) {
   const text = await buildDigest(database);
   if (!text) return null;
 
+  const hash = contentHash(text);
+
+  if (!force && DIGEST.SKIP_IF_UNCHANGED) {
+    const last = await database.collection('digests').findOne(
+      { status: 'published' }, { sort: { publishedAt: -1 } }
+    );
+    if (last && last.hash === hash) return { unchanged: true };
+  }
+
   const res = await database.collection('digests').insertOne({
-    text, createdAt: new Date(), status: 'draft',
+    text, hash, createdAt: new Date(), status: 'draft',
   });
 
   return { text, id: res.insertedId };
@@ -62,6 +82,10 @@ async function runDaily(bot, moderation) {
     const d = await prepare();
     if (!d) {
       console.error('[digest] все блоки пустые, сводка не отправлена');
+      return;
+    }
+    if (d.unchanged) {
+      console.log('[digest] содержимое не изменилось — пропускаем');
       return;
     }
 
@@ -119,6 +143,20 @@ async function handleDigestCallback(bot, cb) {
   return true;
 }
 
+// Регуляторный пост — выходит только в дни крупных вех.
+async function runRegulatory(bot, moderation) {
+  try {
+    const text = buildRegulatory(new Date());
+    if (!text) return;   // сегодня вех нет — молчим
+
+    const target = moderation ? process.env.ADMIN_CHAT_ID : process.env.CHANNEL_ID;
+    await deliver(bot, target, text, null, REG_COVER);
+    console.log('[digest] регуляторный пост отправлен');
+  } catch (e) {
+    console.error('[digest:regulatory]', e.message);
+  }
+}
+
 function startDigest(bot, db, moderation) {
   database = db;
 
@@ -126,6 +164,7 @@ function startDigest(bot, db, moderation) {
   const mod = (DIGEST.MODERATION !== undefined) ? DIGEST.MODERATION : moderation;
 
   cron.schedule(DIGEST.CRON, () => runDaily(bot, mod));
+  cron.schedule(DIGEST.REG_CRON, () => runRegulatory(bot, mod));
 
   bot.on('callback_query', (cb) => {
     handleDigestCallback(bot, cb).catch((e) => console.error('[digest]', e.message));
@@ -137,7 +176,7 @@ function startDigest(bot, db, moderation) {
 
     await bot.sendMessage(msg.chat.id, 'Собираю сводку…');
     try {
-      const d = await prepare();
+      const d = await prepare(true);
       if (!d) return bot.sendMessage(msg.chat.id, 'Все блоки пустые — смотри логи.');
       await deliver(bot, msg.chat.id, d.text, reviewKeyboard(d.id));
     } catch (e) {
@@ -145,7 +184,19 @@ function startDigest(bot, db, moderation) {
     }
   });
 
-  console.log('[digest] сводка запущена, расписание:', DIGEST.CRON, '| автопубликация:', !mod);
+  // /reg — собрать регуляторный пост прямо сейчас, для проверки
+  bot.onText(/\/reg/, async (msg) => {
+    if (String(msg.chat.id) !== String(process.env.ADMIN_CHAT_ID)) return;
+    const text = buildRegulatory(new Date());
+    if (!text) {
+      return bot.sendMessage(msg.chat.id,
+        'Сегодня крупных вех нет — пост не выйдет. Это нормально.');
+    }
+    await deliver(bot, msg.chat.id, text, null, REG_COVER);
+  });
+
+  console.log('[digest] сводка запущена, расписание:', DIGEST.CRON,
+              '| регуляторный:', DIGEST.REG_CRON, '| автопубликация:', !mod);
 }
 
 module.exports = { startDigest, handleDigestCallback };
