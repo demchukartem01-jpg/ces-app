@@ -166,12 +166,13 @@ try {
       handleNewsCallback(bot, cb).catch(e => console.error('[news]', e.message));
     });
 
-    startNewsPipeline(bot)
-      .then(async () => {
-        const db = await newsStore.initStore();
-        startDigest(bot, db, CONFIG.MODERATION);
-      })
-      .catch(e => console.error('[news] старт:', e.message));
+startNewsPipeline(bot)
+        .then(async () => {
+          const db = await newsStore.initStore();
+          startDigest(bot, db, CONFIG.MODERATION);
+          require('./news/content').startContent(bot, db);
+        })
+        .catch(e => console.error('[news] старт:', e.message));
   
  // ===== ПРИВЕТСТВИЕ =====
     const CHANNEL_URL = 'https://t.me/MaritimeHubb';
