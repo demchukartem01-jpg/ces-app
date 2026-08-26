@@ -1,27 +1,56 @@
-// Источники новостей. Начни с 4 — больше на старте только шум.
+// Фильтры релевантности. Применяются ДО отправки в Claude — экономят токены
+// на широких лентах, где морского контента меньшинство.
+const MARITIME_FILTER =
+  /(море|морськ|морск|судн|порт|танкер|балкер|контейнер|фрахт|екіпаж|экипаж|моряк|навігац|навигац|причал|термінал|терминал|shipping|vessel|seafarer|port|tanker|freight)/i;
+
+const DOC_FILTER =
+  /(STCW|MLC|diploma|диплом|сертифікат|сертификат|посвідчення|удостоверен|кваліфікац|квалификац|підтвердження|подтвержден|виза|віза|visa|seaman|CoC|certificate of competency|endorsement|revalidation|medical certificate|ENG1|manning|Морська адміністрація)/i;
+
+// Источники новостей.
+// category — влияет на ротацию публикаций: конвейер по очереди берёт из той
+//            категории, из которой дольше всего не публиковали.
+// filter   — необязательный: если задан, заголовок+текст должны совпасть,
+//            иначе статья даже не уйдёт в Claude.
 const SOURCES = [
   // ── Общие издания ─────────────────────────────────────────────
-  { name: 'Splash 247',         url: 'https://splash247.com/feed/' },
-  { name: 'Maritime Executive', url: 'https://maritime-executive.com/articles.rss' },
-  { name: 'Safety4Sea',         url: 'https://safety4sea.com/feed/' },
-  { name: 'Marine Insight',     url: 'https://www.marineinsight.com/feed/' },
-  { name: 'gCaptain',           url: 'https://gcaptain.com/feed/' },
+  { name: 'Splash 247',         url: 'https://splash247.com/feed/',                        category: 'WORLD' },
+  { name: 'Maritime Executive', url: 'https://maritime-executive.com/articles.rss',        category: 'WORLD' },
+  { name: 'Safety4Sea',         url: 'https://safety4sea.com/feed/',                       category: 'WORLD' },
+  { name: 'Marine Insight',     url: 'https://www.marineinsight.com/feed/',                category: 'WORLD' },
+  { name: 'gCaptain',           url: 'https://gcaptain.com/feed/',                         category: 'WORLD' },
 
   // ── Расследования аварий: разборы, а не заметки ───────────────
-  { name: 'MAIB',    url: 'https://www.gov.uk/government/organisations/marine-accident-investigation-branch.atom' },
-  { name: 'NTSB',    url: 'https://www.ntsb.gov/news/press-releases/Pages/RSSFeed.aspx' },
-  { name: 'ATSB',    url: 'https://www.atsb.gov.au/rss.xml' },
+  { name: 'MAIB',    url: 'https://www.gov.uk/government/organisations/marine-accident-investigation-branch.atom', category: 'WORLD' },
+  { name: 'NTSB',    url: 'https://www.ntsb.gov/news/press-releases/Pages/RSSFeed.aspx',   category: 'WORLD' },
+  { name: 'ATSB',    url: 'https://www.atsb.gov.au/rss.xml',                               category: 'WORLD' },
 
   // ── Экипаж, зарплаты, брошенные суда ──────────────────────────
-  { name: 'ITF Seafarers', url: 'https://www.itfseafarers.org/en/rss.xml' },
-  { name: 'Nautilus Int',  url: 'https://www.nautilusint.org/en/news-insight/news/rss/' },
+  { name: 'ITF Seafarers', url: 'https://www.itfseafarers.org/en/rss.xml',                 category: 'WORLD' },
+  { name: 'Nautilus Int',  url: 'https://www.nautilusint.org/en/news-insight/news/rss/',   category: 'WORLD' },
 
-  // ── Регулирование и практика ──────────────────────────────────
-  { name: 'IMO',           url: 'https://www.imo.org/en/MediaCentre/Pages/rss.aspx' },
-  { name: 'Offshore Energy', url: 'https://www.offshore-energy.biz/feed/' },
+  // ── Украина ───────────────────────────────────────────────────
+  { name: 'USM',           url: 'https://en.usm.media/feed/',                              category: 'UA' },
+  { name: 'USM (укр)',     url: 'https://usm.media/feed/',                                 category: 'UA' },
+  { name: 'ЦТС',           url: 'https://cfts.org.ua/rss',                                 category: 'UA', filter: MARITIME_FILTER },
+  { name: 'ПРМТУ',         url: 'https://mtwtu.org.ua/feed/',                              category: 'UA' },
+
+  // ── Европа и оффшор ───────────────────────────────────────────
+  { name: 'Offshore Energy',  url: 'https://www.offshore-energy.biz/feed/',                category: 'EU_OFFSHORE' },
+  { name: 'Offshore Wind',    url: 'https://www.offshorewind.biz/feed/',                   category: 'EU_OFFSHORE' },
+  { name: 'Naval Today',      url: 'https://www.navaltoday.com/feed/',                     category: 'EU_OFFSHORE' },
+  { name: 'Hellenic Shipping', url: 'https://www.hellenicshippingnews.com/feed/',          category: 'EU_OFFSHORE' },
+
+  // ── Документы: дипломы, конвенции, требования ─────────────────
+  { name: 'IMO',       url: 'https://www.imo.org/en/MediaCentre/Pages/rss.aspx',           category: 'DOCS' },
+  // gov.uk отдаёт Atom для любого поискового URL — отсюда идут MGN/MSN
+  { name: 'MCA (UK)',  url: 'https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=maritime-and-coastguard-agency', category: 'DOCS' },
+  { name: 'Safety4Sea Docs', url: 'https://safety4sea.com/feed/',                          category: 'DOCS', filter: DOC_FILTER },
 
   // ПЛАТНЫЕ, RSS не отдают — не добавляй, потратишь время:
-  // TradeWinds, Lloyd's List, Fairplay
+  // TradeWinds, Lloyd\'s List, Fairplay
+  //
+  // БЕЗ RSS, нужен watcher по странице (механизм есть в news/digest/):
+  // marad.gov.ua, uspa.gov.ua, emsa.europa.eu, liscr.com, register-iri.com
 ];
 
 // Эмодзи по теме — ставится перед заголовком. Меняй свободно.
@@ -78,6 +107,14 @@ const AUDIENCE_BRIEF = `
   изменения процедур, программы по усталости и психическому здоровью
 - заказы на новострой, если они влекут набор экипажей
 
+Отдельно важно: всё, что меняет требования к документам моряка — дипломы,
+подтверждения, сертификаты, медкомиссия, визы, требования флагов и портов.
+Такие новости не пропускай, даже если они выглядят сухо и бюрократично.
+
+Украинские новости: порты, морской коридор, работа моряков, крюинг, документы
+Морской администрации. Военную и политическую сводку как таковую — пропускай,
+она не про работу. Про удары по портам пиши сдержанно и по фактам.
+
 Им НЕ важно: квартальные отчёты и прибыль, котировки акций, фрахтовые
 индексы сами по себе, пресс-релизы про партнёрства, реклама оборудования.
 Разница простая: смена управляющей компании касается моряка напрямую,
@@ -97,7 +134,9 @@ const CONFIG = {
   // Выше 90 — пост перестанет влезать в подпись под фото (лимит 1024).
   BODY_WORDS: 80,
 
-  MODERATION: true,
+  // Автопубликация. Очередь заполняется сразу со статусом approved,
+  // модерация по кнопкам не запрашивается. Верни true — вернётся ручной шаг.
+  MODERATION: false,
 };
 
-module.exports = { SOURCES, AUDIENCE_BRIEF, CONFIG, EMOJI, THEMES };
+module.exports = { SOURCES, AUDIENCE_BRIEF, CONFIG, EMOJI, THEMES, MARITIME_FILTER, DOC_FILTER };

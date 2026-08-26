@@ -21,6 +21,13 @@ async function initStore(existingDb) {
   // Уникальный индекс — главная защита от повторной публикации.
   await db.collection('news').createIndex({ linkHash: 1 }, { unique: true });
   await db.collection('news').createIndex({ status: 1, createdAt: 1 });
+  await db.collection('news').createIndex({ status: 1, category: 1, createdAt: 1 });
+
+  // Разовая миграция: всё, что накопилось до категорий, считаем мировым.
+  await db.collection('news').updateMany(
+    { category: { $exists: false } },
+    { $set: { category: 'WORLD' } }
+  );
 
   return db;
 }
@@ -66,6 +73,7 @@ async function enqueue(item, draft) {
     linkHash: hash(item.link),
     link: item.link,
     source: item.source,
+    category: item.category || 'WORLD',
     titleRaw: item.title,
     draft,
     status: CONFIG.MODERATION ? 'review' : 'approved',
@@ -93,8 +101,28 @@ function skip(item, reason) {
   );
 }
 
-const nextApproved = () =>
-  db.collection('news').findOne({ status: 'approved' }, { sort: { createdAt: 1 } });
+// Ротация по категориям: берём ту, из которой дольше всего не публиковали.
+// Иначе пачка украинских новостей, собранная за один час, вылезет подряд
+// и вытеснит всё остальное на несколько часов.
+async function nextApproved() {
+  const cats = await db.collection('news').distinct('category', { status: 'approved' });
+  if (!cats.length) return null;
+
+  let pick = null;
+  for (const c of cats) {
+    const last = await db.collection('news').findOne(
+      { status: 'published', category: c },
+      { sort: { publishedAt: -1 }, projection: { publishedAt: 1 } }
+    );
+    const t = last && last.publishedAt ? new Date(last.publishedAt).getTime() : 0;
+    if (!pick || t < pick.t) pick = { c, t };
+  }
+
+  return db.collection('news').findOne(
+    { status: 'approved', category: pick.c },
+    { sort: { createdAt: 1 } }
+  );
+}
 
 const setStatus = (id, status, extra) =>
   db.collection('news').updateOne({ _id: id }, { $set: Object.assign({ status }, extra || {}) });

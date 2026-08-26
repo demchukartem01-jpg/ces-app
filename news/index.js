@@ -20,10 +20,15 @@ async function collect(bot) {
       for (const raw of fresh) {
         const item = {
           source: src.name,
+          category: src.category || 'WORLD',
           title: raw.title || '',
           link: raw.link,
           content: raw.contentSnippet || raw.content || '',
         };
+
+        // Фильтр релевантности до вызова Claude — на широких лентах
+        // отсекает большинство статей и экономит токены.
+        if (src.filter && !src.filter.test(item.title + ' ' + item.content)) continue;
 
         if (await store.isDuplicate(item)) continue;
 
@@ -36,6 +41,7 @@ async function collect(bot) {
 
         const saved = await store.enqueue(item, draft);
         if (saved && CONFIG.MODERATION) await sendForReview(bot, saved);
+        else if (saved) console.log('[news:auto]', item.category, '—', item.title.slice(0, 60));
       }
     } catch (e) {
       // Один упавший источник не должен ронять весь обход.
