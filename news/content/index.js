@@ -8,14 +8,22 @@ const FILE_OPTS = { filename: 'card.png', contentType: 'image/png' };
 const CAPTION_LIMIT = 1024;
 
 // Индекс ротации храним в базе — переживает рестарт сервиса.
+//
+// ВНИМАНИЕ: в драйвере mongodb 6.x findOneAndUpdate возвращает сам документ,
+// а не обёртку { value: ... } как в 4.x. Старый код читал doc.value — всегда
+// undefined — и индекс навсегда застревал на 0 (вечный SIRE 2.0).
 async function nextIndex(db, key, length) {
-  const doc = await db.collection('content_state').findOneAndUpdate(
+  const res = await db.collection('content_state').findOneAndUpdate(
     { _id: key },
     { $inc: { i: 1 } },
     { upsert: true, returnDocument: 'after' }
   );
-  const i = ((doc.value && doc.value.i) || 0) % length;
-  return i;
+
+  // Поддерживаем обе формы ответа драйвера — на случай отката версии.
+  const state = res && res.value !== undefined ? res.value : res;
+  const counter = state && Number.isInteger(state.i) ? state.i : 0;
+
+  return ((counter % length) + length) % length;
 }
 
 async function sendCard(bot, chatId, title, tag, source, caption) {
