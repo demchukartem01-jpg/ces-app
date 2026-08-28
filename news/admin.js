@@ -211,11 +211,78 @@ async function handleAdminCallback(bot, cb) {
       return true;
     }
 
+    // Сбор по кнопке: обходит все ленты и отчитывается, сколько добавилось.
     if (what === 'news') {
-      await bot.answerCallbackQuery(cb.id, { text: 'Проверяю источники…' });
+      await bot.answerCallbackQuery(cb.id, { text: 'Обхожу источники…' });
+      const news = db.collection('news');
+
+      const before = await news.countDocuments({ status: 'approved' });
+      const t0 = Date.now();
+
       const { collect } = require('./index');
       await collect(bot);
-      await bot.sendMessage(chatId, 'Источники проверены. Новые черновики придут отдельно.');
+
+      const after   = await news.countDocuments({ status: 'approved' });
+      const added   = after - before;
+      const seconds = Math.round((Date.now() - t0) / 1000);
+
+      if (!added) {
+        await bot.sendMessage(chatId,
+          `Обход занял ${seconds} с. Новых новостей нет — всё уже собрано ранее ` +
+          'или отсеяно фильтрами. Смотри логи Render, если ждал больше.');
+        return true;
+      }
+
+      // Что именно пришло — по категориям, чтобы сразу видеть перекос
+      const byCat = await news.aggregate([
+        { $match: { status: 'approved' } },
+        { $group: { _id: '$category', n: { $sum: 1 } } },
+        { $sort: { n: -1 } },
+      ]).toArray();
+
+      const cats = byCat.map((c) => `${c._id || 'WORLD'} ${c.n}`).join(' · ');
+
+      await bot.sendMessage(chatId,
+        `✅ <b>Собрано ${added}</b> за ${seconds} с\n` +
+        `В очереди всего <b>${after}</b>: ${cats}\n\n` +
+        'Выбрать вручную или выпустить всё подряд?',
+        {
+          parse_mode: 'HTML',
+          reply_markup: {
+            inline_keyboard: [
+              [{ text: '📋 Показать и выбрать', callback_data: 'adm:queue' }],
+              [{ text: '🚀 Выпустить всё подряд', callback_data: 'adm:flush' }],
+            ],
+          },
+        });
+      return true;
+    }
+
+    // Публикует всю очередь подряд с паузой, чтобы не словить лимит Telegram.
+    if (what === 'flush') {
+      await bot.answerCallbackQuery(cb.id, { text: 'Публикую…' });
+      const { setStatus } = require('./store');
+      const { publishToChannel } = require('./publish');
+
+      const docs = await db.collection('news')
+        .find({ status: 'approved' }).sort({ createdAt: 1 }).limit(20).toArray();
+
+      let done = 0;
+      for (const doc of docs) {
+        try {
+          await publishToChannel(bot, doc);
+          await setStatus(doc._id, 'published', { publishedAt: new Date() });
+          done++;
+          await new Promise((r) => setTimeout(r, 4000));   // пауза между постами
+        } catch (e) {
+          console.error('[admin:flush]', e.message);
+          await setStatus(doc._id, 'failed', { error: e.message });
+        }
+      }
+
+      const left = await db.collection('news').countDocuments({ status: 'approved' });
+      await bot.sendMessage(chatId,
+        `Опубликовано ${done}. В очереди осталось ${left}.`);
       return true;
     }
   } catch (e) {
