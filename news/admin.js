@@ -28,10 +28,11 @@ const KEYBOARD = {
 
 async function panelText() {
   const news = db.collection('news');
-  const [queued, published, skipped] = await Promise.all([
-    news.countDocuments({ status: { $in: ['review', 'approved'] } }),
+  const [queued, published, skipped, stuck] = await Promise.all([
+    news.countDocuments({ status: 'approved' }),
     news.countDocuments({ status: 'published' }),
     news.countDocuments({ status: 'skipped' }),
+    news.countDocuments({ status: 'review' }),
   ]);
 
   const lastDigest = await db.collection('digests').findOne(
@@ -46,8 +47,9 @@ async function panelText() {
     '🛠 <b>Панель управления</b>',
     '',
     `📰 Новости: <b>${queued}</b> в очереди · ${published} опубликовано · ${skipped} отсеяно`,
+    stuck ? `⚠️ Зависших в модерации: ${stuck} — жми Чистку` : '',
     `📊 Последняя сводка: ${when}`,
-  ].join('\n');
+  ].filter(Boolean).join('\n');
 }
 
 async function stats() {
@@ -268,7 +270,7 @@ async function handleAdminCallback(bot, cb) {
 
       await bot.answerCallbackQuery(cb.id, { text: `Снято ${dropped}` });
       await bot.sendMessage(chatId,
-        `🧹 Снято с очереди: <b>${dropped}</b> (старше 20 ч)\n` +
+        `🧹 Снято: <b>${dropped}</b> (старше 20 ч, включая зависшие в модерации)\n` +
         `Осталось свежих: <b>${left}</b>`,
         { parse_mode: 'HTML' });
       return true;
