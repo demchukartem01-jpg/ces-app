@@ -28,17 +28,14 @@ const SOURCES = [
   // ── Расследования аварий: разборы, а не заметки ───────────────
   { name: 'MAIB',    url: 'https://www.gov.uk/government/organisations/marine-accident-investigation-branch.atom', category: 'WORLD' },
   { name: 'NTSB',    url: 'https://www.ntsb.gov/news/press-releases/Pages/RSSFeed.aspx',   category: 'WORLD' },
-  { name: 'ATSB',    url: 'https://www.atsb.gov.au/rss.xml',                               category: 'WORLD' },
 
   // ── Экипаж, зарплаты, брошенные суда ──────────────────────────
   { name: 'ITF Seafarers', url: 'https://www.itfseafarers.org/en/rss.xml',                 category: 'WORLD' },
-  { name: 'Nautilus Int',  url: 'https://www.nautilusint.org/en/news-insight/news/rss/',   category: 'WORLD' },
 
   // ── Украина ───────────────────────────────────────────────────
+  // ЦТС и ПРМТУ отдавали 500/404 — RSS у них нет, нужен watcher по странице.
   { name: 'USM',           url: 'https://en.usm.media/feed/',                              category: 'UA' },
   { name: 'USM (укр)',     url: 'https://usm.media/feed/',                                 category: 'UA' },
-  { name: 'ЦТС',           url: 'https://cfts.org.ua/rss',                                 category: 'UA', filter: MARITIME_FILTER },
-  { name: 'ПРМТУ',         url: 'https://mtwtu.org.ua/feed/',                              category: 'UA' },
 
   // ── Европа и оффшор ───────────────────────────────────────────
   { name: 'Offshore Energy',  url: 'https://www.offshore-energy.biz/feed/',                category: 'EU_OFFSHORE' },
@@ -47,14 +44,13 @@ const SOURCES = [
   { name: 'Hellenic Shipping', url: 'https://www.hellenicshippingnews.com/feed/',          category: 'EU_OFFSHORE' },
 
   // ── Техника: машина, навигация, новые технологии ──────────────
-  { name: 'The Motorship',    url: 'https://www.motorship.com/feed',                        category: 'TECH' },
-  { name: 'Riviera Maritime', url: 'https://www.rivieramm.com/rss/news',                    category: 'TECH' },
+  // Motorship и Riviera отдавали 404 — RSS не публикуют, нужен watcher.
   { name: 'Ship Technology',  url: 'https://www.ship-technology.com/feed/',                 category: 'TECH' },
   { name: 'Marine Insight Tech', url: 'https://www.marineinsight.com/feed/',                category: 'TECH', filter: TECH_FILTER },
   { name: 'Safety4Sea Tech',  url: 'https://safety4sea.com/feed/',                          category: 'TECH', filter: TECH_FILTER },
 
   // ── Документы: дипломы, конвенции, требования ─────────────────
-  { name: 'IMO',       url: 'https://www.imo.org/en/MediaCentre/Pages/rss.aspx',           category: 'DOCS' },
+  // IMO отдаёт 500 — их rss.aspx мёртв, нужен watcher по MediaCentre.
   // gov.uk отдаёт Atom для любого поискового URL — отсюда идут MGN/MSN
   { name: 'MCA (UK)',  url: 'https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=maritime-and-coastguard-agency', category: 'DOCS' },
   { name: 'Safety4Sea Docs', url: 'https://safety4sea.com/feed/',                          category: 'DOCS', filter: DOC_FILTER },
