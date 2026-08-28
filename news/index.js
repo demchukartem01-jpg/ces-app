@@ -15,6 +15,35 @@ const parser = new Parser({
   headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BridgeWatchBot/1.0; +https://t.me/MaritimeHubb)' },
 });
 
+// Часть лент (Safety4Sea, NTSB) отдаёт XML с невалидными атрибутами вида
+// <tag attr> без значения — строгий парсер на них падает и теряет всю ленту.
+// Чиним только то, что мешает разбору, не трогая содержимое.
+function sanitizeXml(xml) {
+  return xml
+    // одиночный & не из сущности → &amp;
+    .replace(/&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)/g, '&amp;')
+    // управляющие символы, недопустимые в XML
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '')
+    // атрибут без значения → attr="attr"
+    .replace(/<([a-zA-Z][\w:.-]*)((?:\s+[\w:.-]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s"'>]+))?)*)\s*(\/?)>/g,
+      (m, tag, attrs, close) =>
+        '<' + tag + attrs.replace(/(\s+)([\w:.-]+)(?![\s]*=)(?=\s|$)/g, '$1$2="$2"') + close + '>');
+}
+
+// Сначала обычный разбор. Если лента кривая — качаем сырьё, чистим и пробуем снова.
+async function fetchFeed(url) {
+  try {
+    return await parser.parseURL(url);
+  } catch (e) {
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BridgeWatchBot/1.0)' },
+      signal: AbortSignal.timeout(20000),
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await parser.parseString(sanitizeXml(await res.text()));
+  }
+}
+
 // ── Сборщик: обходит источники и наполняет очередь ──────────────────────
 async function collect(bot) {
   // Перед обходом убираем из очереди то, что успело протухнуть, пока ждало
@@ -22,9 +51,13 @@ async function collect(bot) {
   const stale = await store.dropStale(CONFIG.FRESH_HOURS);
   if (stale) console.log('[news:collect] протухло и снято:', stale);
 
+  // Отчёт по каждой ленте — чтобы видеть, какие живы, а какие пора убирать.
+  const report = { ok: [], fail: [] };
+
   for (const src of SOURCES) {
     try {
-      const feed = await parser.parseURL(src.url);
+      const feed = await fetchFeed(src.url);
+      report.ok.push(`${src.name} (${feed.items.length})`);
 
       const fresh = feed.items
         .filter((i) => i.link &&
@@ -59,9 +92,15 @@ async function collect(bot) {
       }
     } catch (e) {
       // Один упавший источник не должен ронять весь обход.
+      report.fail.push(`${src.name}: ${e.message.slice(0, 40)}`);
       console.error(`[news:collect] ${src.name}:`, e.message);
     }
   }
+
+  console.log(`[news:collect] живых лент ${report.ok.length} из ${SOURCES.length}`);
+  if (report.fail.length) console.log('[news:collect] упали:', report.fail.join(' | '));
+
+  return report;
 }
 
 // ── Публикатор: отдаёт максимум один пост за запуск ─────────────────────

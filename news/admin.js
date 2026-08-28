@@ -223,16 +223,25 @@ async function handleAdminCallback(bot, cb) {
       const t0 = Date.now();
 
       const { collect } = require('./index');
-      await collect(bot);
+      const report = await collect(bot);
 
       const after   = await news.countDocuments({ status: 'approved' });
       const added   = after - before;
       const seconds = Math.round((Date.now() - t0) / 1000);
 
+      // Здоровье лент показываем всегда — даже когда новых новостей нет.
+      const health = report
+        ? `\n\n📡 Лент живых: <b>${report.ok.length}</b> из ${report.ok.length + report.fail.length}` +
+          (report.fail.length
+            ? `\n❌ Не отвечают:\n<code>${report.fail.join('\n')}</code>`
+            : '')
+        : '';
+
       if (!added) {
         await bot.sendMessage(chatId,
           `Обход занял ${seconds} с. Новых новостей нет — всё уже собрано ранее ` +
-          'или отсеяно фильтрами. Смотри логи Render, если ждал больше.');
+          'или отсеяно фильтрами.' + health,
+          { parse_mode: 'HTML' });
         return true;
       }
 
@@ -247,7 +256,7 @@ async function handleAdminCallback(bot, cb) {
 
       await bot.sendMessage(chatId,
         `✅ <b>Собрано ${added}</b> за ${seconds} с\n` +
-        `В очереди всего <b>${after}</b>: ${cats}\n\n` +
+        `В очереди всего <b>${after}</b>: ${cats}` + health + '\n\n' +
         'Выбрать вручную или выпустить всё подряд?',
         {
           parse_mode: 'HTML',
