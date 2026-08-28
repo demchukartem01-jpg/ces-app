@@ -18,14 +18,28 @@ const cron = require('node-cron');
 //   в ленту полезет меню, футер и баннеры.
 // skipPattern — что отбросить дополнительно (архивы, страницы-разделы).
 // title — как подписывать в канале.
+// Проверено 28.08.2026. Не поддаются статическому разбору и убраны:
+//   uscg      — HTTP 403 на любой запрос вне браузера
+//   marshall  — register-iri.com рвёт соединение
+//   gard      — список статей рисуется через JavaScript
+// Чтобы их взять, нужен headless-браузер на сервере: тяжело и не окупается.
 const WATCH = [
   {
-    // USCG отдаёт 403 обычному фиду, но HTML-страница открывается —
-    // MSIB, NVIC, дипломирование, навигационные системы.
-    id: 'uscg',
-    title: '🇺🇸 USCG Maritime Commons',
-    url: 'https://www.news.uscg.mil/maritime-commons/',
-    linkPattern: /maritime-commons\/Article\/\d+\//i,
+    // AMSA публикует marine notices: усталость, вахта, PSC-кампании,
+    // требования при заходе в австралийские порты.
+    id: 'amsa',
+    title: '🇦🇺 AMSA',
+    url: 'https://www.amsa.gov.au/about/regulations-and-standards/index-marine-notices',
+    linkPattern: /amsa\.gov\.au\/.*(marine-notice|safety-alert)/i,
+    skipPattern: /index-marine-notices$/i,
+  },
+  {
+    // ABS Regulatory News — сводки по MARPOL, SOLAS, требованиям флагов
+    // и портовых властей глазами классификационного общества.
+    id: 'abs',
+    title: '📐 ABS Regulatory News',
+    url: 'https://ww2.eagle.org/en/rules-and-resources/regulatory-news0.html',
+    linkPattern: /eagle\.org\/en\/.*regulatory-news.*\/[a-z0-9-]{8,}\.html/i,
   },
   {
     id: 'imo',
@@ -55,22 +69,10 @@ const WATCH = [
     skipPattern: /(news-and-insights|about|contact|privacy|cookie|careers)/i,
   },
   {
-    id: 'marshall',
-    title: '🏴 Marshall Islands',
-    url: 'https://www.register-iri.com/blog/',
-    linkPattern: /register-iri\.com\/blog\/[a-z0-9-]{10,}/i,
-  },
-  {
     id: 'dnv',
     title: '📐 DNV',
     url: 'https://www.dnv.com/maritime/technical-regulatory-news/',
     linkPattern: /technical-regulatory-news\/[^/]+/i,
-  },
-  {
-    id: 'gard',
-    title: '🛡 Gard',
-    url: 'https://www.gard.no/articles/',
-    linkPattern: /gard\.no\/(articles|insights)\/[a-z0-9-]{10,}/i,
   },
   {
     id: 'ukpandi',
