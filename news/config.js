@@ -77,9 +77,7 @@ const SOURCES = [
 
   // ── DOCS: дипломы, конвенции, требования ─────────────────────
   // Первоисточники: официальные бюллетени и циркуляры, а не пересказы.
-  // USCG Maritime Commons — MSIB, NVIC, требования к дипломам, навигационные
   // системы. Ссылка на страницу: бот сам найдёт фид, если тот объявлен.
-  { name: 'USCG Maritime Commons', url: 'https://www.news.uscg.mil/maritime-commons/', category: 'DOCS' },
   { name: 'MCA (UK)',            url: 'https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=maritime-and-coastguard-agency', category: 'DOCS' },
   { name: 'MarineLink Docs',     url: 'https://www.marinelink.com/news/rss',                category: 'DOCS', filter: DOC_FILTER },
   { name: 'gCaptain Docs',       url: 'https://gcaptain.com/feed/',                         category: 'DOCS', filter: DOC_FILTER },

@@ -20,6 +20,14 @@ const cron = require('node-cron');
 // title — как подписывать в канале.
 const WATCH = [
   {
+    // USCG отдаёт 403 обычному фиду, но HTML-страница открывается —
+    // MSIB, NVIC, дипломирование, навигационные системы.
+    id: 'uscg',
+    title: '🇺🇸 USCG Maritime Commons',
+    url: 'https://www.news.uscg.mil/maritime-commons/',
+    linkPattern: /maritime-commons\/Article\/\d+\//i,
+  },
+  {
     id: 'imo',
     title: '🌍 IMO',
     url: 'https://www.imo.org/en/MediaCentre/PressBriefings/Pages/Default.aspx',
@@ -29,8 +37,9 @@ const WATCH = [
   {
     id: 'parismou',
     title: '🛃 Paris MoU',
-    url: 'https://parismou.org/news',
-    linkPattern: /parismou\.org\/(news|publications)\/[^/]+$/i,
+    url: 'https://parismou.org/',
+    linkPattern: /parismou\.org\/[a-z0-9-]+\/[a-z0-9-]{10,}/i,
+    skipPattern: /(about|contact|login|search|privacy|cookie)/i,
   },
   {
     id: 'emsa',
@@ -41,14 +50,15 @@ const WATCH = [
   {
     id: 'liberia',
     title: '🏴 Liberia Registry',
-    url: 'https://www.liscr.com/marine-notices',
-    linkPattern: /\.pdf$/i,
+    url: 'https://www.liscr.com/news-and-insights',
+    linkPattern: /liscr\.com\/[a-z0-9-]{12,}/i,
+    skipPattern: /(news-and-insights|about|contact|privacy|cookie|careers)/i,
   },
   {
     id: 'marshall',
     title: '🏴 Marshall Islands',
-    url: 'https://www.register-iri.com/notices/',
-    linkPattern: /\.pdf$/i,
+    url: 'https://www.register-iri.com/blog/',
+    linkPattern: /register-iri\.com\/blog\/[a-z0-9-]{10,}/i,
   },
   {
     id: 'dnv',
@@ -59,8 +69,8 @@ const WATCH = [
   {
     id: 'gard',
     title: '🛡 Gard',
-    url: 'https://www.gard.no/insights/',
-    linkPattern: /\/insights\/[^/]+/i,
+    url: 'https://www.gard.no/articles/',
+    linkPattern: /gard\.no\/(articles|insights)\/[a-z0-9-]{10,}/i,
   },
   {
     id: 'ukpandi',
@@ -71,14 +81,15 @@ const WATCH = [
   {
     id: 'marad-ua',
     title: '🇺🇦 Морська адміністрація',
-    url: 'https://marad.gov.ua/ua/novini',
-    linkPattern: /marad\.gov\.ua\/ua\/(novini|news)\/[^/]+/i,
+    url: 'https://marad.gov.ua/ua',
+    linkPattern: /marad\.gov\.ua\/ua\/news\/[a-z0-9-]{8,}/i,
   },
   {
     id: 'uspa',
     title: '🇺🇦 АМПУ',
-    url: 'https://www.uspa.gov.ua/en/news',
-    linkPattern: /uspa\.gov\.ua\/(en|ua)\/[^/]*news[^/]*\/[^/]+/i,
+    url: 'https://www.uspa.gov.ua/',
+    linkPattern: /uspa\.gov\.ua\/[a-z0-9-]{12,}/i,
+    skipPattern: /(about|contact|privacy|cookie|login|search)/i,
   },
 ];
 
