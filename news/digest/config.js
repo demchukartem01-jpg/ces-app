@@ -112,10 +112,43 @@ const CONVENTIONS = [
     ref: 'MARPOL Annex VI',
   },
 
+  // ── Добавлено 28.08.2026 по обзорам DNV (MEPC 83 и MEPC 84) ───────────
+  {
+    date: '2027-01-01',
+    title: 'NOx Tier III certification required for ships contracted on or after this date and intended to operate in the North-East Atlantic ECA',
+    ref: 'MARPOL Annex VI',
+  },
+  {
+    date: '2027-03-01',
+    title: 'NOx Technical Code amendments enter into force — multiple engine operational profiles (MEOP) and engine re-certification allowed',
+    ref: 'NOx Technical Code',
+  },
+  {
+    date: '2027-07-01',
+    title: 'Keel-laying cut-off for North-East Atlantic ECA: ships constructed on or after this date need NOx Tier III engines',
+    ref: 'MARPOL Annex VI',
+  },
+  {
+    date: '2027-09-01',
+    title: 'North-East Atlantic ECA enters into force for SOx, PM and NOx — covers waters of Greenland, Iceland, Faroes, Ireland, UK, France, Spain and Portugal',
+    ref: 'MARPOL Annex VI',
+  },
+  {
+    date: '2028-09-01',
+    title: '0.10 per cent sulphur limit starts to apply in the North-East Atlantic ECA, twelve months after entry into force',
+    ref: 'MARPOL Annex VI',
+  },
+
   // ── ТРЕБУЕТ ПРОВЕРКИ ПЕРЕД ПУБЛИКАЦИЕЙ ────────────────────────────────
-  // IMO Net-Zero Framework: сроки сдвигались, уточни текущий статус
-  // на сайте IMO или в циркулярах DNV, прежде чем раскомментировать.
-  // { date: '2028-01-01', title: 'IMO Net-Zero Framework: first reporting period begins', ref: 'MARPOL Annex VI' },
+  // IMO Net-Zero Framework: по состоянию на май 2026 всё ещё пересматривался
+  // на MEPC 84. Дата вступления в силу 01.03.2027 называлась при условии
+  // принятия на внеочередной сессии, но сессия переносилась. НЕ публикуй,
+  // пока не подтвердишь на imo.org или в свежем обзоре DNV.
+  // { date: '2027-03-01', title: 'IMO Net-Zero Framework enters into force', ref: 'MARPOL Annex VI' },
+  //
+  // Одобрено на MEPC 84, но ещё НЕ принято — даты появятся позже:
+  //   поправки к BWM Convention (усиление освидетельствований)
+  //   PV-клапаны на танкерах, перевозящих сырую нефть (Annex VI, Reg. 15)
 
   // ── Как пополнять ─────────────────────────────────────────────────────
   // Смотри регуляторные обзоры классификационных обществ — они выходят
