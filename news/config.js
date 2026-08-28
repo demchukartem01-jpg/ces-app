@@ -41,7 +41,6 @@ const SOURCES = [
   { name: 'gCaptain',            url: 'https://gcaptain.com/feed/',                        category: 'WORLD' },
   { name: 'Marine Insight',      url: 'https://www.marineinsight.com/feed/',               category: 'WORLD' },
   { name: 'MarineLink',          url: 'https://www.marinelink.com/news/rss',               category: 'WORLD' },
-  { name: 'Safety4Sea',          url: 'https://safety4sea.com/feed/',                      category: 'WORLD' },
   { name: 'Container News',      url: 'https://container-news.com/feed',                   category: 'WORLD', filter: MARITIME_FILTER },
   { name: 'MAIB',                url: 'https://www.gov.uk/government/organisations/marine-accident-investigation-branch.atom', category: 'WORLD' },
   { name: 'Marine Log',          url: 'https://www.marinelog.com/feed',                    category: 'WORLD' },
@@ -68,11 +67,9 @@ const SOURCES = [
   { name: 'Ship Technology',     url: 'https://www.ship-technology.com/feed/',             category: 'TECH' },
   { name: 'MarineLink Tech',     url: 'https://www.marinelink.com/news/rss',               category: 'TECH', filter: TECH_FILTER },
   { name: 'Marine Insight Tech', url: 'https://www.marineinsight.com/feed/',               category: 'TECH', filter: TECH_FILTER },
-  { name: 'Safety4Sea Tech',     url: 'https://safety4sea.com/feed/',                      category: 'TECH', filter: TECH_FILTER },
   { name: 'Container News Tech', url: 'https://container-news.com/feed',                   category: 'TECH', filter: TECH_FILTER },
 
   // ── VETTING: PSC, SIRE, RightShip, задержания ────────────────
-  { name: 'Safety4Sea Vetting',  url: 'https://safety4sea.com/feed/',                      category: 'VETTING', filter: VETTING_FILTER },
   { name: 'MarineLink Vetting',  url: 'https://www.marinelink.com/news/rss',                category: 'VETTING', filter: VETTING_FILTER },
   { name: 'Splash Vetting',      url: 'https://splash247.com/feed/',                        category: 'VETTING', filter: VETTING_FILTER },
   { name: 'Maritime Exec PSC',   url: 'https://maritime-executive.com/articles.rss',       category: 'VETTING', filter: VETTING_FILTER },
@@ -80,7 +77,6 @@ const SOURCES = [
 
   // ── DOCS: дипломы, конвенции, требования ─────────────────────
   { name: 'MCA (UK)',            url: 'https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=maritime-and-coastguard-agency', category: 'DOCS' },
-  { name: 'Safety4Sea Docs',     url: 'https://safety4sea.com/feed/',                      category: 'DOCS', filter: DOC_FILTER },
   { name: 'MarineLink Docs',     url: 'https://www.marinelink.com/news/rss',                category: 'DOCS', filter: DOC_FILTER },
   { name: 'gCaptain Docs',       url: 'https://gcaptain.com/feed/',                         category: 'DOCS', filter: DOC_FILTER },
   { name: 'Marine Insight Docs', url: 'https://www.marineinsight.com/feed/',               category: 'DOCS', filter: DOC_FILTER },
@@ -89,6 +85,9 @@ const SOURCES = [
   { name: 'USM',                 url: 'https://en.usm.media/feed/',                        category: 'UA' },
   { name: 'USM (укр)',           url: 'https://usm.media/feed/',                           category: 'UA' },
 
+  // ЗАКРЫТЫ ДЛЯ БОТОВ (Cloudflare отдаёт HTML вместо фида):
+  //   safety4sea.com — проверено 28.08.2026, ленту убрали
+  //
   // БЕЗ RSS — нужен watcher по странице (механизм в news/digest/):
   //   marad.gov.ua, uspa.gov.ua, cfts.org.ua, mtwtu.org.ua,
   //   imo.org, emsa.europa.eu, liscr.com, register-iri.com,
