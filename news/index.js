@@ -31,16 +31,40 @@ function sanitizeXml(xml) {
 }
 
 // Сначала обычный разбор. Если лента кривая — качаем сырьё, чистим и пробуем снова.
+// Заголовки максимально похожи на браузер: часть сайтов за Cloudflare отдаёт
+// боту HTML-заглушку вместо XML, и тогда важно сказать об этом прямо.
 async function fetchFeed(url) {
   try {
     return await parser.parseURL(url);
-  } catch (e) {
-    const res = await fetch(url, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BridgeWatchBot/1.0)' },
-      signal: AbortSignal.timeout(20000),
-    });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    return await parser.parseString(sanitizeXml(await res.text()));
+  } catch (firstErr) {
+    let text;
+    try {
+      const res = await fetch(url, {
+        redirect: 'follow',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +
+                        'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36',
+          'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+          'Accept-Language': 'en-US,en;q=0.9',
+        },
+        signal: AbortSignal.timeout(20000),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      text = await res.text();
+    } catch (e) {
+      throw new Error(`недоступна (${e.message})`);
+    }
+
+    // Пришёл не фид, а страница — почти всегда защита от ботов
+    if (!/<(rss|feed|rdf:RDF)[\s>]/i.test(text)) {
+      throw new Error('отдаёт HTML вместо RSS (блокирует ботов)');
+    }
+
+    try {
+      return await parser.parseString(sanitizeXml(text));
+    } catch (e) {
+      throw new Error(`битый XML: ${firstErr.message.split('\n')[0]}`);
+    }
   }
 }
 
