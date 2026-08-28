@@ -20,6 +20,9 @@ const KEYBOARD = {
       { text: '🧹 Чистка',   callback_data: 'adm:clean' },
     ],
     [
+      { text: '🏛 Циркуляры и конвенции', callback_data: 'adm:watch' },
+    ],
+    [
       { text: '📈 Статистика',   callback_data: 'adm:stats' },
       { text: '🔄 Обновить',     callback_data: 'adm:panel' },
     ],
@@ -281,6 +284,21 @@ async function handleAdminCallback(bot, cb) {
       await bot.sendMessage(chatId,
         `🧹 Снято: <b>${dropped}</b> (старше 20 ч, включая зависшие в модерации)\n` +
         `Осталось свежих: <b>${left}</b>`,
+        { parse_mode: 'HTML' });
+      return true;
+    }
+
+    // Обход официальных страниц без RSS. Новые документы уходят прямо в канал.
+    if (what === 'watch') {
+      await bot.answerCallbackQuery(cb.id, { text: 'Проверяю официальные сайты…' });
+      const { checkAll } = require('./watch');
+      const r = await checkAll(bot, db, process.env.CHANNEL_ID);
+
+      await bot.sendMessage(chatId,
+        `🏛 <b>Официальные источники</b>\n` +
+        `Опубликовано новых документов: <b>${r.posted}</b>\n\n` +
+        `<code>${r.ok.join('\n')}</code>` +
+        (r.fail.length ? `\n\n❌ Недоступны:\n<code>${r.fail.join('\n')}</code>` : ''),
         { parse_mode: 'HTML' });
       return true;
     }
