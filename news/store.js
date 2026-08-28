@@ -55,6 +55,22 @@ function similarity(a, b) {
   return inter / Math.min(A.size, B.size);
 }
 
+// Слова с заглавной буквы длиннее трёх символов — почти всегда название
+// судна, порта, компании или страны. Разные издания перефразируют заголовок
+// целиком, но название судна остаётся одним и тем же — это ловим отдельно
+// от общей похожести слов, которая на перефразировке не срабатывает.
+function properNouns(title) {
+  const words = String(title).match(/\b[A-ZА-ЯЇЄІ][\wёЁ'-]{3,}\b/g) || [];
+  return new Set(words.map((w) => w.toLowerCase()).filter((w) => !STOP.has(w)));
+}
+
+function sharedProperNouns(a, b) {
+  const A = properNouns(a), B = properNouns(b);
+  let shared = 0;
+  for (const w of A) if (B.has(w)) shared++;
+  return shared;
+}
+
 async function isDuplicate(item) {
   if (await db.collection('news').findOne({ linkHash: hash(item.link) })) return true;
 
@@ -64,7 +80,12 @@ async function isDuplicate(item) {
     .limit(CONFIG.DEDUPE_WINDOW)
     .toArray();
 
-  return recent.some((r) => similarity(r.titleRaw, item.title) >= CONFIG.SIMILARITY_THRESHOLD);
+  return recent.some((r) =>
+    similarity(r.titleRaw, item.title) >= CONFIG.SIMILARITY_THRESHOLD ||
+    // 2+ общих имени собственных (судно, порт, компания) — почти наверняка
+    // один и тот же инцидент, даже если заголовки не похожи ни одним словом.
+    sharedProperNouns(r.titleRaw, item.title) >= 2
+  );
 }
 
 // Возвращает вставленный документ с _id, или null если такой уже был.
