@@ -55,8 +55,22 @@ async function fetchFeed(url) {
       throw new Error(`недоступна (${e.message})`);
     }
 
-    // Пришёл не фид, а страница — почти всегда защита от ботов
+    // Пришла страница, а не фид. Прежде чем сдаваться, ищем в её <head>
+    // ссылку на настоящий фид — многие сайты её объявляют, но не афишируют.
     if (!/<(rss|feed|rdf:RDF)[\s>]/i.test(text)) {
+      const m = text.match(
+        /<link[^>]+type=["']application\/(?:rss|atom)\+xml["'][^>]*>/gi) || [];
+
+      for (const tag of m) {
+        const href = (tag.match(/href=["']([^"']+)["']/i) || [])[1];
+        if (!href) continue;
+        const feedUrl = new URL(href, url).href;
+        if (feedUrl === url) continue;
+        try {
+          console.log(`[news:collect] найден фид на странице: ${feedUrl}`);
+          return await parser.parseURL(feedUrl);
+        } catch (_) { /* пробуем следующий */ }
+      }
       throw new Error('отдаёт HTML вместо RSS (блокирует ботов)');
     }
 
