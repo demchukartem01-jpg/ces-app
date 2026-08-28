@@ -17,12 +17,18 @@ const parser = new Parser({
 
 // ── Сборщик: обходит источники и наполняет очередь ──────────────────────
 async function collect(bot) {
+  // Перед обходом убираем из очереди то, что успело протухнуть, пока ждало
+  // своего слота. Иначе канал выдаёт позавчерашнее как свежее.
+  const stale = await store.dropStale(CONFIG.FRESH_HOURS);
+  if (stale) console.log('[news:collect] протухло и снято:', stale);
+
   for (const src of SOURCES) {
     try {
       const feed = await parser.parseURL(src.url);
 
       const fresh = feed.items
-        .filter((i) => i.link && Date.now() - new Date(i.pubDate || 0) < 24 * 3600 * 1000)
+        .filter((i) => i.link &&
+          Date.now() - new Date(i.pubDate || 0) < CONFIG.FRESH_HOURS * 3600 * 1000)
         .slice(0, CONFIG.MAX_PER_SOURCE);
 
       for (const raw of fresh) {

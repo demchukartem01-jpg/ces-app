@@ -151,4 +151,14 @@ const setStatus = (id, status, extra) =>
 const getById = (id) =>
   db.collection('news').findOne({ _id: new ObjectId(String(id)) });
 
-module.exports = { initStore, isDuplicate, enqueue, skip, nextApproved, setStatus, getById };
+// Снимает с очереди новости старше N часов. Возвращает, сколько сняли.
+async function dropStale(hours) {
+  const edge = new Date(Date.now() - hours * 3600 * 1000);
+  const r = await db.collection('news').updateMany(
+    { status: 'approved', createdAt: { $lt: edge } },
+    { $set: { status: 'rejected', rejectedReason: 'stale' } }
+  );
+  return r.modifiedCount || 0;
+}
+
+module.exports = { initStore, dropStale, isDuplicate, enqueue, skip, nextApproved, setStatus, getById };

@@ -16,7 +16,8 @@ const KEYBOARD = {
       { text: '📰 Собрать новости', callback_data: 'adm:news' },
     ],
     [
-      { text: '📋 Очередь', callback_data: 'adm:queue' },
+      { text: '📋 Очередь',  callback_data: 'adm:queue' },
+      { text: '🧹 Чистка',   callback_data: 'adm:clean' },
     ],
     [
       { text: '📈 Статистика',   callback_data: 'adm:stats' },
@@ -259,6 +260,20 @@ async function handleAdminCallback(bot, cb) {
     }
 
     // Публикует всю очередь подряд с паузой, чтобы не словить лимит Telegram.
+    // Ручная чистка: снимает всё, что старше суток. Показывает, сколько снял.
+    if (what === 'clean') {
+      const { dropStale } = require('./store');
+      const dropped = await dropStale(20);
+      const left = await db.collection('news').countDocuments({ status: 'approved' });
+
+      await bot.answerCallbackQuery(cb.id, { text: `Снято ${dropped}` });
+      await bot.sendMessage(chatId,
+        `🧹 Снято с очереди: <b>${dropped}</b> (старше 20 ч)\n` +
+        `Осталось свежих: <b>${left}</b>`,
+        { parse_mode: 'HTML' });
+      return true;
+    }
+
     if (what === 'flush') {
       await bot.answerCallbackQuery(cb.id, { text: 'Публикую…' });
       const { setStatus } = require('./store');
