@@ -335,6 +335,9 @@ async function buildDigest(db) {
     '',
     body.join('\n\n'),
     '',
+    '🤝 <a href="https://t.me/tf141supreme">Task Force Supreme</a> · ' +
+    '🎓 <a href="https://t.me/ces_morskie_bot">CES exam trainer</a>',
+    '',
     '<i>For information only. Official sources: NAVTEX, SafetyNET and ' +
     'administration bulletins.</i>',
   ].join('\n');
