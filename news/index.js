@@ -5,7 +5,17 @@ const store = require('./store');
 const { summarize } = require('./summarize');
 const { sendForReview, publishToChannel } = require('./publish');
 
-const parser = new Parser({ timeout: 15000 });
+// timeout повышен: некоторые источники (ATSB, IMO) отвечают медленно.
+// User-Agent — без него часть сайтов отдаёт 403, думая, что это бот-скрейпер.
+// xml2js.strict: false — часть морских лент отдаёт слегка кривой XML
+// (незаэкранированные символы в атрибутах); строгий парсер ронял всю
+// ленту целиком из-за одной статьи, лояльный режим просто пропускает
+// проблемное место вместо падения.
+const parser = new Parser({
+  timeout: 20000,
+  headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BridgeWatchBot/1.0; +https://t.me/MaritimeHubb)' },
+  xml2js: { strict: false, trim: true },
+});
 
 // ── Сборщик: обходит источники и наполняет очередь ──────────────────────
 async function collect(bot) {
