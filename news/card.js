@@ -10,6 +10,15 @@ const FONTS = ['DejaVuSansCondensed-Bold.ttf', 'DejaVuSansCondensed.ttf']
   .map((f) => path.join(FONT_DIR, f))
   .filter((f) => fs.existsSync(f));
 
+// Эмблема коллаборации Task Force Supreme × Bridge Watch — вставляется
+// в каждую карточку как водяной знак. Читаем один раз при старте модуля,
+// а не на каждый рендер: файл не меняется, а base64 от него — жёсткая
+// стройка, экономим на диске.
+const LOGO_PATH = path.join(__dirname, 'covers', 'collab-emblem.png');
+const LOGO_B64 = fs.existsSync(LOGO_PATH)
+  ? fs.readFileSync(LOGO_PATH).toString('base64')
+  : null;
+
 const W = [0.313,0.4102,0.4688,0.7539,0.626,0.9014,0.7847,0.2754,0.4111,0.4111,0.4702,0.7539,0.3418,0.3735,0.3418,0.3286,0.626,0.626,0.626,0.626,0.626,0.626,0.626,0.626,0.626,0.626,0.3599,0.3599,0.7539,0.7539,0.7539,0.522,0.8999,0.6963,0.6855,0.6602,0.7471,0.6148,0.6148,0.7383,0.7529,0.3345,0.3345,0.6973,0.5733,0.8955,0.7529,0.7647,0.6592,0.7647,0.6929,0.648,0.6138,0.7305,0.6963,0.9927,0.6938,0.6514,0.6523,0.4111,0.3286,0.4111,0.7539,0.4497,0.4497,0.6069,0.644,0.5332,0.644,0.6104,0.3911,0.644,0.6406,0.3081,0.3081,0.5981,0.3081,0.9375,0.6406,0.6182,0.644,0.644,0.4438,0.5356,0.4302,0.6406,0.5864,0.8311,0.5801,0.5864,0.5234,0.6406,0.3286,0.6406,0.7539];
 
 // Ширина символа в долях кегля, снято с DejaVu Sans Condensed Bold.
@@ -74,22 +83,20 @@ function buildSvg(title, tag, source) {
   <defs>
     <radialGradient id="bg" cx="26%" cy="30%" r="92%">
       <stop offset="0%" stop-color="${theme.top}"/>
-      <stop offset="100%" stop-color="#060C15"/>
+      <stop offset="100%" stop-color="#050505"/>
     </radialGradient>
   </defs>
 
   <rect width="1280" height="720" fill="url(#bg)"/>
 
-  <g transform="translate(96,72) scale(0.22)">
-    <path d="M 245.53 106.32 A 150 150 0 0 0 117.44 313.41"
-          fill="none" stroke="#E8382B" stroke-width="46" stroke-linecap="round"/>
-    <path d="M 266.47 106.32 A 150 150 0 0 1 394.56 313.41"
-          fill="none" stroke="#12B67A" stroke-width="46" stroke-linecap="round"/>
-    <circle cx="256" cy="256" r="27" fill="#F2EFE6"/>
-  </g>
+  <!-- Эмблема Task Force Supreme × Bridge Watch. Если файл почему-то -->
+  <!-- не нашёлся при старте — рисуем простой запасной круг, не падаем. -->
+  ${LOGO_B64
+    ? `<image x="88" y="56" width="148" height="148" href="data:image/png;base64,${LOGO_B64}"/>`
+    : `<circle cx="162" cy="130" r="66" fill="none" stroke="#E8352B" stroke-width="8"/>`}
 
-  <text x="188" y="128" font-family="DejaVu Sans Condensed" font-weight="bold"
-        font-size="30" fill="${theme.accent}" letter-spacing="5">${esc(String(tag || '').toUpperCase())}</text>
+  <text x="252" y="146" font-family="DejaVu Sans Condensed" font-weight="bold"
+        font-size="28" fill="${theme.accent}" letter-spacing="4">${esc(String(tag || '').toUpperCase())}</text>
 
   <rect x="96" y="${Math.round(400 - blockH / 2)}" width="7"
         height="${Math.round(blockH)}" fill="${theme.accent}" rx="3"/>
@@ -97,13 +104,13 @@ function buildSvg(title, tag, source) {
   <text font-family="DejaVu Sans Condensed" font-weight="bold" font-size="${size}"
         fill="#F2EFE6">${tspans}</text>
 
-  <line x1="96" y1="600" x2="1184" y2="600" stroke="#22384F" stroke-width="2"/>
+  <line x1="96" y1="600" x2="1184" y2="600" stroke="#3A1512" stroke-width="2"/>
 
   <text x="96" y="656" font-family="DejaVu Sans Condensed" font-size="26"
-        fill="#6B819A" letter-spacing="4">${esc(String(source || '').toUpperCase())}</text>
+        fill="#9A5B52" letter-spacing="4">${esc(String(source || '').toUpperCase())}</text>
 
-  <text x="1184" y="656" text-anchor="end" font-family="DejaVu Sans Condensed"
-        font-size="26" fill="#6B819A" letter-spacing="4">BRIDGE WATCH</text>
+  <text x="1184" y="650" text-anchor="end" font-family="DejaVu Sans Condensed"
+        font-size="20" fill="#9A5B52" letter-spacing="2">TASK FORCE SUPREME × BRIDGE WATCH</text>
 </svg>`;
 }
 
