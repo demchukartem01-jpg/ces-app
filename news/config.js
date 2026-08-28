@@ -6,6 +6,12 @@ const MARITIME_FILTER =
 const DOC_FILTER =
   /(STCW|MLC|diploma|диплом|сертифікат|сертификат|посвідчення|удостоверен|кваліфікац|квалификац|підтвердження|подтвержден|виза|віза|visa|seaman|CoC|certificate of competency|endorsement|revalidation|medical certificate|ENG1|manning|Морська адміністрація)/i;
 
+// Техника: машинное отделение, навигационное оборудование, автоматика.
+// Фильтр широкий — на профильных лентах пропускает почти всё,
+// на общих отсекает коммерцию и финансы.
+const TECH_FILTER =
+  /(engine|machinery|propulsion|thruster|generator|boiler|purifier|separator|scrubber|turbocharger|fuel system|lubric|bearing|shaft|двигател|машинн|механизм|дизел|котёл|котел|сепаратор|топливн|ECDIS|radar|AIS|GMDSS|gyro|autopilot|navigation system|bridge system|VDR|BNWAS|sensor|automation|digital twin|remote monitoring|навигацион|радар|гироком|автопилот|электроник|автоматизац|ammonia|methanol|LNG dual|battery|hybrid|shore power|retrofit)/i;
+
 // Источники новостей.
 // category — влияет на ротацию публикаций: конвейер по очереди берёт из той
 //            категории, из которой дольше всего не публиковали.
@@ -39,6 +45,13 @@ const SOURCES = [
   { name: 'Offshore Wind',    url: 'https://www.offshorewind.biz/feed/',                   category: 'EU_OFFSHORE' },
   { name: 'Naval Today',      url: 'https://www.navaltoday.com/feed/',                     category: 'EU_OFFSHORE' },
   { name: 'Hellenic Shipping', url: 'https://www.hellenicshippingnews.com/feed/',          category: 'EU_OFFSHORE' },
+
+  // ── Техника: машина, навигация, новые технологии ──────────────
+  { name: 'The Motorship',    url: 'https://www.motorship.com/feed',                        category: 'TECH' },
+  { name: 'Riviera Maritime', url: 'https://www.rivieramm.com/rss/news',                    category: 'TECH' },
+  { name: 'Ship Technology',  url: 'https://www.ship-technology.com/feed/',                 category: 'TECH' },
+  { name: 'Marine Insight Tech', url: 'https://www.marineinsight.com/feed/',                category: 'TECH', filter: TECH_FILTER },
+  { name: 'Safety4Sea Tech',  url: 'https://safety4sea.com/feed/',                          category: 'TECH', filter: TECH_FILTER },
 
   // ── Документы: дипломы, конвенции, требования ─────────────────
   { name: 'IMO',       url: 'https://www.imo.org/en/MediaCentre/Pages/rss.aspx',           category: 'DOCS' },
@@ -85,6 +98,9 @@ const THEMES = {
   environment: { accent: '#D6432E', top: '#170807' },
   cargo:       { accent: '#C22E1F', top: '#170807' },
   training:    { accent: '#E85A3D', top: '#170807' },
+  tech:        { accent: '#FF6B3D', top: '#170807' },
+  navigation:  { accent: '#FF6B3D', top: '#170807' },
+  machinery:   { accent: '#E87A3D', top: '#170807' },
   safety:      { accent: '#FF4433', top: '#1D0906' },
   fleet:       { accent: '#D6432E', top: '#170807' },
   management:  { accent: '#C22E1F', top: '#170807' },
@@ -116,6 +132,10 @@ const AUDIENCE_BRIEF = `
 Морской администрации. Военную и политическую сводку как таковую — пропускай,
 она не про работу. Про удары по портам пиши сдержанно и по фактам.
 
+Техника: новое оборудование в машине и на мостике, ECDIS/радары/автоматика,
+альтернативное топливо, ретрофиты, цифровые системы. Пиши, что это меняет
+для вахты: что появится на борту, что придётся обслуживать, чему учиться.
+
 Им НЕ важно: квартальные отчёты и прибыль, котировки акций, фрахтовые
 индексы сами по себе, пресс-релизы про партнёрства, реклама оборудования.
 Разница простая: смена управляющей компании касается моряка напрямую,
@@ -145,4 +165,4 @@ const CONFIG = {
   MODERATION: false,
 };
 
-module.exports = { SOURCES, AUDIENCE_BRIEF, CONFIG, EMOJI, THEMES, MARITIME_FILTER, DOC_FILTER };
+module.exports = { SOURCES, AUDIENCE_BRIEF, CONFIG, EMOJI, THEMES, MARITIME_FILTER, DOC_FILTER, TECH_FILTER };
