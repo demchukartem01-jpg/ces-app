@@ -16,6 +16,9 @@ const KEYBOARD = {
       { text: '📰 Собрать новости', callback_data: 'adm:news' },
     ],
     [
+      { text: '📋 Очередь', callback_data: 'adm:queue' },
+    ],
+    [
       { text: '📈 Статистика',   callback_data: 'adm:stats' },
       { text: '🔄 Обновить',     callback_data: 'adm:panel' },
     ],
@@ -76,6 +79,48 @@ async function stats() {
   ].join('\n');
 }
 
+// Показывает ближайшие посты в очереди. У каждого — своя кнопка «В эфир»,
+// чтобы срочную новость можно было выпустить, не дожидаясь слота планировщика.
+async function sendQueue(bot, chatId) {
+  const docs = await db.collection('news')
+    .find({ status: 'approved' })
+    .sort({ createdAt: 1 })
+    .limit(8)
+    .toArray();
+
+  if (!docs.length) {
+    await bot.sendMessage(chatId, '📋 Очередь пуста — все собранные новости уже вышли.');
+    return;
+  }
+
+  const total = await db.collection('news').countDocuments({ status: 'approved' });
+
+  await bot.sendMessage(chatId,
+    `📋 <b>Очередь</b> — ${total} шт., показаны первые ${docs.length}\n` +
+    'Порядок публикации решает ротация по категориям, а не этот список.',
+    { parse_mode: 'HTML' });
+
+  for (const d of docs) {
+    const age = Math.round((Date.now() - new Date(d.createdAt)) / 60000);
+    const when = age < 60 ? `${age} мин назад` : `${Math.round(age / 60)} ч назад`;
+    const title = d.titleEn || d.titleRaw || '(без заголовка)';
+
+    await bot.sendMessage(chatId,
+      `<b>${title}</b>\n` +
+      `${d.category || 'WORLD'} · ${d.source} · собрано ${when}`,
+      {
+        parse_mode: 'HTML',
+        disable_web_page_preview: true,
+        reply_markup: {
+          inline_keyboard: [[
+            { text: '🚨 В эфир сейчас', callback_data: 'adm:now:' + d._id },
+            { text: '🗑 Снять',          callback_data: 'adm:drop:' + d._id },
+          ]],
+        },
+      });
+  }
+}
+
 async function handleAdminCallback(bot, cb) {
   if (!cb.data || cb.data.indexOf('adm:') !== 0) return false;
 
@@ -117,6 +162,52 @@ async function handleAdminCallback(bot, cb) {
         await bot.sendMessage(chatId,
           'Сегодня крупных вех нет — пост не выйдет. Это нормально.');
       }
+      return true;
+    }
+
+    if (what === 'queue') {
+      await bot.answerCallbackQuery(cb.id);
+      await sendQueue(bot, chatId);
+      return true;
+    }
+
+    // Внеочередная публикация: обходит ротацию и слот планировщика.
+    if (what === 'now') {
+      const id = cb.data.split(':')[2];
+      const { getById, setStatus } = require('./store');
+      const { publishToChannel } = require('./publish');
+
+      const doc = await getById(id);
+      if (!doc || doc.status !== 'approved') {
+        await bot.answerCallbackQuery(cb.id, { text: 'Уже вышла или снята' });
+        return true;
+      }
+
+      await bot.answerCallbackQuery(cb.id, { text: 'Публикую…' });
+      await publishToChannel(bot, doc);
+      await setStatus(doc._id, 'published', { publishedAt: new Date() });
+
+      await bot.editMessageReplyMarkup(
+        { inline_keyboard: [[{ text: '✅ Опубликовано', callback_data: 'adm:noop' }]] },
+        { chat_id: chatId, message_id: cb.message.message_id }
+      ).catch(() => {});
+      return true;
+    }
+
+    if (what === 'drop') {
+      const id = cb.data.split(':')[2];
+      const { setStatus } = require('./store');
+      await setStatus(id, 'rejected');
+      await bot.answerCallbackQuery(cb.id, { text: 'Снято с очереди' });
+      await bot.editMessageReplyMarkup(
+        { inline_keyboard: [[{ text: '🗑 Снято', callback_data: 'adm:noop' }]] },
+        { chat_id: chatId, message_id: cb.message.message_id }
+      ).catch(() => {});
+      return true;
+    }
+
+    if (what === 'noop') {
+      await bot.answerCallbackQuery(cb.id);
       return true;
     }
 
