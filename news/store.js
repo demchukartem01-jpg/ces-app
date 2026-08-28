@@ -155,7 +155,9 @@ const getById = (id) =>
 async function dropStale(hours) {
   const edge = new Date(Date.now() - hours * 3600 * 1000);
   const r = await db.collection('news').updateMany(
-    { status: 'approved', createdAt: { $lt: edge } },
+    // review — старые записи, зависшие с времён ручной модерации: кнопок
+    // к ним уже нет, опубликоваться они не могут, но висят в счётчике.
+    { status: { $in: ['approved', 'review'] }, createdAt: { $lt: edge } },
     { $set: { status: 'rejected', rejectedReason: 'stale' } }
   );
   return r.modifiedCount || 0;
