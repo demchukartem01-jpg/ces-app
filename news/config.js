@@ -72,22 +72,23 @@ const EMOJI = {
 };
 
 
-// Цвета для генерируемых карточек. Ключ — тег в нижнем регистре.
-// accent — полоса и подпись темы, top — верх фонового градиента.
+// Цвета для генерируемых карточек. Единый красный стиль канала —
+// категории различаются только оттенком и яркостью акцента, фон
+// у всех одинаково тёмный (почти чёрный), без синих/зелёных пятен.
 const THEMES = {
-  psc:         { accent: '#E8A33D', top: '#1B2A3A' },
-  regulation:  { accent: '#4A8FE8', top: '#152539' },
-  casualty:    { accent: '#E8382B', top: '#221A22' },
-  piracy:      { accent: '#D6541F', top: '#20201C' },
-  crewing:     { accent: '#12B67A', top: '#132A2C' },
-  wages:       { accent: '#D9B44A', top: '#1E2430' },
-  environment: { accent: '#17A2A2', top: '#122A2E' },
-  cargo:       { accent: '#8296AD', top: '#16232F' },
-  training:    { accent: '#E3DCCB', top: '#1A2433' },
-  safety:      { accent: '#F2C14E', top: '#1D2430' },
-  fleet:       { accent: '#6FA8DC', top: '#152331' },
-  management:  { accent: '#B08BD6', top: '#1C1E33' },
-  default:     { accent: '#93A9BF', top: '#12263A' },
+  psc:         { accent: '#E8352B', top: '#170807' },
+  regulation:  { accent: '#D6432E', top: '#170807' },
+  casualty:    { accent: '#FF4433', top: '#1D0906' },
+  piracy:      { accent: '#C22E1F', top: '#170807' },
+  crewing:     { accent: '#E85A3D', top: '#170807' },
+  wages:       { accent: '#E87A3D', top: '#170807' },
+  environment: { accent: '#D6432E', top: '#170807' },
+  cargo:       { accent: '#C22E1F', top: '#170807' },
+  training:    { accent: '#E85A3D', top: '#170807' },
+  safety:      { accent: '#FF4433', top: '#1D0906' },
+  fleet:       { accent: '#D6432E', top: '#170807' },
+  management:  { accent: '#C22E1F', top: '#170807' },
+  default:     { accent: '#E8352B', top: '#170807' },
 };
 
 // Главный файл настройки. Его будешь править регулярно, код — нет.
@@ -125,8 +126,13 @@ const CONFIG = {
   COLLECT_CRON: '0 * * * *',      // сбор раз в час
   PUBLISH_CRON: '*/25 * * * *',   // публикация максимум раз в 25 минут
   QUIET_HOURS_UTC: [23, 0, 1, 2, 3, 4],
-  DEDUPE_WINDOW: 300,
-  SIMILARITY_THRESHOLD: 0.6,
+  DEDUPE_WINDOW: 800,
+  // Понижен с 0.6: разные издания один и тот же инцидент часто называют
+  // совсем разными словами ("Houthi drone strikes tanker" vs "Yemen
+  // rebels attack VLCC near Yanbu") — по одним словам не поймать.
+  // Основную работу теперь делает вторая проверка — по именам собственным,
+  // см. news/store.js.
+  SIMILARITY_THRESHOLD: 0.5,
   MAX_PER_SOURCE: 10,
   MODEL: 'claude-haiku-4-5-20251001',
 
