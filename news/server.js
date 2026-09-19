@@ -171,7 +171,7 @@ startNewsPipeline(bot)
           const db = await newsStore.initStore();
           startDigest(bot, db, CONFIG.MODERATION);
           require('./news/content').startContent(bot, db);
-          // Слежение за официальными страницами без RSS
+          // Слежение за официальными страницами без RSS: IMO, MoU, флаги, P&I
           require('./news/watch').startWatch(bot, db);
         })
         .catch(e => console.error('[news] старт:', e.message));
