@@ -182,7 +182,7 @@ const AUDIENCE_BRIEF = `
 const CONFIG = {
   COLLECT_CRON: '0 * * * *',      // сбор раз в час
   PUBLISH_CRON: '*/13 * * * *',   // публикация максимум раз в 13 минут
-  QUIET_HOURS_UTC: [23, 0, 1, 2, 3, 4],
+  QUIET_HOURS_UTC: [],
   DEDUPE_WINDOW: 800,
   // Понижен с 0.6: разные издания один и тот же инцидент часто называют
   // совсем разными словами ("Houthi drone strikes tanker" vs "Yemen
