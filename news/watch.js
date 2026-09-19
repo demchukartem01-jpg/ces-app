@@ -13,6 +13,25 @@
 
 const cron = require('node-cron');
 
+// Один проход за раз: cron и кнопка в панели не должны идти параллельно,
+// иначе оба увидят ссылку «новой» и опубликуют её дважды.
+let running = false;
+
+// Одна и та же страница приходит как /page, /page/, /page?utm=..., /page#x,
+// http/https — для сравнения это один документ.
+function normalizeUrl(href) {
+  try {
+    const u = new URL(href);
+    u.hash = '';
+    u.search = '';
+    u.protocol = 'https:';
+    u.hostname = u.hostname.replace(/^www\./, '');
+    return u.href.replace(/\/+$/, '').toLowerCase();
+  } catch {
+    return null;
+  }
+}
+
 // ── Что отслеживаем ────────────────────────────────────────────────────
 // linkPattern — какие ссылки на странице считать документами. Без него
 //   в ленту полезет меню, футер и баннеры.
@@ -133,27 +152,44 @@ async function checkOne(db, w, bot, channelId) {
     .filter((h) => w.linkPattern.test(h))
     .filter((h) => !w.skipPattern || !w.skipPattern.test(h));
 
-  const uniq = [...new Set(hrefs)].slice(0, 25);
-  if (!uniq.length) throw new Error('ссылок по шаблону не найдено');
+  const byKey = new Map();
+  for (const h of hrefs) {
+    const k = normalizeUrl(h);
+    if (k && !byKey.has(k)) byKey.set(k, h);
+  }
+  const found = [...byKey].slice(0, 25);           // [ключ, исходная ссылка]
+  if (!found.length) throw new Error('ссылок по шаблону не найдено');
 
   const col = db.collection('watch_seen');
   const prev = await col.findOne({ _id: w.id });
+  const keys = found.map(([k]) => k);
 
   // Первый запуск: молча запоминаем, иначе в канал улетит вся история сразу
   if (!prev) {
     await col.updateOne({ _id: w.id },
-      { $set: { links: uniq, checkedAt: new Date() } }, { upsert: true });
-    return { first: true, found: uniq.length, posted: 0 };
+      { $set: { links: keys, checkedAt: new Date() } }, { upsert: true });
+    return { first: true, found: keys.length, posted: 0 };
   }
 
-  const seen = new Set(prev.links || []);
-  const fresh = uniq.filter((h) => !seen.has(h));
+  // Прежние записи могли быть без нормализации — приводим к одному виду.
+  const seen = new Set((prev.links || []).map((l) => normalizeUrl(l) || l));
+  const fresh = found.filter(([k]) => !seen.has(k));
 
   // Не больше трёх за раз с одного источника: если сайт переверстали,
   // все ссылки станут «новыми», и канал забьётся мусором.
   const toPost = fresh.slice(0, 3);
 
-  for (const href of toPost) {
+  // Сначала запоминаем ВСЁ найденное и накапливаем историю, а не заменяем её
+  // окном из 25 ссылок: иначе ссылка, которая выпала из окна и вернулась,
+  // публикуется снова. Запись идёт до отправки: если Telegram оборвёт
+  // отправку посреди цикла, уже отправленное не повторится при следующем
+  // запуске. Худший случай теперь — пропуск, а не дубль.
+  const history = [...new Set([...seen, ...keys])].slice(-500);
+  await col.updateOne({ _id: w.id },
+    { $set: { links: history, checkedAt: new Date() } });
+
+  let posted = 0;
+  for (const [, href] of toPost) {
     const name = linkText(html, href) || href.split('/').pop().replace(/[-_]/g, ' ');
     if (name.length < 6) continue;
 
@@ -161,21 +197,30 @@ async function checkOne(db, w, bot, channelId) {
       `${w.title}\n\n<b>${name.slice(0, 200)}</b>\n\n` +
       `<a href="${href}">Открыть документ</a>`,
       { parse_mode: 'HTML', disable_web_page_preview: false });
+    posted++;
 
     await new Promise((r) => setTimeout(r, 3000));
   }
 
-  // Запоминаем ВСЕ найденные, а не только опубликованные: иначе то, что
-  // не попало в лимит трёх, будет всплывать при каждой проверке.
-  await col.updateOne({ _id: w.id },
-    { $set: { links: uniq, checkedAt: new Date() } });
-
-  return { first: false, found: uniq.length, posted: toPost.length };
+  return { first: false, found: keys.length, posted };
 }
 
 // Обходит все страницы. Возвращает отчёт для панели управления.
 async function checkAll(bot, db, channelId) {
   const report = { ok: [], fail: [], posted: 0 };
+  if (running) {
+    report.fail.push('уже идёт другая проверка');
+    return report;
+  }
+  running = true;
+  try {
+    return await runAll(bot, db, channelId, report);
+  } finally {
+    running = false;
+  }
+}
+
+async function runAll(bot, db, channelId, report) {
 
   for (const w of WATCH) {
     try {

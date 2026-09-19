@@ -33,15 +33,11 @@ function imageFor(d, source) {
 
 // Английская часть — одинаковая в обоих вариантах.
 function head(d, link, source) {
-  return [
-    `${emojiFor(d)} <b>${esc(d.title_en)}</b>`,
-    '',
-    esc(d.body_en),
-    '',
-    `🧭 <i>On board:</i> ${esc(d.onboard_en)}`,
-    '',
-    `<a href="${esc(link)}">${esc(source)}</a>`,
-  ];
+  const out = [`${emojiFor(d)} <b>${esc(d.title_en)}</b>`];
+  if (d.body_en) out.push('', esc(d.body_en));
+  if (d.onboard_en) out.push('', `🧭 <i>On board:</i> ${esc(d.onboard_en)}`);
+  out.push('', `<a href="${esc(link)}">${esc(source)}</a>`);
+  return out;
 }
 
 const tagLine = (d) => (d.tags || []).map((t) => '#' + t).join(' ');

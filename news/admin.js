@@ -233,17 +233,26 @@ async function handleAdminCallback(bot, cb) {
       const seconds = Math.round((Date.now() - t0) / 1000);
 
       // Здоровье лент показываем всегда — даже когда новых новостей нет.
+      const reasons = new Map();
+      for (const f of (report ? report.fail : [])) {
+        const r = f.slice(f.indexOf(': ') + 2);
+        reasons.set(r, (reasons.get(r) || 0) + 1);
+      }
+      const failText = [...reasons].slice(0, 6)
+        .map(([r, n]) => `${n}× ${r}`).join('\n')
+        .replace(/[<>&]/g, '');
       const health = report
         ? `\n\n📡 Лент живых: <b>${report.ok.length}</b> из ${report.ok.length + report.fail.length}` +
           (report.fail.length
-            ? `\n❌ Не отвечают:\n<code>${report.fail.join('\n')}</code>`
+            ? `\n❌ Не отвечают:\n<code>${failText}</code>`
             : '')
         : '';
+      const llm = `\n\n🤖 ИИ:\n<code>${require('./summarize').llmStatusText().replace(/[<>&]/g, '')}</code>`;
 
       if (!added) {
         await bot.sendMessage(chatId,
           `Обход занял ${seconds} с. Новых новостей нет — всё уже собрано ранее ` +
-          'или отсеяно фильтрами.' + health,
+          'или отсеяно фильтрами.' + health + llm,
           { parse_mode: 'HTML' });
         return true;
       }
@@ -259,7 +268,7 @@ async function handleAdminCallback(bot, cb) {
 
       await bot.sendMessage(chatId,
         `✅ <b>Собрано ${added}</b> за ${seconds} с\n` +
-        `В очереди всего <b>${after}</b>: ${cats}` + health + '\n\n' +
+        `В очереди всего <b>${after}</b>: ${cats}` + health + llm + '\n\n' +
         'Выбрать вручную или выпустить всё подряд?',
         {
           parse_mode: 'HTML',

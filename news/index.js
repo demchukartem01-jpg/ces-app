@@ -2,7 +2,9 @@ const Parser = require('rss-parser');
 const cron = require('node-cron');
 const { SOURCES, CONFIG } = require('./config');
 const store = require('./store');
-const { summarize } = require('./summarize');
+const { summarize, llmAllDown, llmStatusText } = require('./summarize');
+
+let lastLlmAlert = 0;
 const { sendForReview, publishToChannel } = require('./publish');
 
 // timeout повышен: некоторые источники (ATSB, IMO) отвечают медленно.
@@ -130,9 +132,19 @@ async function collect(bot) {
       }
     } catch (e) {
       // Один упавший источник не должен ронять весь обход.
-      report.fail.push(`${src.name}: ${e.message.slice(0, 40)}`);
+      report.fail.push(`${src.name}: ${e.message.slice(0, 160)}`);
       console.error(`[news:collect] ${src.name}:`, e.message);
     }
+  }
+
+  // Молчаливая поломка — хуже громкой: если ИИ лежит, говорим об этом сразу,
+  // но не чаще раза в 6 часов.
+  if (llmAllDown() && process.env.ADMIN_CHAT_ID && Date.now() - lastLlmAlert > 6 * 3600 * 1000) {
+    lastLlmAlert = Date.now();
+    bot.sendMessage(process.env.ADMIN_CHAT_ID,
+      '⚠️ Ни один ИИ-провайдер не отвечает — новости идут в режиме «заголовок + ссылка».\n\n' +
+      llmStatusText() + '\n\nБесплатный ключ: aistudio.google.com/apikey → GEMINI_API_KEY на Render.')
+      .catch(() => {});
   }
 
   console.log(`[news:collect] живых лент ${report.ok.length} из ${SOURCES.length}`);
